@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4.0.0
         with:
-          node-version: "21.1.0"
+          node-version: "20"
           cache: "npm"
           cache-dependency-path: "probando/*"
       - name: Installing dependencies
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/setup-node@v4.0.0
         with:
           cache: "npm"
-          node-version: "21.1.0"
+          node-version: "20"
           cache-dependency-path: "probando/*"
       - name: Installing dependencies
         run: cd probando && npm ci
@@ -57,7 +57,7 @@ jobs:
       - uses: actions/setup-node@v4.0.0
         with:
           cache: "npm"
-          node-version: "21.1.0"
+          node-version: "20"
           cache-dependency-path: "probando/*"
       - name: Installing dependencies
         run: cd probando && npm ci
