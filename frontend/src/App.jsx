@@ -1,23 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link
 } from "react-router-dom"
-import {
-  Layout,
-  Home,
-  Detail,
-  AdminDashboard,
-  Login,
-  RegistrarProducto,
-  Reserve,
-  Signup
-} from "./Routes/Layout"
+import Layout from "./Routes/Layout"
+import Home from "./Routes/Home"
+import Detail from "./Routes/Detail"
+import AdminDashboard from "./Routes/AdminDashboard"
+import Login from "./Routes/Login"
+import RegistrarProducto from "./Routes/RegistrarProducto"
+import Reserve from "./Routes/Reserve"
+import Signup from "./Routes/Signup"
 import Navbar from "./Components/Navbar"
 import { GlobalContextProvider } from './context'
 
