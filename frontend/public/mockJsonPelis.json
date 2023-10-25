@@ -68,7 +68,7 @@
         ]
     },
     {
-        "id": 1,
+        "id": 3,
         "name": "El Señor de los Anillos",
         "description": "Una aventura épica en la tierra media.",
         "images": [
@@ -104,7 +104,7 @@
         ]
     },
     {
-        "id": 2,
+        "id": 4,
         "name": "Interstellar",
         "description": "Un viaje a través del espacio en busca de un nuevo hogar.",
         "images": [
@@ -136,7 +136,7 @@
         ]
     },
     {
-        "id": 1,
+        "id": 5,
         "name": "El Señor de los Anillos",
         "description": "Una aventura épica en la tierra media.",
         "images": [
@@ -172,7 +172,7 @@
         ]
     },
     {
-        "id": 2,
+        "id": 6,
         "name": "Interstellar",
         "description": "Un viaje a través del espacio en busca de un nuevo hogar.",
         "images": [
@@ -204,7 +204,7 @@
         ]
     },
     {
-        "id": 1,
+        "id": 7,
         "name": "El Señor de los Anillos",
         "description": "Una aventura épica en la tierra media.",
         "images": [
@@ -240,7 +240,7 @@
         ]
     },
     {
-        "id": 2,
+        "id": 8,
         "name": "Interstellar",
         "description": "Un viaje a través del espacio en busca de un nuevo hogar.",
         "images": [
@@ -272,7 +272,7 @@
         ]
     },
     {
-        "id": 1,
+        "id": 9,
         "name": "El Señor de los Anillos",
         "description": "Una aventura épica en la tierra media.",
         "images": [
@@ -308,7 +308,7 @@
         ]
     },
     {
-        "id": 2,
+        "id": 10,
         "name": "Interstellar",
         "description": "Un viaje a través del espacio en busca de un nuevo hogar.",
         "images": [

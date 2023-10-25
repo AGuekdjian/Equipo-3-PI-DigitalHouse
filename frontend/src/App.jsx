@@ -9,7 +9,7 @@ import Home from "./Routes/Home"
 import Detail from "./Routes/Detail"
 import AdminDashboard from "./Routes/AdminDashboard"
 import Login from "./Routes/Login"
-import RegistrarProducto from "./Routes/RegistrarProducto"
+import RegistrarPelicula from "./Routes/RegistrarPelicula"
 import Reserve from "./Routes/Reserve"
 import Signup from "./Routes/Signup"
 import Navbar from "./Components/Navbar"
@@ -31,7 +31,7 @@ function App() {
               <Route path='/' element={<Home/>}/>
               <Route path='/login' element={<Login/>}/>
               <Route path='/Signup' element={<Signup/>}/>
-              <Route path='/productonuevo' element={<RegistrarProducto/>}/>
+              <Route path='/peliculanueva' element={<RegistrarPelicula/>}/>
               <Route path='/reservar' element={<Reserve/>}/>
               <Route path='/detail/:id' element={<Detail/>}/> 
               <Route path='/administracion' element={<AdminDashboard/>}/>

@@ -10,7 +10,6 @@ const Home = () => {
   const [peliculasRandom, setPeliculasRandom] = useState([])
 
 
-
   useEffect(() => {
     const mezclarPeliculas = () => {
       const peliculasCopia = [...data]; 
@@ -23,14 +22,16 @@ const Home = () => {
         peliculasCopia.splice(randomIndex, 1);
       }
 
-      setPeliculasRandom(peliculasAleatorias)  
 
+      setPeliculasRandom(peliculasAleatorias.slice(0, 10))  
+      
+      
     };  
-
     mezclarPeliculas()
-  }, [window.location.href])
-  
 
+  }, [loading])
+  
+  
   // console.log(peliculasRandom);
 
 
@@ -44,7 +45,7 @@ const Home = () => {
 
 
         {loading ? <h1>Loading...</h1> : peliculasRandom.map((item, index) => {
-          console.log(item);
+
           return (
             <Card key={index} item={item} />
 
