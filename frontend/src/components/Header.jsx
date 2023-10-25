@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "/logo.svg";
 
-export const Navbar = () => {
+export const Header = () => {
   return (
-    <>
+    <header>
       <Link to={"/"}>
         <img src={Logo} alt="logo" />
       </Link>
@@ -14,8 +14,8 @@ export const Navbar = () => {
 
         <button>Iniar sesión</button>
       </div>
-    </>
+    </header>
   );
 };
 
-export default Navbar;
+export default Header;
