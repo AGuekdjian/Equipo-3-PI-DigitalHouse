@@ -5,7 +5,7 @@ on:
     paths:
       - frontend/**/*
     branches: [main]
-    types: [opened, synchronize]
+    types: [closed, synchronize]
 
 jobs:
   avoid_reduncy:
