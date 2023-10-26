@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useGlobalContext } from "../context/context";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import Card from "../components/Card";
 import FormBusquedaPelicula from "../components/Forms/FormBusquedaPelicula";
 import Categorias from "../components/Categorias";
 
-const Home = () => {
+export function Home() {
   const { data, loading } = useGlobalContext();
   const [peliculasRandom, setPeliculasRandom] = useState([]);
 
@@ -43,6 +43,4 @@ const Home = () => {
       </div>
     </section>
   );
-};
-
-export default Home;
+}

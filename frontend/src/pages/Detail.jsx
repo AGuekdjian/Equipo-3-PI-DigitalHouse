@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useGlobalContext } from "../context/context";
 import peliculas from "../mockJsonPelis.json"
 
-const Detail = () => {
+export function Detail() {
   const { id } = useParams();
   // const { data } = useGlobalContext();
   const [item, setItem] = useState({});
@@ -27,6 +27,4 @@ const Detail = () => {
       <img src={item.images[0].url_image} alt="" /> 
     </div>
   );
-};
-
-export default Detail;
+}

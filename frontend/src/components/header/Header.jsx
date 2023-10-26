@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "/logo.svg";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Header.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Header.css";
 
 import {
   Collapse,
@@ -11,7 +11,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-} from 'reactstrap';
+} from "reactstrap";
 
 export const Header = () => {
   const [collapsed, setCollapsed] = useState(true);
@@ -24,16 +24,28 @@ export const Header = () => {
           <Link to="/">
             <img src={Logo} alt="logo" className="h-14" />
           </Link>
-          <h1 className="mx-4 text-xl font-extrabold">"Tu busqueda, nuestro compromiso, tu cine."</h1>
+          <h1 className="mx-4 text-xl font-extrabold">
+            "Tu busqueda, nuestro compromiso, tu cine."
+          </h1>
         </div>
 
         <nav>
           <ul className="flex justify-between w-72">
             <li>
-              <Link to="/signup" className="py-2 px-4 bg-sky rounded-xl btn-signup">Crear cuenta</Link>
+              <Link
+                to="/register"
+                className="py-2 px-4 bg-sky rounded-xl btn-signup"
+              >
+                Crear cuenta
+              </Link>
             </li>
             <li>
-              <Link to="/login" className="py-2 px-4 bg-sky rounded-xl btn-login">Iniciar sesión</Link>
+              <Link
+                to="/login"
+                className="py-2 px-4 bg-sky rounded-xl btn-login"
+              >
+                Iniciar sesión
+              </Link>
             </li>
           </ul>
         </nav>
@@ -48,10 +60,20 @@ export const Header = () => {
           <Collapse isOpen={!collapsed} navbar>
             <Nav navbar className="mt-2 navbar-mobile">
               <NavItem className="mb-4">
-                <Link to="/login" className="py-2 px-4 bg-sky rounded-xl btn-login">Iniciar sesión</Link>
+                <Link
+                  to="/login"
+                  className="py-2 px-4 bg-sky rounded-xl btn-login"
+                >
+                  Iniciar sesión
+                </Link>
               </NavItem>
               <NavItem className="mb-2">
-                <Link to="/signup" className="py-2 px-4 bg-sky rounded-xl btn-signup">Crear cuenta</Link>
+                <Link
+                  to="/register"
+                  className="py-2 px-4 bg-sky rounded-xl btn-signup"
+                >
+                  Crear cuenta
+                </Link>
               </NavItem>
             </Nav>
           </Collapse>
