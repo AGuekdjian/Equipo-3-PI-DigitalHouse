@@ -1,17 +1,23 @@
-import React from 'react'
+import React from "react";
 
 const FormBusquedaPelicula = () => {
-    return (
-        <div>
-            <h1>Reserva una pelicula en tu cine más cercano</h1>
+  return (
+    <section className="flex text-center flex-col w-3/12 mt-8">
+      <h1 className="font-extrabold text-2xl">Buscar Pelicula</h1>
 
-            <div className='formularioBusqueda'>
-                <input type="text" placeholder='Seleccione su ubicación' />
-                <input type="text"  placeholder='Seleccione la pelicula'/>
-            </div>
-            <button>Buscar</button>
-        </div>
-    )
-}
+      <div className="mt-2">
+        {/* <input type="text" placeholder='Seleccione su ubicación' /> */}
+        <input
+          className="py-2 px-4 rounded-pill w-72 bg-grey-light"
+          type="text"
+          placeholder="Seleccione la pelicula"
+        />
+        <button className="btn py-2 px-4 bg-sky text-dark rounded-pill font-extrabold ml-2">
+          Buscar
+        </button>
+      </div>
+    </section>
+  );
+};
 
-export default FormBusquedaPelicula
+export default FormBusquedaPelicula;
