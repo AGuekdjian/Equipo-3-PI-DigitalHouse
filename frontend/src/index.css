@@ -25,3 +25,15 @@
 html {
   scroll-behavior: smooth;
 }
+
+.btn-signup,
+.btn-login,
+.btn {
+  transition: var(--transition);
+}
+
+.btn-signup:hover,
+.btn-login:hover,
+.btn:hover {
+  background: var(--sky-hover);
+}

@@ -4,11 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        'sky-light': '#859ad9',
-        'sky': '#436deb',
-        'dark': '#17202a',
-        'txt-grey': '#94a3b8'
-      }
+        "sky-light": "#859ad9",
+        "sky": "#436deb",
+        "dark": "#17202a",
+        "txt-grey": "#94a3b8",
+        "grey-light": "#d0d3d4",
+      },
     },
   },
   plugins: [],
