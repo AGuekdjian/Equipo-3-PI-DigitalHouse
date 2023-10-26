@@ -1,13 +1,3 @@
-.btn-signup,
-.btn-login {
-  transition: var(--transition);
-}
-
-.btn-signup:hover,
-.btn-login:hover {
-  background: var(--sky-hover);
-}
-
 @media screen and (max-width: 768px) {
   .header-desktop {
     display: none !important;
