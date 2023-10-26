@@ -17,6 +17,7 @@ export const GlobalProvider = ({ children }) => {
   async function fetchData() {
     try {
       const response = await fetch('/mockJsonPelis.json');
+      // const response = await fetch('http://localhost:8080/api/movie?size=10');
       const jsonData = await response.json();
       dispatch({ type: Global.actionType.SET_DATA, payload: jsonData });
       dispatch({ type: Global.actionType.SET_LOADING, payload: false });

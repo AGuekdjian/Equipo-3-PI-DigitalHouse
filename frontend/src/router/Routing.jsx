@@ -10,6 +10,7 @@ import {
   AdminDashboard,
   Error404,
   Logout,
+  Gallery
 } from "../pages";
 
 const Routing = () => {
@@ -24,6 +25,7 @@ const Routing = () => {
         <Route path="reservar" element={<Reserve />} />
         <Route path="detail/:id" element={<Detail />} />
         <Route path="administracion" element={<AdminDashboard />} />
+        <Route path="detail/images/:id" element={<Gallery />} />
 
         <Route path="*" element={<Error404 />} />
       </Routes>

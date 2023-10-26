@@ -1,16 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useGlobalContext } from "../hooks/useGlobalContext";
 import peliculas from "../mockJsonPelis.json"
 import { Link } from "react-router-dom";
 
-export function Detail() {
+
+export function Gallery(){
+
+
   const { id } = useParams();
-  // const { data } = useGlobalContext();
   const [item, setItem] = useState({});
-  const data = peliculas;
-//   const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
 //  useEffect(() => {
 //     fetchData()
@@ -24,7 +24,7 @@ export function Detail() {
 //       setLoading(false)
 //     } catch (error) {
 //       console.error('Error al cargar datos desde la API:', error);
-
+      
 //     }
 //   }
 
@@ -34,23 +34,23 @@ export function Detail() {
     setItem(movieParams);
   }, []);
 
-  console.log(item);
-  // console.log(item.genres);
 
   return (
     <div>
-      <h1>Detalle de producto</h1>
+      <h1>Imagenes del producto</h1>
 
-      {/* <img src={item.image_urls[0]} alt="" />
-      <h2>{item.title}</h2>
-      <h3>{item.genre}</h3>
-      <h3>{item.overview}</h3>  */}
-      <Link to={`/detail/images/${item.id}`}> <button> Más imagenes </button> </Link>
-     
+      {/* <div className="lefContainer" >
+        <img src={item.images_urls[0]} alt="" />
+      </div>
 
-      <h2>{item.name}</h2>
-      <h3>{item.description}</h3>
-      {/* <img src={item.images[0].url_image} alt="" />  */}
+      <div className="rightContainer" >
+        {item.images_urls.map((image) => {
+          return (
+            <img src={image} alt="" />
+          )
+        })}
+      </div> */}
     </div>
-  );
+  )
 }
+

@@ -7,3 +7,4 @@ export * from "./Reserve";
 export * from "./user/Logout";
 export * from "./user/login/Login";
 export * from "./user/register/Register";
+export * from "./Gallery"
