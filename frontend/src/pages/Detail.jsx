@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useGlobalContext } from "../context/context";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
-const Detail = () => {
+export function Detail() {
   const { id } = useParams();
   const { data } = useGlobalContext();
   const [item, setItem] = useState({});
@@ -24,6 +24,4 @@ const Detail = () => {
       {/* <img src={item.images[0].url_image} alt="" /> */}
     </div>
   );
-};
-
-export default Detail;
+}

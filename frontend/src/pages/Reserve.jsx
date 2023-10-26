@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
-const Reserve = () => {
-  return (
-    <div>Reserve</div>
-  )
+export function Reserve() {
+  return <div>Reserve</div>;
 }
-
-export default Reserve
