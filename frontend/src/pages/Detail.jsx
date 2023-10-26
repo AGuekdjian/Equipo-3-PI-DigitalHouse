@@ -2,11 +2,14 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useGlobalContext } from "../context/context";
+import peliculas from "../mockJsonPelis.json"
 
 const Detail = () => {
   const { id } = useParams();
-  const { data } = useGlobalContext();
+  // const { data } = useGlobalContext();
   const [item, setItem] = useState({});
+  const data = peliculas;
+
 
   useEffect(() => {
     const movieParams = data.find((movie) => movie.id == id);
@@ -21,7 +24,7 @@ const Detail = () => {
       <h1>Detalle de producto</h1>
       <h2>{item.name}</h2>
       <h3>{item.description}</h3>
-      {/* <img src={item.images[0].url_image} alt="" /> */}
+      <img src={item.images[0].url_image} alt="" /> 
     </div>
   );
 };
