@@ -30,7 +30,7 @@ jobs:
           cache: maven
           cache-dependency-path: "backend/*"
       - name: Build Project
-        run: cd backend && mvn clear install -DskipTests
+        run: cd backend && mvn clean install -DskipTests
       - name: Login to docker hub
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build docker image
