@@ -17,17 +17,17 @@ jobs:
           access_token: ${{ github.token }}
 
   build: 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout sources
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v3.13.0
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: maven
-          cache-dependency-path: "frontend/*"
+          cache-dependency-path: "backend/*"
       - name: Build Project
         run: cd backend && mvn clear install -DskipTests
       - name: Login to docker hub
