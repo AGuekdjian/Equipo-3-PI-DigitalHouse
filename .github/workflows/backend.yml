@@ -36,9 +36,9 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build docker image
-        run: docker build -t backend-java:latest backend/.
+        run: docker build -t aguekdjian/backend-java:latest backend/.
       - name: Publish image to docker hub
-        run: docker push aguekdjian/backend-java
+        run: docker push aguekdjian/backend-java:latest
 
   deploy:
     needs: build
