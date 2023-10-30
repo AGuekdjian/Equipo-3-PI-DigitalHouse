@@ -1,5 +1,6 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM openjdk:17-alpine
+RUN apk update && apk add maven
 WORKDIR /app
-COPY target/springboot-example.jar springboot-example.jar
-EXPOSE 8080
-CMD [ "java", "-jar", "springboot-example.jar" ]
+COPY . .
+RUN mvn package
+CMD ["java", "-jar", "target/my-app-0.0.1-SNAPSHOT.jar"]
