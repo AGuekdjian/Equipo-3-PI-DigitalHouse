@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos Generales */
+
+:root {
+  --transition: all 300ms ease;
+  --sky-light: #859ad9;
+  --sky-hover: #436debc2;
+  --white: #ffffff;
+  --dark: #17202a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Nunito";
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.btn-signup,
+.btn-login,
+.btn {
+  transition: var(--transition);
+}
+
+.btn-signup:hover,
+.btn-login:hover,
+.btn:hover {
+  background: var(--sky-hover);
+}

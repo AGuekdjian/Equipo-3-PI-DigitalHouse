@@ -1,0 +1,342 @@
+[
+    {
+        "id": 1,
+        "name": "El Señor de los Anillos",
+        "description": "Una aventura épica en la tierra media.",
+        "images": [
+            {
+                "id": 1,
+                "url_image": "https://es.web.img2.acsta.net/c_310_420/medias/nmedia/18/89/67/45/20061512.jpg"
+            },
+            {
+                "id": 2,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 1,
+                "movie_link_platform": "https://www.primevideo.com/detail/amzn1.dv.gti.f143d0a2-ea83-4f24-93cd-e5ed0d7bc3eb?tag=ssc-primevideo-button-21",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 1,
+                "name": "Fantasía"
+            },
+            {
+                "id": 2,
+                "name": "Aventura"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Interstellar",
+        "description": "Un viaje a través del espacio en busca de un nuevo hogar.",
+        "images": [
+            {
+                "id": 3,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 2,
+                "movie_link_platform": "https://www.primevideo.com/detail/0GURDFFNEFFK5UUUGQ3JT3HN1T/ref=atv_dl_rdr",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Ciencia Ficción"
+            },
+            {
+                "id": 4,
+                "name": "Drama"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "El Señor de los Anillos",
+        "description": "Una aventura épica en la tierra media.",
+        "images": [
+            {
+                "id": 1,
+                "url_image": "https://es.web.img2.acsta.net/c_310_420/medias/nmedia/18/89/67/45/20061512.jpg"
+            },
+            {
+                "id": 2,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 1,
+                "movie_link_platform": "https://www.primevideo.com/detail/amzn1.dv.gti.f143d0a2-ea83-4f24-93cd-e5ed0d7bc3eb?tag=ssc-primevideo-button-21",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 1,
+                "name": "Fantasía"
+            },
+            {
+                "id": 2,
+                "name": "Aventura"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Interstellar",
+        "description": "Un viaje a través del espacio en busca de un nuevo hogar.",
+        "images": [
+            {
+                "id": 3,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 2,
+                "movie_link_platform": "https://www.primevideo.com/detail/0GURDFFNEFFK5UUUGQ3JT3HN1T/ref=atv_dl_rdr",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Ciencia Ficción"
+            },
+            {
+                "id": 4,
+                "name": "Drama"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "El Señor de los Anillos",
+        "description": "Una aventura épica en la tierra media.",
+        "images": [
+            {
+                "id": 1,
+                "url_image": "https://es.web.img2.acsta.net/c_310_420/medias/nmedia/18/89/67/45/20061512.jpg"
+            },
+            {
+                "id": 2,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 1,
+                "movie_link_platform": "https://www.primevideo.com/detail/amzn1.dv.gti.f143d0a2-ea83-4f24-93cd-e5ed0d7bc3eb?tag=ssc-primevideo-button-21",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 1,
+                "name": "Fantasía"
+            },
+            {
+                "id": 2,
+                "name": "Aventura"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Interstellar",
+        "description": "Un viaje a través del espacio en busca de un nuevo hogar.",
+        "images": [
+            {
+                "id": 3,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 2,
+                "movie_link_platform": "https://www.primevideo.com/detail/0GURDFFNEFFK5UUUGQ3JT3HN1T/ref=atv_dl_rdr",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Ciencia Ficción"
+            },
+            {
+                "id": 4,
+                "name": "Drama"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "El Señor de los Anillos",
+        "description": "Una aventura épica en la tierra media.",
+        "images": [
+            {
+                "id": 1,
+                "url_image": "https://es.web.img2.acsta.net/c_310_420/medias/nmedia/18/89/67/45/20061512.jpg"
+            },
+            {
+                "id": 2,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 1,
+                "movie_link_platform": "https://www.primevideo.com/detail/amzn1.dv.gti.f143d0a2-ea83-4f24-93cd-e5ed0d7bc3eb?tag=ssc-primevideo-button-21",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 1,
+                "name": "Fantasía"
+            },
+            {
+                "id": 2,
+                "name": "Aventura"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Interstellar",
+        "description": "Un viaje a través del espacio en busca de un nuevo hogar.",
+        "images": [
+            {
+                "id": 3,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 2,
+                "movie_link_platform": "https://www.primevideo.com/detail/0GURDFFNEFFK5UUUGQ3JT3HN1T/ref=atv_dl_rdr",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Ciencia Ficción"
+            },
+            {
+                "id": 4,
+                "name": "Drama"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "name": "El Señor de los Anillos",
+        "description": "Una aventura épica en la tierra media.",
+        "images": [
+            {
+                "id": 1,
+                "url_image": "https://es.web.img2.acsta.net/c_310_420/medias/nmedia/18/89/67/45/20061512.jpg"
+            },
+            {
+                "id": 2,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 1,
+                "movie_link_platform": "https://www.primevideo.com/detail/amzn1.dv.gti.f143d0a2-ea83-4f24-93cd-e5ed0d7bc3eb?tag=ssc-primevideo-button-21",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 1,
+                "name": "Fantasía"
+            },
+            {
+                "id": 2,
+                "name": "Aventura"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Interstellar",
+        "description": "Un viaje a través del espacio en busca de un nuevo hogar.",
+        "images": [
+            {
+                "id": 3,
+                "url_image": "https://pics.filmaffinity.com/lord_of_the_rings_the_rings_of_power-159886546-mmed.jpg"
+            }
+        ],
+        "links": [
+            {
+                "id": 2,
+                "movie_link_platform": "https://www.primevideo.com/detail/0GURDFFNEFFK5UUUGQ3JT3HN1T/ref=atv_dl_rdr",
+                "platform_type": "Streaming",
+                "platform": {
+                    "id": 2,
+                    "name": "Prime Video"
+                }
+            }
+        ],
+        "genres": [
+            {
+                "id": 3,
+                "name": "Ciencia Ficción"
+            },
+            {
+                "id": 4,
+                "name": "Drama"
+            }
+        ]
+    }
+]
