@@ -1,0 +1,50 @@
+name: Deploy backend with spring boot to AWS EC2
+
+on:
+  pull_request:
+    paths:
+      - backend/**/*
+    branches: [main]
+    types: [closed, synchronize]
+
+jobs:
+  avoid_reduncy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.12.0
+        with:
+          access_token: ${{ github.token }}
+
+  build: 
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Java
+        uses: actions/setup-java@v3.13.0
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+          cache-dependency-path: "backend/*"
+      - name: Build Project
+        run: cd backend && mvn clear install -DskipTests
+      - name: Login to docker hub
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+      - name: Build docker image
+        run: docker build -t backendJava:0.1 backend/.
+      - name: Publish image to docker hub
+        run: docker push backendJava:latest
+
+  deploy:
+    needs: build
+    runs-on: aws-ec2
+    steps:
+      - name: Pull Image from docker hub
+        run: docker pull backendJava:latest
+      - name: Delete old container
+        run: docker rm -f backendJava-container
+      - name: Run docker container
+        run: docker run -d -p 8080:8080 --name backendJava-container backendJava
