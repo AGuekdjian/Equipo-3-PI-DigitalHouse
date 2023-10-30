@@ -44,10 +44,8 @@ jobs:
     needs: build
     runs-on: aws-ec2
     steps:
-      - name: Export env
-        run: export D_UN=${{secrets.DOCKER_USERNAME}} && export D_PWD=${{secrets.DOCKER_PASSWORD}}
       - name: Login to docker hub
-        run: docker login -u $D_UN -p $D_PWD
+        run: sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Pull Image from docker hub
         run: sudo docker pull aguekdjian/backend-java:latest
       - name: Delete old container
