@@ -44,9 +44,11 @@ jobs:
     needs: build
     runs-on: aws-ec2
     steps:
+      - name: Login to docker hub
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Pull Image from docker hub
         run: sudo docker pull aguekdjian/backend-java:latest
       - name: Delete old container
         run: sudo docker rm -f backend-java-container
       - name: Run docker container
-        run: sudo docker run -d -p 8080:8080 --name backend-java-container backend-java:latest
+        run: sudo docker run -d -p 8080:8080 --name backend-java-container aguekdjian/backend-java:latest
