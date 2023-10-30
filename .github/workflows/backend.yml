@@ -38,7 +38,7 @@ jobs:
       - name: Build docker image
         run: docker build -t backend-java:latest backend/.
       - name: Publish image to docker hub
-        run: docker push backend-java:latest
+        run: docker push aguekdjian/backend-java:latest
 
   deploy:
     needs: build
