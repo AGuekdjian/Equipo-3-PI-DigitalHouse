@@ -26,7 +26,11 @@ export function RegistrarPelicula() {
       });
       const jsonData = await response.json();
       console.log(jsonData);
-      setSubmitStatus('success');
+      if (response.status === 409) {
+        setSubmitStatus('conflict');
+      } else {
+        setSubmitStatus('success');
+      }
     } catch (error) {
       console.error('Error al enviar datos a la API:', error);
       setSubmitStatus('error');
@@ -82,6 +86,7 @@ export function RegistrarPelicula() {
 
         <button type="submit">Registrar pelicula</button>
         {submitStatus === 'success' && <p>Los datos se enviaron correctamente.</p>}
+        {submitStatus === 'conflict' && <p>Ya existe una pelicula con ese título, intenta nuevamente registrando otra película</p>}
         {submitStatus === 'error' && <p>Ocurrió un error al enviar los datos. Por favor, inténtelo de nuevo más tarde.</p>}
       </form>
     </div>
