@@ -52,8 +52,8 @@ export function Login() {
         setLogged("logged");
         setAuth(data.user);
         setTimeout(() => {
-          navigate("/admin");
-        }, 400);
+          window.location.reload();
+        }, 100);
       } else {
         setLogged("error");
         msgError(data.message);
