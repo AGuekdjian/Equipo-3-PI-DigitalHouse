@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useForm } from "../../../hooks/useForm";
 import { Global } from "../../../helpers/Global";
 import { useAuth } from "../../../hooks/useAuth";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function Login() {
   const { form, changed } = useForm({});
   const [logged, setLogged] = useState("not_sended");
+  const navigate = useNavigate();
 
   const { setAuth } = useAuth();
 
@@ -51,7 +52,7 @@ export function Login() {
         setLogged("logged");
         setAuth(data.user);
         setTimeout(() => {
-          window.location.reload();
+          navigate("/");
         }, 400);
       } else {
         setLogged("error");
