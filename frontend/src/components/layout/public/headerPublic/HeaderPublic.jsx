@@ -13,7 +13,7 @@ import {
   NavItem,
 } from "reactstrap";
 
-export const Header = () => {
+export const HeaderPublic = () => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
@@ -83,4 +83,4 @@ export const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderPublic;
