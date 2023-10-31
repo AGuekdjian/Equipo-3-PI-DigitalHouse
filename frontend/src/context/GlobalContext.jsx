@@ -1,27 +1,28 @@
-import React, { createContext, useReducer, useEffect } from 'react';
-import { Global } from '../helpers/Global'
+import React, { createContext, useReducer, useEffect } from "react";
+import { Global } from "../helpers/Global";
 
 export const GlobalContext = createContext();
 
 const initialState = {
   data: [],
-  loading: true
+  loading: true,
 };
 
 export const GlobalProvider = ({ children }) => {
-
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
   async function fetchData() {
     try {
-      const response = await fetch('http://localhost:8080/api/movie');
+      const response = await fetch(
+        `${Global.endpoints.backend.backendJava}api/movies`
+      );
       const jsonData = await response.json();
       dispatch({ type: Global.actionType.SET_DATA, payload: jsonData.content });
       dispatch({ type: Global.actionType.SET_LOADING, payload: false });
     } catch (error) {
-      console.error('Error al cargar datos desde la API:', error);
+      console.error("Error al cargar datos desde la API:", error);
     }
   }
 
@@ -34,7 +35,7 @@ export const GlobalProvider = ({ children }) => {
       default:
         return state;
     }
-  };
+  }
 
   const [state, dispatch] = useReducer(globalReducer, initialState);
 
@@ -42,5 +43,5 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider value={{ ...state, dispatch }}>
       {children}
     </GlobalContext.Provider>
-  )
-}
+  );
+};

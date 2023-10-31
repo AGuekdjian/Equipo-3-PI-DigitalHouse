@@ -12,6 +12,8 @@ import {
   Logout,
   Gallery
 } from "../pages";
+import ListaProductos from "../pages/ListaProductos";
+import EditarProducto from "../pages/EditarProducto";
 
 const Routing = () => {
   return (
@@ -25,6 +27,8 @@ const Routing = () => {
         <Route path="reservar" element={<Reserve />} />
         <Route path="detail/:id" element={<Detail />} />
         <Route path="administracion" element={<AdminDashboard />} />
+        <Route path="administracion/listadoproductos" element={<ListaProductos/>} />
+        <Route path="administracion/listadoproductos/editarproducto" element={<EditarProducto/>} />
         <Route path="detail/images/:id" element={<Gallery />} />
 
         <Route path="*" element={<Error404 />} />
