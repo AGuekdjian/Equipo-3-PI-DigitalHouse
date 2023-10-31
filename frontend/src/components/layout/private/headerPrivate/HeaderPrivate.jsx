@@ -14,6 +14,10 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 
 export const HeaderPrivate = () => {
@@ -21,8 +25,12 @@ export const HeaderPrivate = () => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+
   const { auth } = useAuth();
-  const { name, image } = auth;
+  const { image } = auth;
   return (
     <>
       <header className="bg-sky-light w-full h-16 flex justify-around items-center header-desktop">
@@ -35,61 +43,67 @@ export const HeaderPrivate = () => {
           </h1>
         </div>
 
-        <nav className="flex justify-between w-72">
-          <ul className="flex justify-between w-72 mx-8">
+        <nav className="flex justify-center items-center">
+          <ul className="flex mx-8">
             <li className="menu-list__item">
-              <NavLink to="/">
+              <NavLink to="/" className="flex items-center">
                 <i className="fa-solid fa-house"></i>
-                <span className="menu-list__title">Inicio</span>
+                <span className="ml-2.5">Inicio</span>
               </NavLink>
             </li>
 
-            <li className="menu-list__item">
-              <NavLink to="/administracion">
+            <li className="ml-6">
+              <NavLink to="/admin/dashboard" className="flex items-center">
                 <i className="fa-solid fa-list"></i>
-                <span className="menu-list__title">AdminDashboard</span>
+                <span className="ml-2.5">Dashboard</span>
               </NavLink>
             </li>
           </ul>
 
-          <ul className="flex justify-between w-72 mx-8">
-            <li className="list-end__item">
-              <NavLink
-                to={`/social/profile/${auth._id}`}
-                className="list-end__link-image"
-              >
+          <div className="flex items-center">
+            <Dropdown
+              isOpen={dropdownOpen}
+              toggle={toggle}
+              className="border-none"
+            >
+              <DropdownToggle caret className="border-none flex items-center">
                 {image != "default.png" ? (
                   <img
                     src={`${Global.endpoints.backend.backendNode}user/avatar/${image}`}
-                    className="list-end__img"
+                    className="w-11"
                     alt="Imagen de perfil"
                   />
                 ) : (
-                  <img src={avatar} className="w-11" alt="Imagen de perfil" />
+                  <img src={avatar} className="w-12" alt="Imagen de perfil" />
                 )}
-              </NavLink>
-            </li>
-            <li className="list-end__item">
-              <NavLink
-                to={`/social/profile/${auth._id}`}
-                className="list-end__link"
-              >
-                <span className="list-end__name">{`${name}`}</span>
-              </NavLink>
-            </li>
-            <li className="list-end__item">
-              <NavLink to="/social/settings">
-                <i className="fa-solid fa-gear"></i>
-                <span className="list-end__name">Ajustes</span>
-              </NavLink>
-            </li>
-            <li className="list-end__item">
-              <NavLink to="/social/logout" className="list-end__link">
-                <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                <span className="list-end__name">Cerrar Sesion</span>
-              </NavLink>
-            </li>
-          </ul>
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>
+                  <NavLink
+                    to={`/admin/profile/${auth._id}`}
+                    className="flex items-center"
+                  >
+                    <i className="fa-solid fa-user"></i>
+                    <span className="ml-2.5">Perfil</span>
+                  </NavLink>
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>
+                  <NavLink to="/admin/settings" className="flex items-center">
+                    <i className="fa-solid fa-gear"></i>
+                    <span className="ml-2.5">Ajustes</span>
+                  </NavLink>
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>
+                  <NavLink to="/admin/logout" className="flex items-center">
+                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span className="ml-2.5">Cerrar Sesion</span>
+                  </NavLink>
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
         </nav>
       </header>
 

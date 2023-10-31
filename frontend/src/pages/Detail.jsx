@@ -3,8 +3,11 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Global } from "../helpers/Global";
+import { useAuth } from "../hooks/useAuth";
 
 export function Detail() {
+  const { auth } = useAuth();
+  const { _id } = auth;
   const { id } = useParams();
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(true);
@@ -41,10 +44,21 @@ export function Detail() {
         </div>
       )}
 
-      <Link to={`/detail/images/${item.id}`}>
-        {" "}
-        <button> Más imagenes </button>{" "}
-      </Link>
+      {_id ? (
+        <Link
+          to={`/admin/detail/images/${item.id}`}
+          className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
+        >
+          Más imagenes
+        </Link>
+      ) : (
+        <Link
+          to={`/detail/${item.id}`}
+          className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
+        >
+          Más imagenes
+        </Link>
+      )}
     </div>
   );
 }

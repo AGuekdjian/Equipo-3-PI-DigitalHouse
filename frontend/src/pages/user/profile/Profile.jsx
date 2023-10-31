@@ -21,7 +21,7 @@ export default function Profile() {
 
   const getDataUser = async () => {
     await GetProfile(
-      Global.endpoints.backend.backendJava,
+      Global.endpoints.backend.backendNode,
       token,
       params.userId,
       setLoading,

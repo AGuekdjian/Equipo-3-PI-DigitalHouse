@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import Card from "../components/card/Card";
 import FormBusquedaPelicula from "../components/Forms/FormBusquedaPelicula";
-
+import { Spinner } from "reactstrap";
 
 export function Home() {
   const { data, loading } = useGlobalContext();
@@ -33,7 +33,9 @@ export function Home() {
       {/* <Categorias /> */}
 
       {loading ? (
-        <h1 className="mt-8">Loading...</h1>
+        <Spinner color="primary" className="mt-8">
+          Loading...
+        </Spinner>
       ) : (
         <div className="p-4 mt-8 w-full grid grid-cols-5 gap-4 justify-items-center">
           {peliculasRandom.map((item, index) => {

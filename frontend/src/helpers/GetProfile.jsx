@@ -6,7 +6,7 @@ export const GetProfile = async (
   setUserProfile
 ) => {
   setLoading(true);
-  const res = await fetch(`${url}user/profile/${userId}`, {
+  const res = await fetch(`${url}/user/profile/${userId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
