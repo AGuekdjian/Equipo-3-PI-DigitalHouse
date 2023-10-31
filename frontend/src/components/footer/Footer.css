@@ -1,0 +1,9 @@
+@media screen and (max-width: 768px) {
+  .logo-footer {
+    display: none;
+  }
+
+  footer {
+    justify-content: center;
+  }
+}
