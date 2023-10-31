@@ -2,7 +2,7 @@ export const Global = {
   endpoints: {
     backend: {
       backendJava: "http://54.81.186.162/",
-      backendNode: "http://localhost:8080/api",
+      backendNode: "http://54.167.13.162/api",
     },
   },
   actionType: {
