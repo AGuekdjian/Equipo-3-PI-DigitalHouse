@@ -79,7 +79,7 @@ export function Detail() {
                   </Link>
                 ) : (
                   <Link
-                    to={`/detail/${item.id}`}
+                    to={`/detail/images/${item.id}`}
                     className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
                   >
                     Más imagenes
