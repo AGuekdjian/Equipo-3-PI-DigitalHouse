@@ -19,7 +19,7 @@ export const HeaderPublic = () => {
   const toggleNavbar = () => setCollapsed(!collapsed);
   return (
     <>
-      <header className="bg-sky-light w-full h-16 flex justify-around items-center header-desktop">
+      <header className="bg-sky-light w-full h-16 flex justify-around items-center header-desktop-public">
         <div className="flex items-center">
           <Link to="/">
             <img src={Logo} alt="logo" className="h-14" />
@@ -51,7 +51,7 @@ export const HeaderPublic = () => {
         </nav>
       </header>
 
-      <header className="header-mobile">
+      <header className="header-mobile-public">
         <Navbar className="bg-sky-light" light>
           <NavbarBrand href="/" className="me-auto">
             <img src={Logo} alt="logo" className="h-14" />

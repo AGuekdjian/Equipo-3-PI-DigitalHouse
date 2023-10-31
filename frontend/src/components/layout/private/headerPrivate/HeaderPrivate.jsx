@@ -5,7 +5,7 @@ import { Global } from "../../../../helpers/Global";
 import Logo from "/logo.svg";
 import avatar from "../../../../assets/img/user.png";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../public/headerPublic/Header.css";
+import "./Header.css";
 
 import {
   Collapse,
@@ -33,7 +33,7 @@ export const HeaderPrivate = () => {
   const { image } = auth;
   return (
     <>
-      <header className="bg-sky-light w-full h-16 flex justify-around items-center header-desktop">
+      <header className="bg-sky-light w-full h-16 flex justify-around items-center header-desktop-private">
         <div className="flex items-center">
           <Link to="/">
             <img src={Logo} alt="logo" className="h-14" />
@@ -107,7 +107,7 @@ export const HeaderPrivate = () => {
         </nav>
       </header>
 
-      <header className="header-mobile">
+      <header className="header-mobile-private">
         <Navbar className="bg-sky-light" light>
           <NavbarBrand href="/" className="me-auto">
             <img src={Logo} alt="logo" className="h-14" />
@@ -115,21 +115,29 @@ export const HeaderPrivate = () => {
           <NavbarToggler onClick={toggleNavbar} className="me-2" />
           <Collapse isOpen={!collapsed} navbar>
             <Nav navbar className="mt-2 navbar-mobile">
-              <NavItem className="mb-4">
-                <Link
-                  to="/login"
-                  className="py-2 px-4 bg-sky rounded-xl btn-login"
+              <NavItem className="border-b-[1px] py-2">
+                <NavLink
+                  to={`/admin/profile/${auth._id}`}
+                  className="flex items-center ml-2"
                 >
-                  Iniciar sesión
-                </Link>
+                  <i className="fa-solid fa-user"></i>
+                  <span className="ml-2.5">Perfil</span>
+                </NavLink>
               </NavItem>
-              <NavItem className="mb-2">
-                <Link
-                  to="/register"
-                  className="py-2 px-4 bg-sky rounded-xl btn-signup"
+              <NavItem className="border-b-[1px] py-2">
+                <NavLink
+                  to="/admin/settings"
+                  className="flex items-center ml-2"
                 >
-                  Crear cuenta
-                </Link>
+                  <i className="fa-solid fa-gear"></i>
+                  <span className="ml-2.5">Ajustes</span>
+                </NavLink>
+              </NavItem>
+              <NavItem className="mt-2">
+                <NavLink to="/admin/logout" className="flex items-center ml-2">
+                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                  <span className="ml-2.5">Cerrar Sesion</span>
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
