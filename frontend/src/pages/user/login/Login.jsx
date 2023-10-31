@@ -52,7 +52,7 @@ export function Login() {
         setLogged("logged");
         setAuth(data.user);
         setTimeout(() => {
-          navigate("/");
+          navigate("/admin");
         }, 400);
       } else {
         setLogged("error");
