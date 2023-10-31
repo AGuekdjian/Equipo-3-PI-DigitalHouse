@@ -1,8 +1,6 @@
 name: Deploy backend with spring boot to AWS EC2
 
 on:
-  push:
-    branches: [main]
   pull_request:
     paths:
       - backend/**/*
@@ -29,7 +27,7 @@ jobs:
           distribution: "temurin"
           java-version: "17"
           cache: maven
-          cache-dependency-path: "backend/*"
+          settings-path: "backend/*"
       - name: Build Project
         run: cd backend && mvn clean install -DskipTests
       - name: Login to docker hub
