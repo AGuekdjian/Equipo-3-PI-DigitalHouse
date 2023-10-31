@@ -3,7 +3,9 @@ import Routing from "./router/Routing";
 function App() {
   return (
     <>
-      <Routing />
+      <div className="max-h-screen">
+        <Routing />
+      </div>
     </>
   );
 }
