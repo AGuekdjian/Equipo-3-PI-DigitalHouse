@@ -52,8 +52,8 @@ export function Login() {
         setLogged("logged");
         setAuth(data.user);
         setTimeout(() => {
-          window.location.reload();
-        }, 100);
+          navigate(`${Global.endpoints.frontend.url}/admin`);
+        }, 400);
       } else {
         setLogged("error");
         msgError(data.message);
