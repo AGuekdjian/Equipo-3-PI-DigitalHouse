@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../../../../hooks/useAuth";
+import { Global } from "../../../../helpers/Global";
 import Logo from "/logo.svg";
+import avatar from "../../../../assets/img/user.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../public/headerPublic/Header.css";
 
@@ -17,6 +20,9 @@ export const HeaderPrivate = () => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
+
+  const { auth } = useAuth();
+  const { name, image } = auth;
   return (
     <>
       <header className="bg-sky-light w-full h-16 flex justify-around items-center header-desktop">
@@ -29,8 +35,8 @@ export const HeaderPrivate = () => {
           </h1>
         </div>
 
-        <nav className="navbar__container-lists">
-          <ul className="container-lists__menu-list">
+        <nav className="flex justify-between w-72">
+          <ul className="flex justify-between w-72 mx-8">
             <li className="menu-list__item">
               <NavLink to="/">
                 <i className="fa-solid fa-house"></i>
@@ -46,7 +52,7 @@ export const HeaderPrivate = () => {
             </li>
           </ul>
 
-          <ul className="container-lists__list-end">
+          <ul className="flex justify-between w-72 mx-8">
             <li className="list-end__item">
               <NavLink
                 to={`/social/profile/${auth._id}`}
@@ -54,16 +60,12 @@ export const HeaderPrivate = () => {
               >
                 {image != "default.png" ? (
                   <img
-                    src={`${Global.url}user/avatar/${image}`}
+                    src={`${Global.endpoints.backend.backendNode}user/avatar/${image}`}
                     className="list-end__img"
                     alt="Imagen de perfil"
                   />
                 ) : (
-                  <img
-                    src={avatar}
-                    className="list-end__img"
-                    alt="Imagen de perfil"
-                  />
+                  <img src={avatar} className="w-11" alt="Imagen de perfil" />
                 )}
               </NavLink>
             </li>
@@ -72,7 +74,7 @@ export const HeaderPrivate = () => {
                 to={`/social/profile/${auth._id}`}
                 className="list-end__link"
               >
-                <span className="list-end__name">{`${nick}`}</span>
+                <span className="list-end__name">{`${name}`}</span>
               </NavLink>
             </li>
             <li className="list-end__item">
@@ -89,27 +91,6 @@ export const HeaderPrivate = () => {
             </li>
           </ul>
         </nav>
-
-        <div>
-          <ul className="flex justify-between w-72">
-            <li>
-              <Link
-                to="/register"
-                className="py-2 px-4 bg-sky rounded-xl btn-signup"
-              >
-                Crear cuenta
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/login"
-                className="py-2 px-4 bg-sky rounded-xl btn-login"
-              >
-                Iniciar sesión
-              </Link>
-            </li>
-          </ul>
-        </div>
       </header>
 
       <header className="header-mobile">
