@@ -4,27 +4,56 @@ import Card from "../../components/card/Card";
 import FormBusquedaPelicula from "../../components/Forms/FormBusquedaPelicula";
 import { Spinner } from "reactstrap";
 import "./Home.css";
+import { useQuery } from "react-query";
+import { Global } from "../../helpers/Global";
+import Pagination from "../../components/Pagination";
 
 export function Home() {
-  const { data, loading } = useGlobalContext();
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [moviesPerPage, setMoviesPerPage] = useState(10);
+  let totalMovies = 0;
+  
+  const fetchMovies = async (page) => {
+    const response = await fetch(
+      `${Global.endpoints.backend.backendJava}api/movies `
+      );
+      if (!response.ok) {
+        throw new Error('Error al cargar datos desde la API');
+      }
+      return response.json();
+    };  
+    
+    const {isLoading, isError, data} = useQuery(
+      ['peliculas', 0],
+      () => fetchMovies(0)
+      )
+      
+      if(data) totalMovies = data.content.length;
+ 
+
+
   const [peliculasRandom, setPeliculasRandom] = useState([]);
 
   useEffect(() => {
     const mezclarPeliculas = () => {
-      const peliculasCopia = [...data];
-
-      const peliculasAleatorias = [];
-      while (peliculasCopia.length > 0) {
-        const randomIndex = Math.floor(Math.random() * peliculasCopia.length);
-        const pelicula = peliculasCopia[randomIndex];
-        peliculasAleatorias.push(pelicula);
-        peliculasCopia.splice(randomIndex, 1);
+      if(data) {
+        
+        const peliculasCopia = [...data.content];
+  
+        const peliculasAleatorias = [];
+        while (peliculasCopia.length > 0) {
+          const randomIndex = Math.floor(Math.random() * peliculasCopia.length);
+          const pelicula = peliculasCopia[randomIndex];
+          peliculasAleatorias.push(pelicula);
+          peliculasCopia.splice(randomIndex, 1);
+        }
+  
+        setPeliculasRandom(peliculasAleatorias.slice(0, 10));
       }
-
-      setPeliculasRandom(peliculasAleatorias.slice(0, 10));
     };
     mezclarPeliculas();
-  }, [loading]);
+  }, [isLoading]);
 
   // console.log(peliculasRandom);
 
@@ -33,7 +62,7 @@ export function Home() {
       <FormBusquedaPelicula />
       {/* <Categorias /> */}
 
-      {loading ? (
+      {isLoading ? (
         <Spinner color="primary" className="mt-8">
           Loading...
         </Spinner>
@@ -44,6 +73,11 @@ export function Home() {
           })}
         </div>
       )}
+      <Pagination 
+      moviesPerPage ={moviesPerPage} 
+      currentPage={currentPage} 
+      setCurrentPage={setCurrentPage}
+      totalMovies={totalMovies} />
     </section>
   );
 }
