@@ -25,7 +25,7 @@ const Routing = () => {
       <Routes>
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<Home />} />
-          <Route path="/page/:pageNumber" element={<Home />} />
+          {/* <Route path="page/:pageNumber" element={<Home />} /> */}
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
           <Route path="login" element={<Login />} />

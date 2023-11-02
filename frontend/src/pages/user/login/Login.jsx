@@ -52,7 +52,7 @@ export function Login() {
         setLogged("logged");
         setAuth(data.user);
         setTimeout(() => {
-          window.location.href = `${Global.endpoints.frontend.url}/admin`;
+          window.location.href = `${Global.endpoints.frontend.url}`;
         }, 400);
       } else {
         setLogged("error");
