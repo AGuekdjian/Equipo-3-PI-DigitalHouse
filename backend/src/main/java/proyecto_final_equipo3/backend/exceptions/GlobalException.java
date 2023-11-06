@@ -81,6 +81,16 @@ public class GlobalException {
         return errorMap;
     }
 
+    @ExceptionHandler(RegisterErrorException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Map<String, String> handleRegisterErrorException(RegisterErrorException ex) {
+        Map<String, String> errorMap = new LinkedHashMap<>();
+        errorMap.put("error_code", ErrorList.REGISTER_ERROR);
+        errorMap.put("error_message", ex.getMessage());
+        logger.error(errorMap);
+        return errorMap;
+    }
+
     @ExceptionHandler(ExternalServiceException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Map<String, String> handleExternalServiceException(ExternalServiceException ex) {

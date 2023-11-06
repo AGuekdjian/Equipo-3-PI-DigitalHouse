@@ -6,7 +6,10 @@ import lombok.Getter;
 public class EndsPointInternal {
 
     public final static String MOVIE = "api/movies";
-
     public final static String GENRES = "genres";
+    public final static String GENRE = "api/genres";
+    public final static String FEATURE = "api/features";
+    public final static String AUTH = "auth";
+
 
 }
