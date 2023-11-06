@@ -3,7 +3,7 @@ import json
 
 BASE_URL = "https://api.themoviedb.org/3"
 HEADERS = {
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZWE5NzRhMjAwY2ZmY2ExMzIzNDEyYWNkZDM1ZDNhNSIsInN1YiI6IjY1MzlmODg5MDkxZTYyMDBmZWM2M2Q4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qwPcXPEFWdiVyZGop2P0ILR9D7P7qIHJ3G2PvVrTDH8',
+    'Authorization': 'Bearer API_TOKEN',
     'accept': 'application/json'
 }
 print("1")
