@@ -1,6 +1,10 @@
 name: Deploy backend with spring boot to AWS EC2
 
 on:
+  push:
+    paths:
+      - backend/**/*
+    branches: [main]
   pull_request:
     paths:
       - backend/**/*
@@ -48,4 +52,4 @@ jobs:
       - name: Delete old container
         run: sudo docker rm -f backend-java-container
       - name: Run docker container
-        run: sudo docker run -d -p 8080:8080 --name backend-java-container -e DB_URL=${{secrets.DB_URL}} -e DB_USERNAME=${{secrets.DB_USERNAME}} -e DB_PASSWORD=${{secrets.DB_PASSWORD}} aguekdjian/backend-java:latest
+        run: sudo docker run -d -p 8080:8080 --name backend-java-container -e DB_URL=${{secrets.DB_URL}} -e DB_USERNAME=${{secrets.DB_USERNAME}} -e DB_PASSWORD=${{secrets.DB_PASSWORD}} -e JWT_SECRET=${{secrets.JWT_SECRET}} aguekdjian/backend-java:latest
