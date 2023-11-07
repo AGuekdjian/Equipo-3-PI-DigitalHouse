@@ -1,4 +1,4 @@
-name: Deploy backend with spring boot to AWS EC2
+name: Deploy Backend with Spring Boot to AWS EC2
 
 on:
   push:
