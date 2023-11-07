@@ -1,10 +1,6 @@
 name: Deploy Backend with Spring Boot to AWS EC2
 
 on:
-  push:
-    paths:
-      - backend/**/*
-    branches: [main]
   pull_request:
     paths:
       - backend/**/*
