@@ -2,7 +2,7 @@ version: '3.1'
 services:
   mysql-db:
     image: mysql:8.0
-    container_name: pelicula
+    container_name: peliculas
     environment:
       MYSQL_ROOT_PASSWORD: my-secret-pw
       MYSQL_DATABASE: peliculas
