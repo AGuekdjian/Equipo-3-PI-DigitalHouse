@@ -44,9 +44,9 @@ const Routing = () => {
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
           <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="dashboard/products" element={<ListaProductos />} />
+          <Route path="dashboard/movies" element={<ListaProductos />} />
           <Route
-            path="dashboard/products/update"
+            path="dashboard/movies/update"
             element={<EditarProducto />}
           />
         </Route>

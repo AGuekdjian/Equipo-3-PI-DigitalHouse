@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useGlobalContext } from "../../hooks/useGlobalContext";
 import Card from "../../components/card/Card";
 import FormBusquedaPelicula from "../../components/Forms/FormBusquedaPelicula";
 import { Spinner } from "reactstrap";
