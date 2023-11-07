@@ -6,8 +6,25 @@ export function RegistrarPelicula() {
     overview: "",
     genre: "",
     image_urls: [],
+
   });
   const [submitStatus, setSubmitStatus] = useState(null);
+
+  const [data, setData] = useState({})
+  const [loading, setLoading] = useState(true)
+ 
+  async function fetchData() {
+    try {
+      const response = await fetch(
+        `${Global.endpoints.backend.backendJava}api/genres`
+      );
+      const jsonData = await response.json();
+      setData(jsonData.content);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error al cargar datos desde la API:", error);
+    }
+  }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -74,13 +91,17 @@ export function RegistrarPelicula() {
 
         <div className="movieInput">
           <label htmlFor="genre">Genero de la pelicula</label>
-          <input
-            type="text"
+          <select
+            type="select"
             name="genre"
             id="genre"
             value={formData.genre}
             onChange={handleInputChange}
-          />
+          >
+            {data.genres.map((genre) => (
+              <option key={genre.id} value={genre.id}>{genre.name}</option>
+            ))}
+          </select>
         </div>
 
         <div className="movieInput">
