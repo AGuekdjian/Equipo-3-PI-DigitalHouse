@@ -1,4 +1,4 @@
-package com.dh.clinicaOdontologica.config;
+package proyecto_final_equipo3.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
