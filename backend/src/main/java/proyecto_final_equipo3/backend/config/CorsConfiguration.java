@@ -1,4 +1,5 @@
-package proyecto_final_equipo3.backend.config;
+package com.dh.clinicaOdontologica.config;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
