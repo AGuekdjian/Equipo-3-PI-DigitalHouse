@@ -1,0 +1,19 @@
+@media screen and (max-width: 768px) {
+  .search-styles-mobile {
+    width: 100% !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-input-container {
+    width: 380px;
+  }
+
+  .search-input-container > input {
+    padding: 8px 2px;
+  }
+  .search-input-container > button {
+    margin: 0;
+    margin-top: 8px;
+  }
+}

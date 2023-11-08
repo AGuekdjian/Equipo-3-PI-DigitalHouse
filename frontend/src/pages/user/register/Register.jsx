@@ -4,6 +4,7 @@ import { Global } from "../../../helpers/Global";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./Register.css";
 
 export function Register() {
   const { form, changed } = useForm({});
@@ -74,62 +75,71 @@ export function Register() {
 
   return (
     <>
-      <div className="register__container">
+      <section className="flex flex-col items-center justify-center w-full">
+        <h1 className="font-extrabold text-2xl text-sky">CINESEARCHPRO</h1>
         <ToastContainer />
-        <form onSubmit={saveUser} className="form__register">
-          <h1 className="title__register">Registrarse</h1>
-          <div className="container__data">
-            <div className="container__input">
-              <label htmlFor="name" className="label__register">
-                Nombre
-              </label>
+        <form
+          onSubmit={saveUser}
+          className="form mt-4 w-[28rem] bg-slate-600 py-4 px-4 rounded-xl text-center"
+        >
+          <h1 className="text-dark text-lg">Registrarse</h1>
+          <div className="flex flex-col items-start inputs-container">
+            <div>
+              <div className="flex group-by-name-surname">
+                <div className="mt-3.5 w-48">
+                  <input
+                    className="py-2 px-4 w-full rounded-xl shadow-sm placeholder-slate-400 text-gray-700 focus:outline-none"
+                    type="text"
+                    name="name"
+                    onChange={changed}
+                    placeholder="Nombre"
+                  />
+                </div>
+                <div className="mt-3.5 w-48 ml-4">
+                  <input
+                    className="py-2 px-4 w-full rounded-xl shadow-sm placeholder-slate-400 text-gray-700 focus:outline-none"
+                    type="text"
+                    name="surname"
+                    onChange={changed}
+                    placeholder="Apellido"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="w-full mt-2.5">
               <input
-                type="text"
-                name="name"
+                className="input-email py-2 px-4 w-full rounded-xl shadow-sm placeholder-slate-400 text-gray-700 focus:outline-none invalid:text-red-600"
+                type="email"
+                name="email"
                 onChange={changed}
-                placeholder="Nombre"
+                placeholder="Correo electronico"
               />
             </div>
-            <div className="container__input">
-              <label htmlFor="surname" className="label__register">
-                Apellido
-              </label>
+            <div className="my-2.5">
               <input
-                type="text"
-                name="surname"
+                className="input-pwd py-2 px-4 rounded-xl shadow-sm placeholder-slate-400 text-gray-700 focus:outline-none"
+                type="password"
+                name="password"
                 onChange={changed}
-                placeholder="Apellido"
+                placeholder="Contrasenia"
               />
             </div>
           </div>
-          <div className="container__input">
-            <label htmlFor="email" className="label__register">
-              Email
-            </label>
+          <div className="flex flex-col items-center">
             <input
-              type="email"
-              name="email"
-              onChange={changed}
-              placeholder="Correo Electronico"
+              type="submit"
+              value="Registrarse"
+              className="w-36 mt-1 py-2 px-4 bg-sky rounded-pill btn text-dark font-extrabold"
             />
+            <NavLink
+              to="/login"
+              className="mt-1 transition ease hover:text-dark duration-300"
+            >
+              Iniciar Sesion
+            </NavLink>
           </div>
-          <div className="container__input">
-            <label htmlFor="password" className="label__register">
-              Contrasenia
-            </label>
-            <input
-              type="password"
-              name="password"
-              onChange={changed}
-              placeholder="Contrasenia"
-            />
-          </div>
-          <input type="submit" value="Registrarse" className="btn__register" />
-          <NavLink to="/login" className="btn__signIn">
-            Iniciar Sesion
-          </NavLink>
         </form>
-      </div>
+      </section>
     </>
   );
 }

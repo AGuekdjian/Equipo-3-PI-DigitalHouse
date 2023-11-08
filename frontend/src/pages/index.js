@@ -1,10 +1,14 @@
 export * from "./AdminDashboard";
 export * from "./Detail";
+export { default as EditarProducto } from "./EditarProducto";
 export * from "./Error404/Error404";
 export * from "./Gallery";
-export * from "./Home";
+export { default as ListaProductos } from "./ListaProductos";
 export * from "./RegistrarPelicula";
 export * from "./Reserve";
+export * from "./home/Home";
 export * from "./user/Logout";
+export * from "./user/Setting";
 export * from "./user/login/Login";
+export { default as Profile } from "./user/profile/Profile";
 export * from "./user/register/Register";

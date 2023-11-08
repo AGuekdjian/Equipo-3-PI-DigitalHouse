@@ -10,7 +10,7 @@ export function Logout() {
     localStorage.clear();
     setAuth({});
 
-    navigate("/home");
+    navigate("/");
   });
 
   return <h1>Cerrando Sesion...</h1>;
