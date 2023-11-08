@@ -1,34 +1,75 @@
 package proyecto_final_equipo3.backend.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@Entity
-@Table(name = "genre")
-@EntityListeners(AuditingEntityListener.class)
-public class Genre {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public enum Genre {
+    @JsonProperty("Action")
+    ACTION("Action"),
 
-    @NotNull
-    @Column(unique = true)
-    private String name;
+    @JsonProperty("Adventure")
+    ADVENTURE("Adventure"),
 
-    @CreatedDate
-    @Column(name = "created_date", nullable = false, updatable = false)
-    private LocalDateTime created_date;
+    @JsonProperty("Animation")
+    ANIMATION("Animation"),
 
-    @LastModifiedDate
-    @Column(name = "last_modified_date")
-    private LocalDateTime last_modified_date;
+    @JsonProperty("Comedy")
+    COMEDY("Comedy"),
 
+    @JsonProperty("Crime")
+    CRIME("Crime"),
+
+    @JsonProperty("Documentary")
+    DOCUMENTARY("Documentary"),
+
+    @JsonProperty("Drama")
+    DRAMA("Drama"),
+
+    @JsonProperty("Family")
+    FAMILY("Family"),
+
+    @JsonProperty("Fantasy")
+    FANTASY("Fantasy"),
+
+    @JsonProperty("History")
+    HISTORY("History"),
+
+    @JsonProperty("Horror")
+    HORROR("Horror"),
+
+    @JsonProperty("Music")
+    MUSIC("Music"),
+
+    @JsonProperty("Mystery")
+    MYSTERY("Mystery"),
+
+    @JsonProperty("Romance")
+    ROMANCE("Romance"),
+
+    @JsonProperty("Science Fiction")
+    SCIENCE_FICTION("Science Fiction"),
+
+    @JsonProperty("TV Movie")
+    TV_MOVIE("TV Movie"),
+
+    @JsonProperty("Thriller")
+    THRILLER("Thriller"),
+
+    @JsonProperty("War")
+    WAR("War"),
+
+    @JsonProperty("Western")
+    WESTERN("Western");
+
+    private final String displayName;
+
+    Genre(String displayName) {
+        this.displayName = displayName;
+    }
+
+    @Override
+    public String toString() {
+        return this.displayName;
+    }
 }

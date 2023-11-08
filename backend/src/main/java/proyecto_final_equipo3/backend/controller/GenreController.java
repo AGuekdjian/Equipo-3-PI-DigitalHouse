@@ -9,15 +9,11 @@ import proyecto_final_equipo3.backend.controller.abstracts.AbstractCrudControlle
 import proyecto_final_equipo3.backend.model.Genre;
 import proyecto_final_equipo3.backend.service.GenreService;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(EndsPointInternal.GENRE)
-public class GenreController extends AbstractCrudController<Genre, GenreService> {
-
-    @Autowired
-    public GenreController(GenreService service) {
-        super(service);
+public class GenreController {
+    @GetMapping
+    public Genre[] getAllGenres() {
+        return Genre.values();
     }
-
 }

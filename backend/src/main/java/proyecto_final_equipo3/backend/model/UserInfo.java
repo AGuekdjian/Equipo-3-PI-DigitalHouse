@@ -1,4 +1,5 @@
 package proyecto_final_equipo3.backend.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class UserInfo {
     @Column(unique = true)
     private String email;
     @NotNull
+    @JsonIgnore
     private String password;
     @NotNull
     private String roles;

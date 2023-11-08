@@ -11,10 +11,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import proyecto_final_equipo3.backend.constants.EndsPointInternal;
 import proyecto_final_equipo3.backend.dto.AuthRequest;
+import proyecto_final_equipo3.backend.exceptions.particular.ItemNotFoundException;
 import proyecto_final_equipo3.backend.exceptions.particular.RegisterErrorException;
 import proyecto_final_equipo3.backend.model.UserInfo;
 import proyecto_final_equipo3.backend.service.JwtService;
 import proyecto_final_equipo3.backend.service.UserInfoService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(EndsPointInternal.AUTH)
@@ -31,13 +34,21 @@ public class UserController {
         return service.addUser(userInfo);
     }
     @PostMapping("/generateToken")
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) throws ItemNotFoundException {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getEmail());
+            UserInfo userInfo = service.findByEmail(authRequest.getEmail());
+            return jwtService.generateToken(userInfo);
         } else {
             throw new UsernameNotFoundException("Invalid user request!");
         }
+    }
+
+    @GetMapping("/users")
+    @PreAuthorize("hasAuthority('ROLE_ROOT')")
+    public ResponseEntity<List<UserInfo>> getAllUsers() {
+        List<UserInfo> users = service.findAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @PostMapping("/promoteToAdmin/{email}")

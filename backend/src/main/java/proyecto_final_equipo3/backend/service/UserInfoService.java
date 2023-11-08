@@ -5,18 +5,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import proyecto_final_equipo3.backend.exceptions.particular.ItemNotFoundException;
 import proyecto_final_equipo3.backend.exceptions.particular.RegisterErrorException;
 import proyecto_final_equipo3.backend.model.UserInfo;
 import proyecto_final_equipo3.backend.persistence.UserInfoRepository;
-
 import java.util.Optional;
-
+import java.util.List;
 @Service
 public class UserInfoService implements UserDetailsService {
 
     @Autowired
     private UserInfoRepository repository;
-
+    @Autowired
+    private JwtService jwtService;
     @Autowired
     private PasswordEncoder encoder;
 
@@ -27,6 +28,11 @@ public class UserInfoService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
     }
 
+    public UserInfo findByEmail(String email) throws ItemNotFoundException {
+        Optional<UserInfo> entityOptional = repository.findByEmail(email);
+        return entityOptional.orElseThrow(() -> new ItemNotFoundException("Entity not found with email: " + email));
+    }
+
     public String addUser(UserInfo userInfo) throws RegisterErrorException {
         Optional<UserInfo> existingUserByEmail = repository.findByEmail(userInfo.getEmail());
         if (existingUserByEmail.isPresent()) {
@@ -34,6 +40,7 @@ public class UserInfoService implements UserDetailsService {
         }
         userInfo.setPassword(encoder.encode(userInfo.getPassword()));
         repository.save(userInfo);
+
         return "User Added Successfully";
     }
     public String promoteToAdmin(String email) {
@@ -47,6 +54,10 @@ public class UserInfoService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found " + email);
         }
     }
+    public List<UserInfo> findAllUsers() {
+        return repository.findAll();
+    }
+
 
     public boolean existsRootUser() {
         return repository.existsByRoles("ROLE_ROOT");
