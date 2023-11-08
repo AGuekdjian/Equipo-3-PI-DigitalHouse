@@ -45,7 +45,6 @@ public abstract class AbstractCrudService<T, ID, R extends JpaRepository<T, ID>>
     public Page<T> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
-
     public void delete(ID id) throws ItemNotFoundException {
         if (!repository.existsById(id)) {
             throw new ItemNotFoundException("Entity not found with id: " + id);
