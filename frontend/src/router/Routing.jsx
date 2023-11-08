@@ -11,7 +11,7 @@ import {
   Error404,
   Logout,
   Gallery,
-  ListaProductos,
+  ListaPeliculas,
   EditarProducto,
   Setting,
   Profile,
@@ -44,7 +44,7 @@ const Routing = () => {
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
           <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="dashboard/movies" element={<ListaProductos />} />
+          <Route path="dashboard/movies" element={<ListaPeliculas />} />
           <Route
             path="dashboard/movies/update"
             element={<EditarProducto />}

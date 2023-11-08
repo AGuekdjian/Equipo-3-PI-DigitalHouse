@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function RegistrarPelicula() {
   const [formData, setFormData] = useState({
@@ -25,6 +25,10 @@ export function RegistrarPelicula() {
       console.error("Error al cargar datos desde la API:", error);
     }
   }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

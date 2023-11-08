@@ -3,7 +3,7 @@ export * from "./Detail";
 export { default as EditarProducto } from "./EditarProducto";
 export * from "./Error404/Error404";
 export * from "./Gallery";
-export { default as ListaProductos } from "./ListaProductos";
+export { default as ListaPeliculas } from "./ListaPeliculas";
 export * from "./RegistrarPelicula";
 export * from "./Reserve";
 export * from "./home/Home";
