@@ -1,15 +1,13 @@
 package proyecto_final_equipo3.backend.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class UserInfo {
 
     @Id
@@ -27,6 +25,11 @@ public class UserInfo {
     private String name;
     @NotNull
     private String last_name;
+
+    @JsonProperty
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 
 }
