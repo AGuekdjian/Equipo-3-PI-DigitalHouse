@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Global } from "../helpers/Global";
-import { Modal } from "reactstrap";
+import { Modal } from "react-bootstrap";
 
 const ListaPeliculas = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -11,10 +11,10 @@ const ListaPeliculas = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [formData, setFormData] = useState({
-    title: selectedMovie.title,
-    overview: selectedMovie.overview,
-    genre: selectedMovie.genre,
-    image_urls: selectedMovie.image_urls,
+    title: "",
+    overview: "",
+    genre: "",
+    image_urls: "",
 
   });
 
@@ -114,6 +114,13 @@ const ListaPeliculas = () => {
 
   const handleEdit = (movie) => {
     setSelectedMovie(movie);
+    setFormData({
+      title: movie.title,
+      overview: movie.overview,
+      genre: movie.genre,
+      image_urls: movie.imageUrl,
+  
+    })
     setShowModal(true);
   };
 
@@ -187,9 +194,9 @@ const ListaPeliculas = () => {
                   value={formData.genre}
                   onChange={handleInputChange}
                 >
-                  {genres.genres.map((genre) => (
+                  {genres ? genres.genres.map((genre) => (
                     <option key={genre.id} value={genre.id}>{genre.name}</option>
-                  ))}
+                  )) : null}
                 </select>
               </div>
 
