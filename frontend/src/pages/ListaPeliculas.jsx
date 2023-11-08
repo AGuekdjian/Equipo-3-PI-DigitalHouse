@@ -14,7 +14,7 @@ const ListaPeliculas = () => {
     title: "",
     overview: "",
     genre: "",
-    image_urls: "",
+    image_url: "",
 
   });
 
@@ -115,11 +115,7 @@ const ListaPeliculas = () => {
   const handleEdit = (movie) => {
     setSelectedMovie(movie);
     setFormData({
-      title: movie.title,
-      overview: movie.overview,
-      genre: movie.genre,
-      image_urls: movie.imageUrl,
-  
+      ...movie,
     })
     setShowModal(true);
   };
