@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Global } from "../helpers/Global";
+import { Global } from "../../../helpers/Global";
 
 export function RegistrarPelicula() {
   const [formData, setFormData] = useState({

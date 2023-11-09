@@ -1,33 +1,21 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD:frontend/src/pages/ListaPeliculas.jsx
-import { Global } from "../helpers/Global";
-import { Modal } from "react-bootstrap";
-=======
 import { Global } from "../../../helpers/Global";
-import { Modal } from "reactstrap";
->>>>>>> 8885235b2180bc2045eb7f10e9404fa809533a9e:frontend/src/pages/Dashboard/movies/ListaPeliculas.jsx
+import { Modal } from "react-bootstrap";
 
 const ListaPeliculas = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [formData, setFormData] = useState({
-<<<<<<< HEAD:frontend/src/pages/ListaPeliculas.jsx
     title: "",
     overview: "",
     genre: "",
     image_urls: [],
 
-=======
-    title: selectedMovie.title,
-    overview: selectedMovie.overview,
-    genre: selectedMovie.genre,
-    image_urls: selectedMovie.image_urls,
->>>>>>> 8885235b2180bc2045eb7f10e9404fa809533a9e:frontend/src/pages/Dashboard/movies/ListaPeliculas.jsx
   });
 
 
@@ -52,7 +40,7 @@ const ListaPeliculas = () => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/movies/`,
+        `${Global.endpoints.backend.backendJava}/api/movies/`,
         {
           method: "PUT",
           headers: {
@@ -84,7 +72,7 @@ const ListaPeliculas = () => {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/movies?page=${currentPage} `
+        `${Global.endpoints.backend.backendJava}/api/movies?page=${currentPage} `
       );
       const jsonData = await response.json();
       data ? setData((prevData) => prevData.concat(jsonData.content)) : null
@@ -95,11 +83,10 @@ const ListaPeliculas = () => {
   }
 
 
-
   async function fetchGenres() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/genre`
+        `${Global.endpoints.backend.backendJava}/api/genre`
       );
       const jsonData = await response.json();
       setGenres(jsonData.content);
@@ -193,7 +180,6 @@ const ListaPeliculas = () => {
               />
             </div>
 
-<<<<<<< HEAD:frontend/src/pages/ListaPeliculas.jsx
               <div className="movieInput">
                 <label htmlFor="genre">Genero de la pelicula</label>
                 <select
@@ -241,37 +227,8 @@ const ListaPeliculas = () => {
                   Agregar URL de imagen
                 </button>
               </div>
-=======
-            <div className="movieInput">
-              <label htmlFor="genre">Genero de la pelicula</label>
-              <select
-                type="select"
-                name="genre"
-                id="genre"
-                value={formData.genre}
-                onChange={handleInputChange}
-              >
-                {genres.genres.map((genre) => (
-                  <option key={genre.id} value={genre.id}>
-                    {genre.name}
-                  </option>
-                ))}
-              </select>
-            </div>
->>>>>>> 8885235b2180bc2045eb7f10e9404fa809533a9e:frontend/src/pages/Dashboard/movies/ListaPeliculas.jsx
 
-            <div className="movieInput">
-              <label htmlFor="overview">Sinopsis</label>
-              <textarea
-                name="overview"
-                id="overview"
-                cols="30"
-                rows="10"
-                value={formData.overview}
-                onChange={handleInputChange}
-                style={{ resize: "none" }}
-              ></textarea>
-            </div>
+  
 
             <div className="movieInput">
               <label htmlFor="image_urls">URLs de imagenes</label>
