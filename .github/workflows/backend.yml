@@ -1,4 +1,4 @@
-name: Deploy backend with spring boot to AWS EC2
+name: Deploy Backend with Spring Boot to AWS EC2
 
 on:
   pull_request:
@@ -16,35 +16,36 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-  build: 
+  build:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup Java
-        uses: actions/setup-java@v3.13.0
+      - uses: actions/setup-java@v3.13.0
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: "temurin"
+          java-version: "17"
           cache: maven
-          cache-dependency-path: "backend/*"
+          settings-path: "backend/*"
       - name: Build Project
         run: cd backend && mvn clean install -DskipTests
       - name: Login to docker hub
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build docker image
-        run: docker build -t backendJava:0.1 backend/.
+        run: docker build -t aguekdjian/backend-java:latest backend/.
       - name: Publish image to docker hub
-        run: docker push backendJava:latest
+        run: docker push aguekdjian/backend-java:latest
 
   deploy:
     needs: build
     runs-on: aws-ec2
     steps:
+      - name: Login to docker hub
+        run: sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Pull Image from docker hub
-        run: docker pull backendJava:latest
+        run: sudo docker pull aguekdjian/backend-java:latest
       - name: Delete old container
-        run: docker rm -f backendJava-container
+        run: sudo docker rm -f backend-java-container
       - name: Run docker container
-        run: docker run -d -p 8080:8080 --name backendJava-container backendJava
+        run: sudo docker run -d -p 8080:8080 --name backend-java-container -e DB_URL=${{secrets.DB_URL}} -e DB_USERNAME=${{secrets.DB_USERNAME}} -e DB_PASSWORD=${{secrets.DB_PASSWORD}} -e JWT_SECRET=${{secrets.JWT_SECRET}} -e DB_UPDATE=${{secrets.DB_UPDATE}} aguekdjian/backend-java:latest

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../../../hooks/useAuth";
-import { Global } from "../../../../helpers/Global";
 import Logo from "/logo.svg";
 import avatar from "../../../../assets/img/user.png";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,6 +20,7 @@ import {
 } from "reactstrap";
 
 export const HeaderPrivate = () => {
+  const [route, setRoute] = useState("");
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
@@ -30,7 +30,15 @@ export const HeaderPrivate = () => {
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const { auth } = useAuth();
-  const { image } = auth;
+
+  useEffect(() => {
+    if (auth.role == "ROLE_USER") {
+      setRoute("user");
+    } else {
+      setRoute("admin");
+    }
+  }, []);
+
   return (
     <>
       <header className="bg-sky-light w-full h-16 flex justify-around items-center header-desktop-private">
@@ -52,12 +60,24 @@ export const HeaderPrivate = () => {
               </NavLink>
             </li>
 
-            <li className="ml-6">
-              <NavLink to="/admin/dashboard" className="flex items-center">
-                <i className="fa-solid fa-list"></i>
-                <span className="ml-2.5">Dashboard</span>
-              </NavLink>
-            </li>
+            {route == "user" ? (
+              <li className="ml-6">
+                <NavLink to={`/${route}/reserve`} className="flex items-center">
+                  <i className="fa-solid fa-list"></i>
+                  <span className="ml-2.5">Reservar</span>
+                </NavLink>
+              </li>
+            ) : (
+              <li className="ml-6">
+                <NavLink
+                  to={`/${route}/dashboard`}
+                  className="flex items-center"
+                >
+                  <i className="fa-solid fa-list"></i>
+                  <span className="ml-2.5">Dashboard</span>
+                </NavLink>
+              </li>
+            )}
           </ul>
 
           <div className="flex items-center">
@@ -67,24 +87,47 @@ export const HeaderPrivate = () => {
               className="border-none"
             >
               <DropdownToggle caret className="border-none flex items-center">
-              <img src={avatar} className="w-12" alt="Imagen de perfil" />
+                <img src={avatar} className="w-12" alt="Imagen de perfil" />
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem>
-                  <NavLink
-                    to={`/admin/profile/${auth._id}`}
-                    className="flex items-center"
-                  >
-                    <i className="fa-solid fa-user"></i>
-                    <span className="ml-2.5">Perfil</span>
-                  </NavLink>
+                  {route == "user" ? (
+                    <NavLink
+                      to={`/${route}/profile`}
+                      className="flex items-center"
+                    >
+                      <i className="fa-solid fa-user"></i>
+                      <span className="ml-2.5">Perfil</span>
+                    </NavLink>
+                  ) : (
+                    <NavLink
+                      to={`/${route}/profile`}
+                      className="flex items-center"
+                    >
+                      <i className="fa-solid fa-user"></i>
+                      <span className="ml-2.5">Perfil</span>
+                    </NavLink>
+                  )}
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
-                  <NavLink to="/admin/settings" className="flex items-center">
-                    <i className="fa-solid fa-gear"></i>
-                    <span className="ml-2.5">Ajustes</span>
-                  </NavLink>
+                  {route == "user" ? (
+                    <NavLink
+                      to={`/${route}/settings`}
+                      className="flex items-center"
+                    >
+                      <i className="fa-solid fa-gear"></i>
+                      <span className="ml-2.5">Ajustes</span>
+                    </NavLink>
+                  ) : (
+                    <NavLink
+                      to={`/${route}/settings`}
+                      className="flex items-center"
+                    >
+                      <i className="fa-solid fa-gear"></i>
+                      <span className="ml-2.5">Ajustes</span>
+                    </NavLink>
+                  )}
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
@@ -109,7 +152,7 @@ export const HeaderPrivate = () => {
             <Nav navbar className="mt-2 navbar-mobile">
               <NavItem className="border-b-[1px] py-2">
                 <NavLink
-                  to={`/admin/profile/${auth._id}`}
+                  to={`/admin/profile`}
                   className="flex items-center ml-2"
                 >
                   <i className="fa-solid fa-user"></i>
