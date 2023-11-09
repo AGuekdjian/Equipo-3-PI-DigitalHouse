@@ -38,7 +38,7 @@ const ListaPeliculas = () => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/movies/`,
+        `${Global.endpoints.backend.backendJava}/api/movies/`,
         {
           method: "PUT",
           headers: {

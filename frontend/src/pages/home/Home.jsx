@@ -66,28 +66,6 @@ export function Home() {
     fetchMovies(pageNumber)
   );
 
-<<<<<<< HEAD
-  // useEffect(() => {
-  //   let items = []
-  //   if (data) {
-  //     for (let i = 1; i < data.totalPages; i++) {
-  //       items.push(<Pagination.Item key={i} onClick={(e) => {
-  //         const newPageNumber = parseInt(e.target.text - 1);
-  //         fetchMovies(newPageNumber, null);
-         
-  //       }}>{i}</Pagination.Item>)
-  //     }
-  //     setItemPagination(items)
-  //   }
-  // }, [pageNumber, data])
-
-
-
-
-
-
-
-=======
   useEffect(() => {
     let items = [];
     if (data) {
@@ -107,9 +85,6 @@ export function Home() {
       setItemPagination(items);
     }
   }, [pageNumber, data]);
->>>>>>> 8885235b2180bc2045eb7f10e9404fa809533a9e
-
-  // console.log(peliculasRandom);
 
   return (
     <section className="w-full flex items-center justify-center flex-col">
@@ -135,8 +110,4 @@ export function Home() {
     </section>
   );
 }
-<<<<<<< HEAD
- 
-export default Home
-=======
->>>>>>> 8885235b2180bc2045eb7f10e9404fa809533a9e
+export default Home;

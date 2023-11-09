@@ -10,7 +10,7 @@ export * from "./Detail";
 export * from "./Error404/Error404";
 export * from "./Gallery";
 export * from "./Reserve";
-export * from "./home/Home";
+export { default as Home } from "./home/Home";
 export * from "./user/Logout";
 export * from "./user/Setting";
 export * from "./user/login/Login";

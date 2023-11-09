@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Global } from "../helpers/Global";
+import { Global } from "../../../helpers/Global";
 
 export function RegistrarPelicula() {
   const [formData, setFormData] = useState({
@@ -7,13 +7,12 @@ export function RegistrarPelicula() {
     overview: "",
     genre: "",
     image_urls: [],
-
   });
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const [data, setData] = useState()
-  const [loading, setLoading] = useState(true)
- 
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+
   async function fetchData() {
     try {
       const response = await fetch(
@@ -28,10 +27,7 @@ export function RegistrarPelicula() {
 
   useEffect(() => {
     fetchData();
-  
   }, []);
-
-
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -105,9 +101,13 @@ export function RegistrarPelicula() {
             value={formData.genre}
             onChange={handleInputChange}
           >
-            {data ? data.map((genre) => (
-              <option key={genre} value={genre}>{genre}</option>
-            ) ) : null}
+            {data
+              ? data.map((genre) => (
+                  <option key={genre} value={genre}>
+                    {genre}
+                  </option>
+                ))
+              : null}
           </select>
         </div>
 
