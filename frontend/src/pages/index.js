@@ -1,10 +1,14 @@
-export * from "./AdminDashboard";
+export * from "./Dashboard/AdminDashboard";
+export { default as EditarPelicula } from "./Dashboard/movies/EditarPelicula";
+export { default as ListaPeliculas } from "./Dashboard/movies/ListaPeliculas";
+export * from "./Dashboard/movies/RegistrarPelicula";
+export { default as AgregarUsuario } from "./Dashboard/users/AgregarUsuario";
+export { default as EditarUsuario } from "./Dashboard/users/EditarUsuario";
+export { default as EliminarUsuario } from "./Dashboard/users/EliminarUsuario";
+export { default as ListUsers } from "./Dashboard/users/ListUsers";
 export * from "./Detail";
-export { default as EditarProducto } from "./EditarProducto";
 export * from "./Error404/Error404";
 export * from "./Gallery";
-export { default as ListaPeliculas } from "./ListaPeliculas";
-export * from "./RegistrarPelicula";
 export * from "./Reserve";
 export * from "./home/Home";
 export * from "./user/Logout";

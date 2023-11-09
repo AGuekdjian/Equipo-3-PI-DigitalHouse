@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "../../../hooks/useForm";
-import { Global } from "../../../helpers/Global";
 import { useAuth } from "../../../hooks/useAuth";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { MsgError, MsgSuccess, Global } from "../../../helpers";
 import "react-toastify/dist/ReactToastify.css";
 
 export function Login() {
@@ -13,19 +13,6 @@ export function Login() {
 
   const { setAuth } = useAuth();
 
-  const msgError = (msg) => {
-    toast.error(msg, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
-
   const loginUser = async (e) => {
     e.preventDefault();
 
@@ -33,7 +20,7 @@ export function Login() {
 
     try {
       const res = await fetch(
-        `${Global.endpoints.backend.backendNode}/user/login`,
+        `${Global.endpoints.backend.backendJava}/auth/generateToken`,
         {
           method: "POST",
           headers: {
@@ -45,6 +32,8 @@ export function Login() {
 
       const data = await res.json();
 
+      console.log(data);
+
       if (data.status == "Success") {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
@@ -53,10 +42,10 @@ export function Login() {
         setAuth(data.user);
         setTimeout(() => {
           window.location.href = `${Global.endpoints.frontend.url}/admin`;
-        }, 400);
+        }, 600);
       } else {
         setLogged("error");
-        msgError(data.message);
+        MsgError(data.message);
       }
     } catch (error) {
       throw new Error("Ha ocurrido un error!");

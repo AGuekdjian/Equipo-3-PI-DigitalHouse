@@ -12,8 +12,8 @@ const PublicLayout = () => {
       <HeaderPublic />
 
       <main className="bg-dark min-h-screen text-txt-grey flex items-center">
-        {false ? <Outlet /> : <Navigate to="/admin" />}
-        {/* {!_id ? <Outlet /> : <Navigate to="/admin" />} */}
+        {/* {false ? <Outlet /> : <Navigate to="/admin" />} */}
+        {!_id ? <Outlet /> : <Navigate to="/admin" />}
       </main>
 
       <Footer />

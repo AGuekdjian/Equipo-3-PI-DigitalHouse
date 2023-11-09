@@ -6,31 +6,30 @@ import "./Home.css";
 import { useQuery } from "react-query";
 import { Global } from "../../helpers/Global";
 import PaginationComponent from "../../components/PaginationComponent";
-import Pagination from 'react-bootstrap/Pagination';
-import { useNavigate } from 'react-router-dom';
+import Pagination from "react-bootstrap/Pagination";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
-  
   const navigate = useNavigate();
   const [peliculasRandom, setPeliculasRandom] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0)
-  const [itemPagination, setItemPagination] = useState([])
-  
-
-
+  const [pageNumber, setPageNumber] = useState(0);
+  const [itemPagination, setItemPagination] = useState([]);
 
   const fetchMovies = async (page, url) => {
     setPageNumber(page);
     navigate(`/page/${page}`);
-  
-    let uri = page === null ? url : `${Global.endpoints.backend.backendJava}api/movies?page=${page}`
-  
-    const response = await fetch(uri)
+
+    let uri =
+      page === null
+        ? url
+        : `${Global.endpoints.backend.backendJava}/api/movies?page=${page}`;
+
+    const response = await fetch(uri);
     if (!response.ok) {
-      throw new Error('Error al cargar datos desde la API');
+      throw new Error("Error al cargar datos desde la API");
     }
     const data = await response.json();
-    
+
     // Mezcla las películas y establece el estado de peliculasRandom aquí
     const peliculasCopia = [...data.content];
     const peliculasAleatorias = [];
@@ -41,49 +40,51 @@ export function Home() {
       peliculasCopia.splice(randomIndex, 1);
     }
     setPeliculasRandom(peliculasAleatorias.slice(0, 10));
-  
-    let items = []
+
+    let items = [];
     if (data) {
       for (let i = 1; i < data.totalPages; i++) {
-
-        items.push(<Pagination.Item key={i} onClick={(e) => {
-          const newPageNumber = parseInt(e.target.text - 1);
-          fetchMovies(newPageNumber, null);
-        }}>{i}</Pagination.Item>)
-
+        items.push(
+          <Pagination.Item
+            key={i}
+            onClick={(e) => {
+              const newPageNumber = parseInt(e.target.text - 1);
+              fetchMovies(newPageNumber, null);
+            }}
+          >
+            {i}
+          </Pagination.Item>
+        );
       }
-      setItemPagination(items)
-
+      setItemPagination(items);
     }
 
     return data;
   };
-  
-  const { isLoading, isError, data } = useQuery(
-    ['peliculas', pageNumber],
-    () => fetchMovies(pageNumber)
-  )
+
+  const { isLoading, isError, data } = useQuery(["peliculas", pageNumber], () =>
+    fetchMovies(pageNumber)
+  );
 
   useEffect(() => {
-    let items = []
+    let items = [];
     if (data) {
       for (let i = 1; i < data.totalPages; i++) {
-        items.push(<Pagination.Item key={i} onClick={(e) => {
-          const newPageNumber = parseInt(e.target.text - 1);
-          fetchMovies(newPageNumber, null);
-         
-        }}>{i}</Pagination.Item>)
+        items.push(
+          <Pagination.Item
+            key={i}
+            onClick={(e) => {
+              const newPageNumber = parseInt(e.target.text - 1);
+              fetchMovies(newPageNumber, null);
+            }}
+          >
+            {i}
+          </Pagination.Item>
+        );
       }
-      setItemPagination(items)
+      setItemPagination(items);
     }
-  }, [pageNumber, data])
-
-
-
-
-
-
-
+  }, [pageNumber, data]);
 
   // console.log(peliculasRandom);
 
@@ -103,8 +104,11 @@ export function Home() {
           })}
         </div>
       )}
-      <PaginationComponent items={itemPagination} fetch={fetchMovies} pageNumer={pageNumber} />
+      <PaginationComponent
+        items={itemPagination}
+        fetch={fetchMovies}
+        pageNumer={pageNumber}
+      />
     </section>
   );
 }
- 

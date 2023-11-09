@@ -1,40 +1,14 @@
 import React from "react";
 import { useForm } from "../../../hooks/useForm";
-import { Global } from "../../../helpers/Global";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { MsgError, MsgSuccess, Global } from "../../../helpers";
 import "react-toastify/dist/ReactToastify.css";
 import "./Register.css";
 
 export function Register() {
   const { form, changed } = useForm({});
   const navigate = useNavigate();
-
-  const msgSuccess = (msg) => {
-    toast.success(msg, {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
-
-  const msgError = (msg) => {
-    toast.error(msg, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
 
   const saveUser = async (e) => {
     e.preventDefault();
@@ -43,7 +17,7 @@ export function Register() {
 
     try {
       const res = await fetch(
-        `${Global.endpoints.backend.backendNode}/user/register`,
+        `${Global.endpoints.backend.backendJava}/auth/register`,
         {
           method: "POST",
           headers: {
@@ -55,21 +29,17 @@ export function Register() {
 
       const data = await res.json();
 
-      if (data.status == "Success") {
-        if (data.message == "El usuario ya existe!") {
-          msgError(data.message);
-          return;
-        }
-        msgSuccess(data.message);
+      if (data.error_code == "REGISTER_ERROR") {
+        MsgError(data.error_message);
+        return;
+      } else {
+        MsgSuccess("Registrado correctamente");
         setTimeout(() => {
           navigate("/login");
         }, 2000);
-      } else {
-        msgError(data.message);
       }
     } catch (error) {
-      console.log(error);
-      throw new Error("Ha ocurrido un error!");
+      throw new Error(error);
     }
   };
 
@@ -99,7 +69,7 @@ export function Register() {
                   <input
                     className="py-2 px-4 w-full rounded-xl shadow-sm placeholder-slate-400 text-gray-700 focus:outline-none"
                     type="text"
-                    name="surname"
+                    name="last_name"
                     onChange={changed}
                     placeholder="Apellido"
                   />
