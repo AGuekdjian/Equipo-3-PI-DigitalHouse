@@ -4,7 +4,7 @@ import { Modal } from "react-bootstrap";
 
 const ListaPeliculas = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -14,9 +14,10 @@ const ListaPeliculas = () => {
     title: "",
     overview: "",
     genre: "",
-    image_url: "",
+    image_urls: [],
 
   });
+
 
   const handleImageUrlChange = (event, index) => {
     const { value } = event.target;
@@ -77,17 +78,19 @@ const ListaPeliculas = () => {
         `${Global.endpoints.backend.backendJava}api/movies?page=${currentPage} `
       );
       const jsonData = await response.json();
-      setData((prevData) => prevData.concat(jsonData.content));
+      data ? setData((prevData) => prevData.concat(jsonData.content)) : null
       setLoading(false);
     } catch (error) {
       console.error("Error al cargar datos desde la API:", error);
     }
   }
 
+
+
   async function fetchGenres() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/genres`
+        `${Global.endpoints.backend.backendJava}api/genre`
       );
       const jsonData = await response.json();
       setGenres(jsonData.content);
@@ -131,7 +134,7 @@ const ListaPeliculas = () => {
           </tr>
         </thead>
         <tbody>
-          {data.length > 0 &&
+          {data ? data.length > 0 &&
             data.map((item) => {
               return (
                 <tr key={item.id}>
@@ -145,7 +148,7 @@ const ListaPeliculas = () => {
                   </td>
                 </tr>
               );
-            })}
+            }) : null}
 
           {loading && (
             <tr>
@@ -190,7 +193,7 @@ const ListaPeliculas = () => {
                   value={formData.genre}
                   onChange={handleInputChange}
                 >
-                  {genres ? genres.genres.map((genre) => (
+                  {genres ? genres.map((genre) => (
                     <option key={genre.id} value={genre.id}>{genre.name}</option>
                   )) : null}
                 </select>
@@ -211,7 +214,7 @@ const ListaPeliculas = () => {
 
               <div className="movieInput">
                 <label htmlFor="image_urls">URLs de imagenes</label>
-                {formData.image_urls.map((imageUrl, index) => (
+                {Array.isArray(formData.image_urls) && formData.image_urls.map((imageUrl, index) => (
                   <div key={index}>
                     <input
                       type="text"
@@ -223,7 +226,7 @@ const ListaPeliculas = () => {
                       Eliminar
                     </button>
                   </div>
-                ))}
+                ) )}
                 <button type="button" onClick={handleAddImageUrl}>
                   Agregar URL de imagen
                 </button>

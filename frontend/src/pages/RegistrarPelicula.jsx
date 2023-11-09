@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Global } from "../helpers/Global";
 
 export function RegistrarPelicula() {
   const [formData, setFormData] = useState({
@@ -10,17 +11,16 @@ export function RegistrarPelicula() {
   });
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const [data, setData] = useState({})
+  const [data, setData] = useState()
   const [loading, setLoading] = useState(true)
  
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/genres`
+        `${Global.endpoints.backend.backendJava}api/genre`
       );
       const jsonData = await response.json();
-      setData(jsonData.content);
-      setLoading(false);
+      setData(jsonData);
     } catch (error) {
       console.error("Error al cargar datos desde la API:", error);
     }
@@ -28,7 +28,10 @@ export function RegistrarPelicula() {
 
   useEffect(() => {
     fetchData();
+  
   }, []);
+
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -102,9 +105,9 @@ export function RegistrarPelicula() {
             value={formData.genre}
             onChange={handleInputChange}
           >
-            {data.genres.map((genre) => (
-              <option key={genre.id} value={genre.id}>{genre.name}</option>
-            ))}
+            {data ? data.map((genre) => (
+              <option key={genre} value={genre}>{genre}</option>
+            ) ) : null}
           </select>
         </div>
 

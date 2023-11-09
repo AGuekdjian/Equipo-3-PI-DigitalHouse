@@ -55,7 +55,7 @@ export function Home() {
       setItemPagination(items)
 
     }
-
+    console.log(data);
     return data;
   };
   
@@ -64,19 +64,19 @@ export function Home() {
     () => fetchMovies(pageNumber)
   )
 
-  useEffect(() => {
-    let items = []
-    if (data) {
-      for (let i = 1; i < data.totalPages; i++) {
-        items.push(<Pagination.Item key={i} onClick={(e) => {
-          const newPageNumber = parseInt(e.target.text - 1);
-          fetchMovies(newPageNumber, null);
+  // useEffect(() => {
+  //   let items = []
+  //   if (data) {
+  //     for (let i = 1; i < data.totalPages; i++) {
+  //       items.push(<Pagination.Item key={i} onClick={(e) => {
+  //         const newPageNumber = parseInt(e.target.text - 1);
+  //         fetchMovies(newPageNumber, null);
          
-        }}>{i}</Pagination.Item>)
-      }
-      setItemPagination(items)
-    }
-  }, [pageNumber, data])
+  //       }}>{i}</Pagination.Item>)
+  //     }
+  //     setItemPagination(items)
+  //   }
+  // }, [pageNumber, data])
 
 
 
@@ -108,3 +108,4 @@ export function Home() {
   );
 }
  
+export default Home

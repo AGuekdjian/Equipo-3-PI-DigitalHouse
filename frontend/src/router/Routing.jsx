@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   Login,
-  Home,
   Register,
   RegistrarPelicula,
   Reserve,
@@ -16,6 +15,7 @@ import {
   Setting,
   Profile,
 } from "../pages";
+import Home from "../pages/home/Home";
 import PrivateLayout from "../components/layout/private/PrivateLayout";
 import PublicLayout from "../components/layout/public/PublicLayout";
 
