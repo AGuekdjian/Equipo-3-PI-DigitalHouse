@@ -1,7 +1,7 @@
 export const Global = {
   endpoints: {
     backend: {
-      backendJava: "http://18.118.7.75/",
+      backendJava: "http://18.118.7.75",
       // backendNode: "http://54.167.13.162/api", // NO FUNCIONA,
     },
     frontend: {
