@@ -30,11 +30,7 @@ export function Login() {
         }
       );
 
-      console.log(res)
-
       const data = await res.json();
-
-      console.log(data)
 
       if (res.status == 200) {
         localStorage.setItem("token", data.token);
