@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import proyecto_final_equipo3.backend.constants.EndsPointInternal;
@@ -17,7 +18,9 @@ import proyecto_final_equipo3.backend.model.UserInfo;
 import proyecto_final_equipo3.backend.service.JwtService;
 import proyecto_final_equipo3.backend.service.UserInfoService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(EndsPointInternal.AUTH)
@@ -33,16 +36,41 @@ public class UserController {
         userInfo.setRoles("ROLE_USER");
         return service.addUser(userInfo);
     }
-    @PostMapping("/generateToken")
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) throws ItemNotFoundException {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
-        if (authentication.isAuthenticated()) {
-            UserInfo userInfo = service.findByEmail(authRequest.getEmail());
-            return jwtService.generateToken(userInfo);
-        } else {
-            throw new UsernameNotFoundException("Invalid user request!");
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            authRequest.getEmail(),
+                            authRequest.getPassword()
+                    )
+            );
+            if (authentication.isAuthenticated()) {
+                UserInfo userInfo = service.findByEmail(authRequest.getEmail());
+                String token = jwtService.generateToken(userInfo);
+
+                Map<String, Object> response = new HashMap<>();
+                response.put("token", token);
+
+                Map<String, Object> userMap = new HashMap<>();
+                userMap.put("name", userInfo.getName());
+                userMap.put("last_name", userInfo.getLast_name());
+                userMap.put("email", userInfo.getEmail());
+                userMap.put("role", userInfo.getRoles());
+
+                response.put("user", userMap);
+
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not authenticated.");
+            }
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid user credentials.");
+        } catch (ItemNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
+
 
     @GetMapping("/users")
     @PreAuthorize("hasAuthority('ROLE_ROOT')")
