@@ -6,7 +6,9 @@ import Footer from "../../footer/Footer";
 
 const UserLayout = () => {
   const { auth, loading } = useAuth();
-  const { _id, role } = auth;
+  const { role } = auth;
+
+  console.log(typeof role)
 
   if (loading) {
     return <h1>Cargando...</h1>;
@@ -16,7 +18,7 @@ const UserLayout = () => {
         <HeaderPrivate />
 
         <main className="bg-dark min-h-screen text-txt-grey flex items-center">
-          {_id && role == "ROLE_USER" ? <Outlet /> : <Navigate to="/login" />}
+          {role == "ROLE_USER" ? <Outlet /> : <Navigate to="/login" />}
           {/* {true && false ? <Outlet /> : <Navigate to="/login" />} */}
         </main>
         <Footer />

@@ -42,7 +42,7 @@ const Routing = () => {
           <Route path="settings" element={<Setting />} />
           <Route path="logout" element={<Logout />} />
           <Route path="profile/:userId" element={<Profile />} />
-          <Route path="reservar" element={<Reserve />} />
+          <Route path="reserve" element={<Reserve />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
         </Route>
@@ -53,7 +53,7 @@ const Routing = () => {
           <Route path="settings" element={<Setting />} />
           <Route path="logout" element={<Logout />} />
           <Route path="profile/:userId" element={<Profile />} />
-          <Route path="reservar" element={<Reserve />} />
+          <Route path="reserve" element={<Reserve />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
           <Route path="dashboard" element={<AdminDashboard />} />

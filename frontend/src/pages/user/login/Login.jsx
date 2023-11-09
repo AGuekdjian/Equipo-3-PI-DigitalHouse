@@ -18,11 +18,9 @@ export function Login() {
 
     let userToLogin = form;
 
-    console.log(userToLogin)
-
     try {
       const res = await fetch(
-        `${Global.endpoints.backend.backendJava}/auth/generateToken`,
+        `${Global.endpoints.backend.backendJava}/auth/login`,
         {
           method: "POST",
           headers: {
@@ -32,24 +30,25 @@ export function Login() {
         }
       );
 
-      console.log(res);
+      console.log(res)
+
       const data = await res.json();
 
-      
+      console.log(data)
 
-      // if (data.status == "Success") {
-      //   localStorage.setItem("token", data.token);
-      //   localStorage.setItem("user", JSON.stringify(data.user));
+      if (res.status == 200) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
 
-      //   setLogged("logged");
-      //   setAuth(data.user);
-      //   setTimeout(() => {
-      //     window.location.href = `${Global.endpoints.frontend.url}/admin`;
-      //   }, 600);
-      // } else {
-      //   setLogged("error");
-      //   MsgError(data.message);
-      // }
+        setLogged("logged");
+        setAuth(data.user);
+        setTimeout(() => {
+          navigate(`/user`);
+        }, 600);
+      } else {
+        setLogged("error");
+        MsgError(data.message);
+      }
     } catch (error) {
       throw new Error(error);
     }
