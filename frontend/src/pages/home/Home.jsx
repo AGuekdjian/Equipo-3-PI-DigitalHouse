@@ -17,7 +17,7 @@ export function Home() {
 
   const fetchMovies = async (page, url) => {
     setPageNumber(page);
-    navigate(`/page/${page}`);
+    navigate(`/admin/page/${page}`);
 
     let uri =
       page === null

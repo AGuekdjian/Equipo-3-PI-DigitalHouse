@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MagicMotion } from "react-magic-motion";
 import {ListaPeliculas} from "./movies/ListaPeliculas";
 import ListUsers from "./users/ListUsers";
+import { RegistrarPelicula } from "./movies/RegistrarPelicula";
 
 export function AdminDashboard() {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -115,6 +116,22 @@ export function AdminDashboard() {
                 <i className={`fa-solid fa-user text-[27px]`}></i>
                 Usuarios
               </li>
+
+              <li
+                style={{
+                  display: "flex",
+                  gap: "0.8rem",
+                  alignItems: "center",
+                  width: "fit-content",
+                }}
+                className={`cursor-pointer ${
+                  isActive == "Usuarios" ? "" : "text-sky-hover"
+                }`}
+                onClick={() => handleActive("Agregar")}
+              >
+                <i className={`fa-solid fa-plus text-[27px]`}></i>
+                Agregar pelicula
+              </li>
             </ul>
           </aside>
         </MagicMotion>
@@ -122,6 +139,7 @@ export function AdminDashboard() {
       <section className=" my-[1.5rem] ml-[12rem]">
         {isActive === "Peliculas" && <ListaPeliculas />}
         {isActive === "Usuarios" && <ListUsers />}
+        {isActive === "Agregar" && <RegistrarPelicula />}
       </section>
     </div>
   );

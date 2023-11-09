@@ -8,7 +8,7 @@ const Card = ({ item }) => {
   return (
     <div className="w-64 pt-4 px-4 pb-2.5 bg-sky-light text-dark rounded-xl flex flex-col items-center text-center">
       <img className="w-64 h-72" src={item.image_urls[0]} alt="" />
-      <h2 className="my-2">{item.name}</h2>
+      <h2 className="my-2">{item.title}</h2>
       {_id ? (
         <Link
           to={`/admin/detail/${item.id}`}
