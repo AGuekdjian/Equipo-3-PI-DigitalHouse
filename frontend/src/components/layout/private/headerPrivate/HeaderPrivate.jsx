@@ -69,7 +69,7 @@ export const HeaderPrivate = () => {
               <DropdownToggle caret className="border-none flex items-center">
                 {image != "default.png" ? (
                   <img
-                    src={`${Global.endpoints.backend.backendNode}user/avatar/${image}`}
+                    src={`${Global.endpoints.backend.backendJava}/user/avatar/${image}`}
                     className="w-11"
                     alt="Imagen de perfil"
                   />
