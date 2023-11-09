@@ -3,7 +3,7 @@ import json
 
 BASE_URL = "https://api.themoviedb.org/3"
 HEADERS = {
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MzdlMTkwY2U1N2ZhMGJlNTIwOGMwMmFjODgyNWY1MSIsInN1YiI6IjY1MzlmODg5MDkxZTYyMDBmZWM2M2Q4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IDaHIxHdJkemN3HtwLbe3Jxejd4ypZk_t0eY-_oRkmc',
+    'Authorization': 'Bearer TOKEN_PELICULAS',
     'accept': 'application/json'
 }
 print("1")
@@ -22,7 +22,7 @@ def get_movie_images(movie_id):
         return []
     
 POST_HEADERS = {
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlJPTEVfUk9PVCIsIm5hbWUiOiJ1bmRlZmluZWQiLCJsYXN0X25hbWUiOiJ1bmRlZmluZWQiLCJzdWIiOiJ1bmRlZmluZWRAZ21haWwuY29tIiwiaWF0IjoxNjk5NDk2NDY0LCJleHAiOjE2OTk1MzI0NjR9.IfHKBbHicMnSx17AqKZPuEJI6NwMLE5f8hdTPzzid4U',
+    'Authorization': 'Bearer TOKEN_ROOT',
     'Content-Type': 'application/json'
 }
 print("3")
