@@ -32,7 +32,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/register", "/auth/generateToken","/auth/createRootUser","/auth/users","/api/**").permitAll()
+                .requestMatchers("/auth/register", "/auth/login","/auth/createRootUser","/auth/users","/api/**").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/auth/promoteToAdmin/**").authenticated()
                 .and()
