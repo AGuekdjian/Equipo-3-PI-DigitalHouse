@@ -53,16 +53,11 @@ const Routing = () => {
           <Route path="settings" element={<Setting />} />
           <Route path="logout" element={<Logout />} />
           <Route path="profile/:userId" element={<Profile />} />
-          <Route path="newmovie" element={<RegistrarPelicula />} />
           <Route path="reservar" element={<Reserve />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="dashboard/movies" element={<ListaPeliculas />} />
-          <Route path="dashboard/movies/update" element={<EditarPelicula />} />
-          <Route path="dashboard/user/update" element={<EditarUsuario />} />
-          <Route path="dashboard/user/delete" element={<EliminarUsuario />} />
-          <Route path="dashboard/user/create" element={<AgregarUsuario />} />
           <Route path="dashboard/user" element={<ListUsers />} />
         </Route>
 

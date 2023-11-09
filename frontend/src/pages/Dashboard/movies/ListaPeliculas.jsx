@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Global } from "../../../helpers/Global";
 import { Modal } from "reactstrap";
 
-const ListaPeliculas = () => {
+export function ListaPeliculas() {
   const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState();
   const [genres, setGenres] = useState([]);
@@ -70,7 +70,7 @@ const ListaPeliculas = () => {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/movies?page=${currentPage} `
+        `${Global.endpoints.backend.backendJava}/api/movies?page=${currentPage}`
       );
       const jsonData = await response.json();
       data ? setData((prevData) => prevData.concat(jsonData.content)) : null;
@@ -83,7 +83,7 @@ const ListaPeliculas = () => {
   async function fetchGenres() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/genre`
+        `${Global.endpoints.backend.backendJava}/api/genre`
       );
       const jsonData = await response.json();
       setGenres(jsonData.content);
@@ -98,7 +98,7 @@ const ListaPeliculas = () => {
     );
     if (confirmDelete) {
       try {
-        await fetch(`${Global.endpoints.backend.backendJava}api/movies/${id}`, {
+        await fetch(`${Global.endpoints.backend.backendJava}/api/movies/${id}`, {
           method: "DELETE",
         });
         setData(data.filter((item) => item.id !== id));
@@ -286,5 +286,3 @@ const ListaPeliculas = () => {
     </div>
   );
 };
-
-export default ListaPeliculas;

@@ -67,15 +67,7 @@ export const HeaderPrivate = () => {
               className="border-none"
             >
               <DropdownToggle caret className="border-none flex items-center">
-                {image != "default.png" ? (
-                  <img
-                    src={`${Global.endpoints.backend.backendJava}/user/avatar/${image}`}
-                    className="w-11"
-                    alt="Imagen de perfil"
-                  />
-                ) : (
-                  <img src={avatar} className="w-12" alt="Imagen de perfil" />
-                )}
+              <img src={avatar} className="w-12" alt="Imagen de perfil" />
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem>

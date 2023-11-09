@@ -1,19 +1,6 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-
-// export function AdminDashboard() {
-//   return (
-//     <div>
-//       <h1>Bienvenido al panel de administración!</h1>
-//       <Link to={"/admin/dashboard/movies"}> <button>Lista de productos</button></Link>
-//       <Link to={"/admin/newmovie"}> <button>Agregar producto nuevo</button></Link>
-//     </div>
-//   );
-// }
-
 import { useState } from "react";
 import { MagicMotion } from "react-magic-motion";
-import ListaPeliculas from "./movies/ListaPeliculas";
+import {ListaPeliculas} from "./movies/ListaPeliculas";
 import ListUsers from "./users/ListUsers";
 
 export function AdminDashboard() {
@@ -21,9 +8,7 @@ export function AdminDashboard() {
   const [isActive, setIsActive] = useState("Peliculas");
 
   const handleActive = (txt) => {
-    console.log(txt);
     setIsActive(txt);
-    console.log(isActive);
   };
 
   return (

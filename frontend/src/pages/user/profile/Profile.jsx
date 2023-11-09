@@ -36,19 +36,11 @@ export default function Profile() {
           {!loading ? (
             <>
               <div className="general-info__container-avatar">
-                {userProfile.image != "default.png" ? (
-                  <img
-                    src={`${Global.endpoints.backend.backendJava}user/avatar/${userProfile.image}`}
-                    className="list-end__img"
-                    alt="Imagen de perfil"
-                  />
-                ) : (
-                  <img
+                <img
                     src={avatar}
                     className="list-end__img"
                     alt="Imagen de perfil"
                   />
-                )}
               </div>
             </>
           ) : (
