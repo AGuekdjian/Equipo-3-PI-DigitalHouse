@@ -3,7 +3,7 @@ import json
 
 BASE_URL = "https://api.themoviedb.org/3"
 HEADERS = {
-    'Authorization': 'Bearer API_TOKEN',
+    'Authorization': 'Bearer TOKEN_PELICULAS',
     'accept': 'application/json'
 }
 print("1")
@@ -20,9 +20,14 @@ def get_movie_images(movie_id):
         return response.json().get('backdrops', [])[:5]
     else:
         return []
+    
+POST_HEADERS = {
+    'Authorization': 'Bearer TOKEN_ROOT',
+    'Content-Type': 'application/json'
+}
 print("3")
 def main():
-    for page in range(1, 10):
+    for page in range(36, 60):
         response = requests.get(f"{BASE_URL}/trending/movie/week?language=es-ES&page={page}", headers=HEADERS)
         print("4")
         if response.status_code == 200:
@@ -40,7 +45,7 @@ def main():
                         "image_urls": image_urls
                     }
                     
-                    response = requests.post('http://localhost:8080/api/movies', headers={'Content-Type': 'application/json'}, json=data_to_send)
+                    response = requests.post('http://18.118.7.75/api/movies', headers=POST_HEADERS, json=data_to_send)
                     print(f"Data for movie {movie['title']} sent. Response status: {response.status_code}")
 
 if __name__ == "__main__":
