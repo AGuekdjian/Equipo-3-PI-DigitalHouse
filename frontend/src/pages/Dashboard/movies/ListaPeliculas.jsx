@@ -4,7 +4,7 @@ import { Modal } from "reactstrap";
 
 export function ListaPeliculas() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -71,6 +71,7 @@ export function ListaPeliculas() {
     try {
       const response = await fetch(
         `${Global.endpoints.backend.backendJava}/api/movies?page=${currentPage}`
+
       );
       const jsonData = await response.json();
       data ? setData((prevData) => prevData.concat(jsonData.content)) : null;
@@ -214,6 +215,7 @@ export function ListaPeliculas() {
               <label htmlFor="image_urls">URLs de imagenes</label>
               {Array.isArray(formData.image_urls) &&
                 formData.image_urls.map((imageUrl, index) => (
+
                   <div key={index}>
                     <input
                       type="text"
@@ -234,18 +236,7 @@ export function ListaPeliculas() {
               </button>
             </div>
 
-            <div className="movieInput">
-              <label htmlFor="overview">Sinopsis</label>
-              <textarea
-                name="overview"
-                id="overview"
-                cols="30"
-                rows="10"
-                value={formData.overview}
-                onChange={handleInputChange}
-                style={{ resize: "none" }}
-              ></textarea>
-            </div>
+  
 
             <div className="movieInput">
               <label htmlFor="image_urls">URLs de imagenes</label>
