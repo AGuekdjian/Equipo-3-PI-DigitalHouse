@@ -20,25 +20,8 @@ export const AuthProvider = ({ children }) => {
             return false
         }
 
-        const userObj = JSON.parse(user)
-        const userId = userObj.id
-
-        try {
-            const res = await fetch(`${Global.endpoints.backend.backendNode}/user/profile/${userId}`, {
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": token
-                }
-            })
-
-            const data = await res.json()
-
-            setAuth(data.user)
+            setAuth(user)
             setLoading(false)
-        } catch (error) {
-
-        }
     }
 
     return (

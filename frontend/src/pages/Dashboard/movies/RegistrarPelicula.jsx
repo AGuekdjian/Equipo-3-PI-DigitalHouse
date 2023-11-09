@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Global } from "../../../helpers/Global";
 
 export function RegistrarPelicula() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,25 @@ export function RegistrarPelicula() {
     image_urls: [],
   });
   const [submitStatus, setSubmitStatus] = useState(null);
+
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+
+  async function fetchData() {
+    try {
+      const response = await fetch(
+        `${Global.endpoints.backend.backendJava}api/genre`
+      );
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      console.error("Error al cargar datos desde la API:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -74,13 +94,21 @@ export function RegistrarPelicula() {
 
         <div className="movieInput">
           <label htmlFor="genre">Genero de la pelicula</label>
-          <input
-            type="text"
+          <select
+            type="select"
             name="genre"
             id="genre"
             value={formData.genre}
             onChange={handleInputChange}
-          />
+          >
+            {data
+              ? data.map((genre) => (
+                  <option key={genre} value={genre}>
+                    {genre}
+                  </option>
+                ))
+              : null}
+          </select>
         </div>
 
         <div className="movieInput">
