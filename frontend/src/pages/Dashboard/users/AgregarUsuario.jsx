@@ -1,7 +1,5 @@
 import React from "react";
 
-const AgregarUsuario = () => {
+export function AgregarUsuario() {
   return <div></div>;
 };
-
-export default AgregarUsuario;

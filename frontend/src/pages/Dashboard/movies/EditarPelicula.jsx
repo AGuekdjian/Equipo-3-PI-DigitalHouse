@@ -1,7 +1,5 @@
 import React from "react";
 
-const EditarPelicula = () => {
+export function EditarPelicula() {
   return <div>EditarPelicula</div>;
 };
-
-export default EditarPelicula;

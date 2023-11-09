@@ -16,8 +16,8 @@ const PrivateLayout = () => {
       <HeaderPrivate />
 
         <main className="bg-dark min-h-screen text-txt-grey flex items-center">
-          {_id ? <Outlet /> : <Navigate to="/login" />}
-          {/* {true ? <Outlet /> : <Navigate to="/login" />} */}
+          {/* {_id ? <Outlet /> : <Navigate to="/login" />} */}
+          {true ? <Outlet /> : <Navigate to="/login" />}
         </main>
         <Footer />
       </>
