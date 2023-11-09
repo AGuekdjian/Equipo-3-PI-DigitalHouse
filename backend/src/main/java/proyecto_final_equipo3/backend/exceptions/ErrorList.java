@@ -7,4 +7,6 @@ public class ErrorList {
 
     public final static String ITEM_NOT_FOUND = "ITEM_NOT_FOUND";
     public final static String NOT_MAPPED_ERROR = "NOT_MAPPED_ERROR";
+    public final static String REGISTER_ERROR = "REGISTER_ERROR";
+
 }

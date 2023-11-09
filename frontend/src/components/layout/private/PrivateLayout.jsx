@@ -5,8 +5,8 @@ import { useAuth } from "../../../hooks/useAuth";
 import Footer from "../../footer/Footer";
 
 const PrivateLayout = () => {
-  const { auth, loading } = useAuth();
-  const { _id } = auth;
+  // const { auth, loading } = useAuth();
+  // const { _id } = auth;
 
   if (loading) {
     return <h1>Cargando...</h1>;

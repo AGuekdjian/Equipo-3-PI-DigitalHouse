@@ -7,6 +7,7 @@ import proyecto_final_equipo3.backend.exceptions.particular.ForeignKeyException;
 import proyecto_final_equipo3.backend.exceptions.particular.ItemNotFoundException;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BaseInterfaceService<T> {
     Page<T> findAll(Pageable pageable);

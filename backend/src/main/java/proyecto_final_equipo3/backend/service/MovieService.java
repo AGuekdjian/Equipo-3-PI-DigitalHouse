@@ -1,6 +1,9 @@
 package proyecto_final_equipo3.backend.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import proyecto_final_equipo3.backend.dto.GenreImageResponse;
+import proyecto_final_equipo3.backend.model.Genre;
 import proyecto_final_equipo3.backend.model.Movie;
 import proyecto_final_equipo3.backend.persistence.MovieRepository;
 import proyecto_final_equipo3.backend.service.abstracts.AbstractCrudService;
@@ -28,13 +31,11 @@ public class MovieService extends AbstractCrudService<Movie, Integer, MovieRepos
 
     public List<GenreImageResponse> findGroupedByGenreWithImage() {
         List<Movie> allMovies = repository.findAll();
-
-        Map<String, GenreImageResponse> genreMap = new HashMap<>();
-
+        Map<Genre, GenreImageResponse> genreMap = new HashMap<>();
         for (Movie movie : allMovies) {
             if (!genreMap.containsKey(movie.getGenre())) {
                 GenreImageResponse response = new GenreImageResponse();
-                response.setGenre(movie.getGenre());
+                response.setGenre(String.valueOf(movie.getGenre()));
                 response.setUrl(movie.getImage_urls().isEmpty() ? null : movie.getImage_urls().get(0));
                 response.setMovie_count(1);
 
@@ -47,4 +48,10 @@ public class MovieService extends AbstractCrudService<Movie, Integer, MovieRepos
 
         return new ArrayList<>(genreMap.values());
     }
+
+    public Page<Movie> findByGenre(Genre genre, Pageable pageable) {
+        return repository.findByGenre(genre, pageable);
+    }
+
+
 }
