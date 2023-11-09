@@ -6,17 +6,17 @@ import Footer from "../../footer/Footer";
 
 const PrivateLayout = () => {
   const { auth, loading } = useAuth();
-  const { _id } = auth;
+  const { role } = auth;
 
   if (loading) {
     return <h1>Cargando...</h1>;
   } else {
-  return (
-    <>
-      <HeaderPrivate />
+    return (
+      <>
+        <HeaderPrivate />
 
         <main className="bg-dark min-h-screen text-txt-grey flex items-center">
-          {_id ? <Outlet /> : <Navigate to="/login" />}
+          {role == "ROLE_ROOT" ? <Outlet /> : <Navigate to="/login" />}
           {/* {true ? <Outlet /> : <Navigate to="/login" />} */}
         </main>
         <Footer />

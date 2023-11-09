@@ -39,7 +39,9 @@ export function Login() {
         setLogged("logged");
         setAuth(data.user);
         setTimeout(() => {
-          navigate(`/user`);
+          data.user.role == "ROLE_USER"
+            ? navigate(`/user`)
+            : navigate(`/admin`);
         }, 600);
       } else {
         setLogged("error");
