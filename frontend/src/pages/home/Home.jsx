@@ -30,13 +30,8 @@ export function Home() {
     }
     const data = await response.json();
 
-
-  
-  
     return data;
   };
-
-
 
   const { isLoading, isError, data } = useQuery(["peliculas", pageNumber], () =>
     fetchMovies(pageNumber)
@@ -59,16 +54,15 @@ export function Home() {
         );
       }
 
-          
-    const peliculasCopia = [...data.content];
-    const peliculasAleatorias = [];
-    while (peliculasCopia.length > 0) {
-      const randomIndex = Math.floor(Math.random() * peliculasCopia.length);
-      const pelicula = peliculasCopia[randomIndex];
-      peliculasAleatorias.push(pelicula);
-      peliculasCopia.splice(randomIndex, 1);
-    }
-    setPeliculasRandom(peliculasAleatorias.slice(0, 10));
+      const peliculasCopia = [...data.content];
+      const peliculasAleatorias = [];
+      while (peliculasCopia.length > 0) {
+        const randomIndex = Math.floor(Math.random() * peliculasCopia.length);
+        const pelicula = peliculasCopia[randomIndex];
+        peliculasAleatorias.push(pelicula);
+        peliculasCopia.splice(randomIndex, 1);
+      }
+      setPeliculasRandom(peliculasAleatorias.slice(0, 10));
 
       setItemPagination(items);
     }
@@ -85,9 +79,11 @@ export function Home() {
         </Spinner>
       ) : (
         <div className="p-4 mt-8 w-full grid grid-cols-5 gap-4 justify-items-center styles-mobile">
-          {peliculasRandom.length  > 0 ? peliculasRandom.map((item, index) => {
-            return <Card key={index} item={item} />;
-          }) : null}
+          {peliculasRandom.length > 0
+            ? peliculasRandom.map((item, index) => {
+                return <Card key={index} item={item} />;
+              })
+            : null}
         </div>
       )}
       <PaginationComponent

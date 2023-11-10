@@ -1,32 +1,22 @@
 import React, { useEffect, useState } from "react";
 import avatar from "../../../assets/img/user.png";
-import { useParams } from "react-router-dom";
-import { Global } from "../../../helpers/Global";
-import { GetProfile } from "../../../helpers/GetProfile";
+import { useAuth } from "../../../hooks/useAuth";
 
 export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [userProfile, setUserProfile] = useState({});
-
-  const params = useParams();
-  const token = localStorage.getItem("token");
+  const { auth } = useAuth();
 
   useEffect(() => {
-    getDataUser();
+    getDataUser(auth);
   }, []);
 
-  useEffect(() => {
-    getDataUser();
-  }, [params]);
-
-  const getDataUser = async () => {
-    await GetProfile(
-      Global.endpoints.backend.backendNode,
-      token,
-      params.userId,
-      setLoading,
-      setUserProfile
-    );
+  const getDataUser = async (user) => {
+    if (!user) {
+      throw new Error("Ah ocurrido un error al obtener los datos del usuario.");
+    }
+    setUserProfile(user);
+    setLoading(false);
   };
 
   return (
@@ -37,10 +27,10 @@ export default function Profile() {
             <>
               <div className="general-info__container-avatar">
                 <img
-                    src={avatar}
-                    className="list-end__img"
-                    alt="Imagen de perfil"
-                  />
+                  src={avatar}
+                  className="list-end__img"
+                  alt="Imagen de perfil"
+                />
               </div>
             </>
           ) : (
@@ -53,7 +43,7 @@ export default function Profile() {
             {!loading ? (
               <>
                 <div className="container-names__name">
-                  <h1>{`${userProfile.name} ${userProfile.surname}`}</h1>
+                  <h1>{`${userProfile.name} ${userProfile.last_name}`}</h1>
                 </div>
               </>
             ) : (

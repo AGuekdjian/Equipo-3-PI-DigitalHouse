@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useForm } from "../../../hooks/useForm";
-import { useAuth } from "../../../hooks/useAuth";
+import React from "react";
+import { useForm, useAuth } from "../../../hooks";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { MsgError, MsgSuccess, Global } from "../../../helpers";
@@ -8,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export function Login() {
   const { form, changed } = useForm({});
-  const [logged, setLogged] = useState("not_sended");
   const navigate = useNavigate();
 
   const { setAuth } = useAuth();
@@ -36,15 +34,14 @@ export function Login() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
 
-        setLogged("logged");
         setAuth(data.user);
+        MsgSuccess("Usuario logueado correctamente!!");
         setTimeout(() => {
           data.user.role == "ROLE_USER"
             ? navigate(`/user`)
             : navigate(`/admin`);
         }, 600);
       } else {
-        setLogged("error");
         MsgError(data.message);
       }
     } catch (error) {

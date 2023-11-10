@@ -131,10 +131,23 @@ export const HeaderPrivate = () => {
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
-                  <NavLink to="/admin/logout" className="flex items-center">
-                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                    <span className="ml-2.5">Cerrar Sesion</span>
-                  </NavLink>
+                  {route == "user" ? (
+                    <NavLink
+                      to={`/${route}/logout`}
+                      className="flex items-center"
+                    >
+                      <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                      <span className="ml-2.5">Cerrar Sesion</span>
+                    </NavLink>
+                  ) : (
+                    <NavLink
+                      to={`/${route}/logout`}
+                      className="flex items-center"
+                    >
+                      <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                      <span className="ml-2.5">Cerrar Sesion</span>
+                    </NavLink>
+                  )}
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -151,28 +164,61 @@ export const HeaderPrivate = () => {
           <Collapse isOpen={!collapsed} navbar>
             <Nav navbar className="mt-2 navbar-mobile">
               <NavItem className="border-b-[1px] py-2">
-                <NavLink
-                  to={`/admin/profile`}
-                  className="flex items-center ml-2"
-                >
-                  <i className="fa-solid fa-user"></i>
-                  <span className="ml-2.5">Perfil</span>
-                </NavLink>
+                {route == "user" ? (
+                  <NavLink
+                    to={`/${route}/profile`}
+                    className="flex items-center"
+                  >
+                    <i className="fa-solid fa-user"></i>
+                    <span className="ml-2.5">Perfil</span>
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    to={`/${route}/profile`}
+                    className="flex items-center"
+                  >
+                    <i className="fa-solid fa-user"></i>
+                    <span className="ml-2.5">Perfil</span>
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem className="border-b-[1px] py-2">
-                <NavLink
-                  to="/admin/settings"
-                  className="flex items-center ml-2"
-                >
-                  <i className="fa-solid fa-gear"></i>
-                  <span className="ml-2.5">Ajustes</span>
-                </NavLink>
+                {route == "user" ? (
+                  <NavLink
+                    to={`/${route}/settings`}
+                    className="flex items-center"
+                  >
+                    <i className="fa-solid fa-gear"></i>
+                    <span className="ml-2.5">Ajustes</span>
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    to={`/${route}/settings`}
+                    className="flex items-center"
+                  >
+                    <i className="fa-solid fa-gear"></i>
+                    <span className="ml-2.5">Ajustes</span>
+                  </NavLink>
+                )}
               </NavItem>
               <NavItem className="mt-2">
-                <NavLink to="/admin/logout" className="flex items-center ml-2">
-                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                  <span className="ml-2.5">Cerrar Sesion</span>
-                </NavLink>
+                {route == "user" ? (
+                  <NavLink
+                    to={`/${route}/logout`}
+                    className="flex items-center"
+                  >
+                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span className="ml-2.5">Cerrar Sesion</span>
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    to={`/${route}/logout`}
+                    className="flex items-center"
+                  >
+                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span className="ml-2.5">Cerrar Sesion</span>
+                  </NavLink>
+                )}
               </NavItem>
             </Nav>
           </Collapse>
