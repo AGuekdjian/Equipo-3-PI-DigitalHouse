@@ -3,15 +3,18 @@ import { Global } from "../../../helpers/Global";
 
 const ListUsers = () => {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState(null);
+  
 
-  async function fetchData() {
+  const fetchData = async () => {
     try {
-      const response = await fetch(
-        `${Global.endpoints.backend.backendJava}/api/auth/users`
-
-      );
+      const response = await fetch(`${Global.endpoints.backend.backendJava}/auth/users`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const jsonData = await response.json();
       data ? setData(jsonData) : null;
       setLoading(false);
@@ -23,6 +26,7 @@ const ListUsers = () => {
   useEffect(() => {
     setLoading(true);
     fetchData();
+    setToken
   }, []);
 
   const handlePromote = async (email) => {
@@ -33,6 +37,9 @@ const ListUsers = () => {
       try {
         await fetch(`${Global.endpoints.backend.backendJava}/auth/promoteToAdmin/${email}`, {
           method: "POST",
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
         });
         fetchData();
       } catch (error) {
