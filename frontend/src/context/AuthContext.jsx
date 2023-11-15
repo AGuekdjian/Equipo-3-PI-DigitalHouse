@@ -1,35 +1,35 @@
-import React, { useState, useEffect, createContext } from 'react'
-import { Global } from '../helpers/Global'
+import React, { useState, useEffect, createContext } from "react";
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({})
-    const [loading, setLoading] = useState(true)
+  const [auth, setAuth] = useState({});
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        authUser()
-    }, [])
+  useEffect(() => {
+    authUser();
+  }, []);
 
-    const authUser = async () => {
-        const token = localStorage.getItem("token")
-        const user = localStorage.getItem("user")
+  const authUser = async () => {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
 
-        if (!token || !user) {
-            setLoading(false)
-            return false
-        }
+    const userObject = JSON.parse(user);
 
-            setAuth(user)
-            setLoading(false)
+    if (!token || !user) {
+      setLoading(false);
+      return false;
     }
 
-    return (
-        <AuthContext.Provider
-            value={{ auth, setAuth, loading }}>
-            {children}
-        </AuthContext.Provider>
-    )
-}
+    setAuth(userObject);
+    setLoading(false);
+  };
 
-export default AuthContext
+  return (
+    <AuthContext.Provider value={{ auth, setAuth, loading }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export default AuthContext;

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useForm } from "../../../hooks/useForm";
-import { useAuth } from "../../../hooks/useAuth";
+import React from "react";
+import { useForm, useAuth } from "../../../hooks";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { MsgError, MsgSuccess, Global } from "../../../helpers";
@@ -8,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export function Login() {
   const { form, changed } = useForm({});
-  const [logged, setLogged] = useState("not_sended");
   const navigate = useNavigate();
 
   const { setAuth } = useAuth();
@@ -19,16 +17,13 @@ export function Login() {
     let userToLogin = form;
 
     try {
-      const res = await fetch(
-        `${Global.endpoints.backend.backendJava}/auth/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userToLogin),
-        }
-      );
+      const res = await fetch(`${Global.endpoints.backend.Prod}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userToLogin),
+      });
 
       const data = await res.json();
 
@@ -36,13 +31,14 @@ export function Login() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
 
-        setLogged("logged");
         setAuth(data.user);
+        MsgSuccess(`Usuario logueado correctamente!!`);
         setTimeout(() => {
-          navigate(`/user`);
-        }, 600);
+          user.role == "ROLE_ROOT" || user.role == "ROLE_ADMIN"
+            ? navigate("/admin")
+            : navigate("/user");
+        }, 6000);
       } else {
-        setLogged("error");
         MsgError(data.message);
       }
     } catch (error) {

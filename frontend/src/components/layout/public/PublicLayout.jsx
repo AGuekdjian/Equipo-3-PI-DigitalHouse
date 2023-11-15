@@ -6,24 +6,25 @@ import Footer from "../../footer/Footer";
 
 const PublicLayout = () => {
   const { auth } = useAuth();
-  const { email } = auth;
-  const [route, setRoute] = useState('')
+  const { role } = auth;
+  const [route, setRoute] = useState("");
 
   useEffect(() => {
-    if(auth.role == "ROLE_USER") {
-      setRoute("user")
+    if (role === "ROLE_ROOT" || role === "ROLE_ADMIN") {
+      setRoute("/admin");
+    } else if (role === "ROLE_USER") {
+      setRoute("/user");
     } else {
-      setRoute("admin")
+      setRoute("/");
     }
-  },[])
+  }, [role]);
 
   return (
     <>
       <HeaderPublic />
 
       <main className="bg-dark min-h-screen text-txt-grey flex items-center">
-        {/* {false ? <Outlet /> : <Navigate to="/admin" />} */}
-        {!email ? <Outlet /> : <Navigate to={`/${route}`} />}
+        {!role ? <Outlet /> : <Navigate to={route} />}
       </main>
 
       <Footer />

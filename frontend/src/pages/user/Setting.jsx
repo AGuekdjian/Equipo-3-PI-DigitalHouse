@@ -40,17 +40,14 @@ export const Setting = () => {
     let userUpdated = SerializeForm(e.target);
     const token = localStorage.getItem("token");
 
-    const res = await fetch(
-      `${Global.endpoints.backend.backendJava}user/update`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-        body: JSON.stringify(userUpdated),
-      }
-    );
+    const res = await fetch(`${Global.endpoints.backend.Prod}user/update`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify(userUpdated),
+    });
 
     const data = await res.json();
 
@@ -116,7 +113,7 @@ export const Setting = () => {
                         </label>
                         <div className="general-info__container-avatar">
                             {auth.image != "default.png" ?
-                                <img src={`${Global.endpoints.backend.backendJava}user/avatar/${auth.image}`} className="list-end__img" alt="Imagen de perfil" />
+                                <img src={`${Global.endpoints.backend.Prod}user/avatar/${auth.image}`} className="list-end__img" alt="Imagen de perfil" />
                                 :
                                 <img src={avatar} className="list-end__img" alt="Imagen de perfil" />
                             }

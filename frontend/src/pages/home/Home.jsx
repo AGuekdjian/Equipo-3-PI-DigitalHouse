@@ -8,8 +8,12 @@ import { Global } from "../../helpers/Global";
 import PaginationComponent from "../../components/PaginationComponent";
 import Pagination from "react-bootstrap/Pagination";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks";
 
 export function Home() {
+  const [route, setRoute] = useState("");
+  const { auth } = useAuth();
+  const { role } = auth;
   const navigate = useNavigate();
   const [peliculasRandom, setPeliculasRandom] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -17,12 +21,12 @@ export function Home() {
 
   const fetchMovies = async (page, url) => {
     setPageNumber(page);
-    navigate(`/page/${page}`);
+    navigate(`${route}/page/${page}`);
 
     let uri =
       page === null
         ? url
-        : `${Global.endpoints.backend.backendJava}/api/movies?page=${page}`;
+        : `${Global.endpoints.backend.Prod}/api/movies?page=${page}`;
 
     const response = await fetch(uri);
     if (!response.ok) {
@@ -30,20 +34,34 @@ export function Home() {
     }
     const data = await response.json();
 
-
-  
-  
     return data;
   };
-
-
 
   const { isLoading, isError, data } = useQuery(["peliculas", pageNumber], () =>
     fetchMovies(pageNumber)
   );
 
   useEffect(() => {
+    if (role === "ROLE_ROOT" || role === "ROLE_ADMIN") {
+      setRoute("/admin");
+    } else if (role === "ROLE_USER") {
+      setRoute("/user");
+    } else {
+      setRoute("/");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (role === "ROLE_ROOT" || role === "ROLE_ADMIN") {
+      setRoute("/admin");
+    } else if (role === "ROLE_USER") {
+      setRoute("/user");
+    } else {
+      setRoute("/");
+    }
+
     let items = [];
+
     if (data) {
       for (let i = 1; i < data.totalPages; i++) {
         items.push(
@@ -59,20 +77,19 @@ export function Home() {
         );
       }
 
-          
-    const peliculasCopia = [...data.content];
-    const peliculasAleatorias = [];
-    while (peliculasCopia.length > 0) {
-      const randomIndex = Math.floor(Math.random() * peliculasCopia.length);
-      const pelicula = peliculasCopia[randomIndex];
-      peliculasAleatorias.push(pelicula);
-      peliculasCopia.splice(randomIndex, 1);
-    }
-    setPeliculasRandom(peliculasAleatorias.slice(0, 10));
+      const peliculasCopia = [...data.content];
+      const peliculasAleatorias = [];
+      while (peliculasCopia.length > 0) {
+        const randomIndex = Math.floor(Math.random() * peliculasCopia.length);
+        const pelicula = peliculasCopia[randomIndex];
+        peliculasAleatorias.push(pelicula);
+        peliculasCopia.splice(randomIndex, 1);
+      }
+      setPeliculasRandom(peliculasAleatorias.slice(0, 10));
 
       setItemPagination(items);
     }
-  }, [pageNumber, data]);
+  }, [pageNumber, data, role]);
 
   return (
     <section className="w-full flex items-center justify-center flex-col">
@@ -85,9 +102,11 @@ export function Home() {
         </Spinner>
       ) : (
         <div className="p-4 mt-8 w-full grid grid-cols-5 gap-4 justify-items-center styles-mobile">
-          {peliculasRandom.length  > 0 ? peliculasRandom.map((item, index) => {
-            return <Card key={index} item={item} />;
-          }) : null}
+          {peliculasRandom.length > 0
+            ? peliculasRandom.map((item, index) => {
+                return <Card key={index} item={item} />;
+              })
+            : null}
         </div>
       )}
       <PaginationComponent

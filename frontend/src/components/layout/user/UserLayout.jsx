@@ -8,8 +8,6 @@ const UserLayout = () => {
   const { auth, loading } = useAuth();
   const { role } = auth;
 
-  console.log(typeof role)
-
   if (loading) {
     return <h1>Cargando...</h1>;
   } else {

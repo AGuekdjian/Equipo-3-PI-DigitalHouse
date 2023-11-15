@@ -20,7 +20,7 @@ export function Detail() {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/movies/${id}`
+        `${Global.endpoints.backend.Prod}api/movies/${id}`
       );
       const jsonData = await response.json();
       setItem(jsonData);

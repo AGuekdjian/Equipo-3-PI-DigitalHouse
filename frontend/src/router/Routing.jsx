@@ -41,7 +41,7 @@ const Routing = () => {
           <Route path="page/:pageNumber" element={<Home />} />
           <Route path="settings" element={<Setting />} />
           <Route path="logout" element={<Logout />} />
-          <Route path="profile/:userId" element={<Profile />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="reserve" element={<Reserve />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
@@ -52,7 +52,7 @@ const Routing = () => {
           <Route path="page/:pageNumber" element={<Home />} />
           <Route path="settings" element={<Setting />} />
           <Route path="logout" element={<Logout />} />
-          <Route path="profile/:userId" element={<Profile />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="reserve" element={<Reserve />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
