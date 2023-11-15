@@ -1,8 +1,8 @@
 export const Global = {
   endpoints: {
     backend: {
-      backendJava: "http://18.118.7.75",
-      // backendNode: "http://54.167.13.162/api", // NO FUNCIONA,
+      Prod: "http://18.118.7.75",
+      Local: "http://localhost:8080",
     },
     frontend: {
       url: "http://1023c12-grupo2-pi.s3-website-us-east-1.amazonaws.com",

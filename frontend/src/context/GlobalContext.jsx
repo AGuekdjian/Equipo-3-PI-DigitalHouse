@@ -16,7 +16,7 @@ export const GlobalProvider = ({ children }) => {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}/api/movies`
+        `${Global.endpoints.backend.Local}/api/movies`
       );
       const jsonData = await response.json();
       dispatch({ type: Global.actionType.SET_DATA, payload: jsonData.content });

@@ -8,8 +8,12 @@ import { Global } from "../../helpers/Global";
 import PaginationComponent from "../../components/PaginationComponent";
 import Pagination from "react-bootstrap/Pagination";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks";
 
 export function Home() {
+  const [route, setRoute] = useState("");
+  const { auth } = useAuth();
+  const { role } = auth;
   const navigate = useNavigate();
   const [peliculasRandom, setPeliculasRandom] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -17,12 +21,12 @@ export function Home() {
 
   const fetchMovies = async (page, url) => {
     setPageNumber(page);
-    navigate(`/admin/page/${page}`);
+    navigate(`${route}/page/${page}`);
 
     let uri =
       page === null
         ? url
-        : `${Global.endpoints.backend.backendJava}/api/movies?page=${page}`;
+        : `${Global.endpoints.backend.Prod}/api/movies?page=${page}`;
 
     const response = await fetch(uri);
     if (!response.ok) {
@@ -38,7 +42,26 @@ export function Home() {
   );
 
   useEffect(() => {
+    if (role === "ROLE_ROOT" || role === "ROLE_ADMIN") {
+      setRoute("/admin");
+    } else if (role === "ROLE_USER") {
+      setRoute("/user");
+    } else {
+      setRoute("/");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (role === "ROLE_ROOT" || role === "ROLE_ADMIN") {
+      setRoute("/admin");
+    } else if (role === "ROLE_USER") {
+      setRoute("/user");
+    } else {
+      setRoute("/");
+    }
+
     let items = [];
+
     if (data) {
       for (let i = 1; i < data.totalPages; i++) {
         items.push(
@@ -66,7 +89,7 @@ export function Home() {
 
       setItemPagination(items);
     }
-  }, [pageNumber, data]);
+  }, [pageNumber, data, role]);
 
   return (
     <section className="w-full flex items-center justify-center flex-col">

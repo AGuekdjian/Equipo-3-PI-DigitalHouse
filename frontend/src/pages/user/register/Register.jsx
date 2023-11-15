@@ -17,7 +17,7 @@ export function Register() {
 
     try {
       const res = await fetch(
-        `${Global.endpoints.backend.backendJava}/auth/register`,
+        `${Global.endpoints.backend.Prod}/auth/register`,
         {
           method: "POST",
           headers: {

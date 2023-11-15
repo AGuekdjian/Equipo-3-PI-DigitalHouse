@@ -38,7 +38,7 @@ export function ListaPeliculas() {
     event.preventDefault();
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}/api/movies/`,
+        `${Global.endpoints.backend.Prod}/api/movies/`,
         {
           method: "PUT",
           headers: {
@@ -70,8 +70,7 @@ export function ListaPeliculas() {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}/api/movies?page=${currentPage}`
-
+        `${Global.endpoints.backend.Prod}/api/movies?page=${currentPage}`
       );
       const jsonData = await response.json();
       data ? setData((prevData) => prevData.concat(jsonData.content)) : null;
@@ -84,7 +83,7 @@ export function ListaPeliculas() {
   async function fetchGenres() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}/api/genre`
+        `${Global.endpoints.backend.Prod}/api/genre`
       );
       const jsonData = await response.json();
       setGenres(jsonData);
@@ -99,7 +98,7 @@ export function ListaPeliculas() {
     );
     if (confirmDelete) {
       try {
-        await fetch(`${Global.endpoints.backend.backendJava}/api/movies/${id}`, {
+        await fetch(`${Global.endpoints.backend.Prod}/api/movies/${id}`, {
           method: "DELETE",
         });
         setData(data.filter((item) => item.id !== id));
@@ -123,28 +122,47 @@ export function ListaPeliculas() {
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-sky-light dark:bg-sky-light dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3 dark:text-black ">ID</th>
-              <th scope="col" className="px-6 py-3 dark:text-black">Nombre</th>
-              <th scope="col" className="px-6 py-3 dark:text-black">Acciones</th>
+              <th scope="col" className="px-6 py-3 dark:text-black ">
+                ID
+              </th>
+              <th scope="col" className="px-6 py-3 dark:text-black">
+                Nombre
+              </th>
+              <th scope="col" className="px-6 py-3 dark:text-black">
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody>
             {data
               ? data.length > 0 &&
-              data.map((item) => {
-                return (
-                  <tr key={item.id} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">{item.id}</th>
-                    <td className="px-6 py-4">{item.title}</td>
-                    <td className="px-6 py-4">
-                      <button onClick={() => handleEdit(item)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Editar</button>
-                      <button onClick={() => handleDelete(item.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-5 ml-5">
-                        Eliminar
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })
+                data.map((item) => {
+                  return (
+                    <tr
+                      key={item.id}
+                      class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    >
+                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                        {item.id}
+                      </th>
+                      <td className="px-6 py-4">{item.title}</td>
+                      <td className="px-6 py-4">
+                        <button
+                          onClick={() => handleEdit(item)}
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item.id)}
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-5 ml-5"
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
               : null}
 
             {loading && (
@@ -171,9 +189,17 @@ export function ListaPeliculas() {
         </Modal.Header>
         <Modal.Body>
           <div className="w-full max-w-xs">
-            <form onSubmit={handleUpdate} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form
+              onSubmit={handleUpdate}
+              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            >
               <div className="mb-4">
-                <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">Nombre de la pelicula</label>
+                <label
+                  htmlFor="title"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Nombre de la pelicula
+                </label>
                 <input
                   type="text"
                   name="title"
@@ -185,7 +211,12 @@ export function ListaPeliculas() {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="genre" className="block text-gray-700 text-sm font-bold mb-2">Genero de la pelicula</label>
+                <label
+                  htmlFor="genre"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Genero de la pelicula
+                </label>
                 <select
                   type="select"
                   name="genre"
@@ -196,16 +227,21 @@ export function ListaPeliculas() {
                 >
                   {genres
                     ? genres.map((genre) => (
-                      <option key={genre} value={genre}>
-                        {genre}
-                      </option>
-                    ))
+                        <option key={genre} value={genre}>
+                          {genre}
+                        </option>
+                      ))
                     : null}
                 </select>
               </div>
 
               <div className="mb-4">
-                <label htmlFor="overview" className="block text-gray-700 text-sm font-bold mb-2">Sinopsis</label>
+                <label
+                  htmlFor="overview"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  Sinopsis
+                </label>
                 <textarea
                   name="overview"
                   id="overview"
@@ -219,10 +255,14 @@ export function ListaPeliculas() {
               </div>
 
               <div className="mb-6">
-                <label htmlFor="image_urls" className="block text-gray-700 text-sm font-bold mb-2">URLs de imagenes</label>
+                <label
+                  htmlFor="image_urls"
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                >
+                  URLs de imagenes
+                </label>
                 {Array.isArray(formData.image_urls) &&
                   formData.image_urls.map((imageUrl, index) => (
-
                     <div key={index}>
                       <input
                         type="text"
@@ -243,8 +283,6 @@ export function ListaPeliculas() {
                   Agregar URL de imagen
                 </button>
               </div>
-
-
 
               <div className="md:flex md:items-center">
                 <div className="md:w-1/3"></div>
@@ -267,4 +305,4 @@ export function ListaPeliculas() {
       </Modal>
     </div>
   );
-};
+}

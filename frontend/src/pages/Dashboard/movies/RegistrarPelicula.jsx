@@ -16,7 +16,7 @@ export function RegistrarPelicula() {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}/api/genre`
+        `${Global.endpoints.backend.Prod}/api/genre`
       );
       const jsonData = await response.json();
       setData(jsonData);
@@ -38,7 +38,7 @@ export function RegistrarPelicula() {
     event.preventDefault();
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/movies/`,
+        `${Global.endpoints.backend.Prod}api/movies/`,
         {
           method: "POST",
           headers: {
@@ -80,9 +80,17 @@ export function RegistrarPelicula() {
   return (
     <div>
       <div className="w-full max-w-xs">
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
           <div className="mb-4">
-            <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">Nombre de la pelicula</label>
+            <label
+              htmlFor="title"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Nombre de la pelicula
+            </label>
             <input
               type="text"
               name="title"
@@ -95,7 +103,12 @@ export function RegistrarPelicula() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="genre" className="block text-gray-700 text-sm font-bold mb-2">Genero de la pelicula</label>
+            <label
+              htmlFor="genre"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Genero de la pelicula
+            </label>
             <select
               type="select"
               name="genre"
@@ -106,16 +119,21 @@ export function RegistrarPelicula() {
             >
               {data
                 ? data.map((genre) => (
-                  <option key={genre} value={genre}>
-                    {genre}
-                  </option>
-                ))
+                    <option key={genre} value={genre}>
+                      {genre}
+                    </option>
+                  ))
                 : null}
             </select>
           </div>
 
           <div className="mb-4">
-            <label htmlFor="overview" className="block text-gray-700 text-sm font-bold mb-2">Sinopsis</label>
+            <label
+              htmlFor="overview"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Sinopsis
+            </label>
             <textarea
               name="overview"
               id="overview"
@@ -125,12 +143,16 @@ export function RegistrarPelicula() {
               onChange={handleInputChange}
               style={{ resize: "none" }}
               className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-
             ></textarea>
           </div>
 
           <div className="mb-6">
-            <label htmlFor="image_urls" className="block text-gray-700 text-sm font-bold mb-2">URLs de imagenes</label>
+            <label
+              htmlFor="image_urls"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              URLs de imagenes
+            </label>
             {formData.image_urls.map((imageUrl, index) => (
               <div key={index}>
                 <input
@@ -140,7 +162,10 @@ export function RegistrarPelicula() {
                   onChange={(event) => handleImageUrlChange(event, index)}
                   className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 />
-                <button type="button" onClick={() => handleRemoveImageUrl(index)}>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImageUrl(index)}
+                >
                   Eliminar
                 </button>
               </div>
@@ -155,7 +180,6 @@ export function RegistrarPelicula() {
             <div className="md:w-2/3">
               <button type="submit">Registrar pelicula</button>
             </div>
-
           </div>
           {submitStatus === "success" && (
             <p>Los datos se enviaron correctamente.</p>
@@ -168,8 +192,8 @@ export function RegistrarPelicula() {
           )}
           {submitStatus === "error" && (
             <p>
-              Ocurrió un error al enviar los datos. Por favor, inténtelo de nuevo
-              más tarde.
+              Ocurrió un error al enviar los datos. Por favor, inténtelo de
+              nuevo más tarde.
             </p>
           )}
         </form>

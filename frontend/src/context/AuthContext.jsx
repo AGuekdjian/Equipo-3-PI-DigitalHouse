@@ -14,12 +14,14 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
 
+    const userObject = JSON.parse(user);
+
     if (!token || !user) {
       setLoading(false);
       return false;
     }
 
-    setAuth(user);
+    setAuth(userObject);
     setLoading(false);
   };
 

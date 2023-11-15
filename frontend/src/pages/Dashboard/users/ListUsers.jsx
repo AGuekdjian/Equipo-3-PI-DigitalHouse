@@ -8,19 +8,16 @@ const ListUsers = () => {
 
   async function fetchData() {
     try {
-      const res = await fetch(
-        `${Global.endpoints.backend.backendJava}/auth/users`,
-        {
-          method: "GET",
-          headers: {
-            "Authorization": `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await fetch(`${Global.endpoints.backend.Prod}/auth/users`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const jsonData = await res.json();
-      if(res.status == 200) {
-        setData(jsonData)
+      if (res.status == 200) {
+        setData(jsonData);
         setLoading(false);
       }
     } catch (error) {
@@ -40,11 +37,11 @@ const ListUsers = () => {
     if (confirmDelete) {
       try {
         await fetch(
-          `${Global.endpoints.backend.backendJava}/auth/promoteToAdmin/${email}`,
+          `${Global.endpoints.backend.Prod}/auth/promoteToAdmin/${email}`,
           {
             method: "POST",
             headers: {
-              "Authorization": token,
+              Authorization: token,
             },
           }
         );

@@ -17,16 +17,13 @@ export function Login() {
     let userToLogin = form;
 
     try {
-      const res = await fetch(
-        `${Global.endpoints.backend.backendJava}/auth/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userToLogin),
-        }
-      );
+      const res = await fetch(`${Global.endpoints.backend.Prod}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userToLogin),
+      });
 
       const data = await res.json();
 
@@ -35,12 +32,12 @@ export function Login() {
         localStorage.setItem("user", JSON.stringify(data.user));
 
         setAuth(data.user);
-        MsgSuccess("Usuario logueado correctamente!!");
+        MsgSuccess(`Usuario logueado correctamente!!`);
         setTimeout(() => {
-          data.user.role == "ROLE_USER"
-            ? navigate(`/user`)
-            : navigate(`/admin`);
-        }, 600);
+          user.role == "ROLE_ROOT" || user.role == "ROLE_ADMIN"
+            ? navigate("/admin")
+            : navigate("/user");
+        }, 6000);
       } else {
         MsgError(data.message);
       }
