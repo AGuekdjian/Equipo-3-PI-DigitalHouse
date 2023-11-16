@@ -21,11 +21,6 @@ public class CorsConfiguration {
                         .allowedOrigins(ALLOWED_ORIGINS)
                         .allowedMethods(ALLOWED_METHODS)
                         .allowedHeaders(ALLOWED_HEADERS);
-
-                registry.addMapping("/auth/promoteToAdmin/{email}")
-                        .allowedOrigins(ALLOWED_ORIGINS)
-                        .allowedMethods(ALLOWED_METHODS)
-                        .allowedHeaders(ALLOWED_HEADERS);
             }
         };
     };
