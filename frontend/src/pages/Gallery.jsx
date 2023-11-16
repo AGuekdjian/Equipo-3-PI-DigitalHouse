@@ -32,8 +32,6 @@ export function Gallery() {
     }
   }
 
-  console.log(item);
-
   const backTo = () => window.history.back();
   return (
     <div>
