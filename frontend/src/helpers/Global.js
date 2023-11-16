@@ -15,4 +15,10 @@ export const Global = {
   dataMock: {
     movies: "/mockJsonPelis.json",
   },
+  emailJS: {
+    mailUrlApi: "https://api.emailjs.com/api/v1.0/email/send",
+    service_id: "service_yacjl8k",
+    template_id: "template_7wekzda",
+    user_id: "tdWvdgHNY8bMtLG1K",
+  },
 };

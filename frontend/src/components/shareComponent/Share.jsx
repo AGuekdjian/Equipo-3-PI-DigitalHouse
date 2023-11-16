@@ -68,7 +68,10 @@ function Share() {
                 text={window.location.href}
                 onCopy={() => MsgSuccess("Copiado!")}
               >
-                <p className="font-semibold text-lg">{window.location.href}</p>
+                <p className="font-semibold text-lg">
+                  {"http://1023c12-grupo2-pi.s3-website-us-east-1.amazonaws.com" +
+                    window.location.pathname}
+                </p>
               </CopyToClipboard>
               <CopyToClipboard
                 text={window.location.href}
