@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        "sky-light": "#859ad9",
+        "sky-light": "#C2C2C2",
         "sky": "#436deb",
         "dark": "#17202a",
         "txt-grey": "#94a3b8",

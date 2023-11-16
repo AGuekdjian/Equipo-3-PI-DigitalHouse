@@ -8,7 +8,7 @@ import { Spinner } from "reactstrap";
 
 export function Detail() {
   const { auth } = useAuth();
-  const { _id } = auth;
+  const { email, role } = auth;
   const { id } = useParams();
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ export function Detail() {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.Prod}api/movies/${id}`
+        `${Global.endpoints.backend.Prod}/api/movies/${id}`
       );
       const jsonData = await response.json();
       setItem(jsonData);
@@ -70,9 +70,9 @@ export function Detail() {
               </div>
               <h3 className="mb-3">{item.overview} </h3>
               <div className="flex justify-end">
-                {_id ? (
+                {email ? (
                   <Link
-                    to={`/admin/detail/images/${item.id}`}
+                    to={`${role === "ROLE_ROOT" || role === "ROLE_ADMIN" ? "/admin" : "/user"}/detail/images/${item.id}`}
                     className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
                   >
                     Más imagenes
