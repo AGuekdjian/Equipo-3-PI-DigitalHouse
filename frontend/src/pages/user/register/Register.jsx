@@ -10,33 +10,51 @@ export function Register() {
   const { form, changed } = useForm({});
   const navigate = useNavigate();
 
+  const { endpoints, emailJS } = Global;
+
+  const sendEmail = async (mailUrlApi, mailBody) => {
+    await fetch(mailUrlApi, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(mailBody),
+    });
+  };
+
   const saveUser = async (e) => {
     e.preventDefault();
 
     let newUser = form;
 
     try {
-      const res = await fetch(
-        `${Global.endpoints.backend.Prod}/auth/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newUser),
-        }
-      );
+      const res = await fetch(`${endpoints.backend.Prod}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      });
 
-      const data = await res.json();
-
-      if (data.error_code == "REGISTER_ERROR") {
-        MsgError(data.error_message);
-        return;
-      } else {
+      if (res.status === 200) {
         MsgSuccess("Registrado correctamente");
+        let mailBody = {
+          service_id: emailJS.service_id,
+          template_id: emailJS.template_id,
+          user_id: emailJS.user_id,
+          template_params: {
+            user_name: newUser.name,
+            user_email: newUser.email,
+          },
+        };
+        sendEmail(emailJS.mailUrlApi, mailBody);
         setTimeout(() => {
           navigate("/login");
         }, 2000);
+      } else {
+        const data = await res.json();
+        MsgError(data.error_message);
+        return;
       }
     } catch (error) {
       throw new Error(error);
