@@ -1,7 +1,7 @@
 export const Global = {
   endpoints: {
     backend: {
-      Prod: "http://18.118.7.75",
+      Prod: "http://34.212.28.234",
       Local: "http://localhost:8080",
     },
     frontend: {
