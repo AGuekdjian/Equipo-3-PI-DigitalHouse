@@ -16,6 +16,7 @@ const ListUsers = () => {
       });
 
       const jsonData = await res.json();
+
       if (res.status == 200) {
         setData(jsonData);
         setLoading(false);
