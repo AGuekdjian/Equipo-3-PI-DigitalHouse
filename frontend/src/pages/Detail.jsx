@@ -1,10 +1,9 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { Global } from "../helpers/Global";
 import { useAuth } from "../hooks/useAuth";
-import { Spinner } from "reactstrap";
+import { Spinner} from "reactstrap";
+import Share from "../components/shareComponent/Share";
 
 export function Detail() {
   const { auth } = useAuth();
@@ -60,8 +59,8 @@ export function Detail() {
               />
             </div>
             <div className="p-2">
-              <div className="mb-6 mt-4">
-                <i className="fa-solid fa-share-nodes text-lg mx-1"></i>
+              <div className="mb-6 mt-4 flex items-center">
+                <Share />
                 <i className="fa-regular fa-heart text-lg mx-1.5"></i>
               </div>
               <div className="mb-6">
