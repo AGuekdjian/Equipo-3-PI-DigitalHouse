@@ -16,7 +16,11 @@ const PrivateLayout = () => {
         <HeaderPrivate />
 
         <main className="bg-dark min-h-screen text-txt-grey flex items-center">
-          {role == "ROLE_ROOT" ? <Outlet /> : <Navigate to="/login" />}
+          {role == "ROLE_ROOT" || role == "ROLE_ADMIN" ? (
+            <Outlet />
+          ) : (
+            <Navigate to="/login" />
+          )}
           {/* {true ? <Outlet /> : <Navigate to="/login" />} */}
         </main>
         <Footer />

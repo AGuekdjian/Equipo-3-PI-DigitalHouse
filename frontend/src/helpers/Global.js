@@ -1,8 +1,8 @@
 export const Global = {
   endpoints: {
     backend: {
-      backendJava: "http://18.118.7.75",
-      // backendNode: "http://54.167.13.162/api", // NO FUNCIONA,
+      Prod: "http://34.212.28.234",
+      Local: "http://localhost:8080",
     },
     frontend: {
       url: "http://1023c12-grupo2-pi.s3-website-us-east-1.amazonaws.com",
@@ -14,5 +14,11 @@ export const Global = {
   },
   dataMock: {
     movies: "/mockJsonPelis.json",
+  },
+  emailJS: {
+    mailUrlApi: "https://api.emailjs.com/api/v1.0/email/send",
+    service_id: "service_yacjl8k",
+    template_id: "template_7wekzda",
+    user_id: "tdWvdgHNY8bMtLG1K",
   },
 };

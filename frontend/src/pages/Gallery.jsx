@@ -8,14 +8,11 @@ export function Gallery() {
   const { id } = useParams();
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(true);
-  const righContainerImages = []
+  const righContainerImages = [];
   if (item.image_urls) {
-
     for (let i = 1; i < item.image_urls.length; i++) {
-      righContainerImages.push(item.image_urls[i])
-
+      righContainerImages.push(item.image_urls[i]);
     }
-
   }
 
   useEffect(() => {
@@ -25,7 +22,7 @@ export function Gallery() {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/movies/${id}`
+        `${Global.endpoints.backend.Prod}api/movies/${id}`
       );
       const jsonData = await response.json();
       setItem(jsonData);
@@ -34,8 +31,6 @@ export function Gallery() {
       console.error("Error al cargar datos desde la API:", error);
     }
   }
-
-  console.log(item);
 
   const backTo = () => window.history.back();
   return (
@@ -46,7 +41,6 @@ export function Gallery() {
         </Spinner>
       ) : (
         <div className="mx-auto px-5 md:px-10 lg:px-20">
-
           <div>
             <div className="flex justify-between mt-12 w-full mb-4">
               <h1 className="font-extrabold text-1xl md:text-2xl lg:text-3xl text-grey-light ml-4">
@@ -60,21 +54,29 @@ export function Gallery() {
             </div>
             <div className="mainContainer flex flex-col md:flex-row">
               <div className="leftContainer w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
-                <img className="w-full h-full object-cover rounded-lg" src={item.image_urls[0]} alt="" />
+                <img
+                  className="w-full h-full object-cover rounded-lg"
+                  src={item.image_urls[0]}
+                  alt=""
+                />
               </div>
 
               <div className="rightContainer w-full md:w-1/2 flex flex-wrap">
                 {righContainerImages.map((image, index) => {
                   return (
                     <div className="w-full md:w-1/2 h-1/2 flex p-2">
-                      <img className="w-full h-full object-cover rounded-lg" src={image} alt="" key={index} />
+                      <img
+                        className="w-full h-full object-cover rounded-lg"
+                        src={image}
+                        alt=""
+                        key={index}
+                      />
                     </div>
                   );
                 })}
               </div>
             </div>
           </div>
-
         </div>
       )}
     </div>

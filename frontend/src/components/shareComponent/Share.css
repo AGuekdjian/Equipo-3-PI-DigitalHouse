@@ -1,0 +1,13 @@
+.modal-content,
+.modal-dialog {
+  border-radius: 16px;
+  color: var(--grey-light);
+}
+
+.btn-close {
+  background: #f0f8ff !important;
+}
+
+.link-social:hover {
+  cursor: pointer;
+}

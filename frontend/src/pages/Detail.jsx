@@ -1,14 +1,13 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { Global } from "../helpers/Global";
 import { useAuth } from "../hooks/useAuth";
-import { Spinner } from "reactstrap";
+import { Spinner} from "reactstrap";
+import Share from "../components/shareComponent/Share";
 
 export function Detail() {
   const { auth } = useAuth();
-  const { _id } = auth;
+  const { email, role } = auth;
   const { id } = useParams();
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(true);
@@ -20,7 +19,7 @@ export function Detail() {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.backendJava}api/movies/${id}`
+        `${Global.endpoints.backend.Prod}/api/movies/${id}`
       );
       const jsonData = await response.json();
       setItem(jsonData);
@@ -60,8 +59,8 @@ export function Detail() {
               />
             </div>
             <div className="p-2">
-              <div className="mb-6 mt-4">
-                <i className="fa-solid fa-share-nodes text-lg mx-1"></i>
+              <div className="mb-6 mt-4 flex items-center">
+                <Share />
                 <i className="fa-regular fa-heart text-lg mx-1.5"></i>
               </div>
               <div className="mb-6">
@@ -70,9 +69,9 @@ export function Detail() {
               </div>
               <h3 className="mb-3">{item.overview} </h3>
               <div className="flex justify-end">
-                {_id ? (
+                {email ? (
                   <Link
-                    to={`/admin/detail/images/${item.id}`}
+                    to={`${role === "ROLE_ROOT" || role === "ROLE_ADMIN" ? "/admin" : "/user"}/detail/images/${item.id}`}
                     className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
                   >
                     Más imagenes
