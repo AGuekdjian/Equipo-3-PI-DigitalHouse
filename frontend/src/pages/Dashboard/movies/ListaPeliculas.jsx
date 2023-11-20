@@ -16,6 +16,7 @@ export function ListaPeliculas() {
     genre: "",
     image_urls: [],
   });
+  const [token, setToken] = useState();
 
   const handleImageUrlChange = (event, index) => {
     const { value } = event.target;
@@ -65,6 +66,8 @@ export function ListaPeliculas() {
     setLoading(true);
     fetchData();
     fetchGenres();
+    const token = localStorage.getItem("token");
+    setToken(token);
   }, [currentPage]);
 
   async function fetchData() {
@@ -100,6 +103,9 @@ export function ListaPeliculas() {
       try {
         await fetch(`${Global.endpoints.backend.Prod}/api/movies/${id}`, {
           method: "DELETE",
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
         });
         setData(data.filter((item) => item.id !== id));
       } catch (error) {
@@ -140,7 +146,7 @@ export function ListaPeliculas() {
                   return (
                     <tr
                       key={item.id}
-                      class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     >
                       <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                         {item.id}

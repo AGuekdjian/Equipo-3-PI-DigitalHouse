@@ -19,9 +19,19 @@ export function Home() {
   const [pageNumber, setPageNumber] = useState(0);
   const [itemPagination, setItemPagination] = useState([]);
 
+  function getPageRange(currentPage, totalPages) {
+    let startPage = Math.max(currentPage - 2, 2);
+    let endPage = Math.min(startPage + 4, totalPages - 1);
+  
+    if (endPage - startPage < 4) {
+      startPage = Math.max(endPage - 4, 2);
+    }
+  
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+  }
   const fetchMovies = async (page, url) => {
     setPageNumber(page);
-    navigate(`${route}/page/${page}`);
+    navigate(`${route}/page/${page + 1}`);
 
     let uri =
       page === null
@@ -38,9 +48,11 @@ export function Home() {
   };
 
   const { isLoading, isError, data } = useQuery(["peliculas", pageNumber], () =>
-    fetchMovies(pageNumber)
+  fetchMovies(pageNumber)
   );
+  
 
+  
   useEffect(() => {
     if (role === "ROLE_ROOT" || role === "ROLE_ADMIN") {
       setRoute("/admin");
@@ -62,20 +74,51 @@ export function Home() {
 
     let items = [];
 
-    if (data) {
-      for (let i = 1; i < data.totalPages; i++) {
-        items.push(
-          <Pagination.Item
-            key={i}
-            onClick={(e) => {
-              const newPageNumber = parseInt(e.target.text - 1);
-              fetchMovies(newPageNumber, null);
-            }}
-          >
-            {i}
-          </Pagination.Item>
-        );
-      }
+  if (data) {
+    const pageRange = getPageRange(pageNumber + 1, data.totalPages);
+
+    items.push(
+      <Pagination.Item
+        key={1}
+        onClick={() => {
+          fetchMovies(0, null);
+        }}
+      >
+        {1}
+      </Pagination.Item>
+    );
+
+    if (pageRange[0] > 2) {
+      items.push(<Pagination.Ellipsis />);
+    }
+
+    for (let i = 0; i < pageRange.length; i++) {
+      items.push(
+        <Pagination.Item
+          key={pageRange[i]}
+          onClick={() => {
+            fetchMovies(pageRange[i] - 1, null);
+          }}
+        >
+          {pageRange[i]}
+        </Pagination.Item>
+      );
+    }
+
+    if (pageRange[pageRange.length - 1] < data.totalPages - 1) {
+      items.push(<Pagination.Ellipsis />);
+    }
+
+    items.push(
+      <Pagination.Item
+        key={data.totalPages}
+        onClick={() => {
+          fetchMovies(data.totalPages - 1, null);
+        }}
+      >
+        {data.totalPages}
+      </Pagination.Item>
+    );
 
       const peliculasCopia = [...data.content];
       const peliculasAleatorias = [];
@@ -90,6 +133,7 @@ export function Home() {
       setItemPagination(items);
     }
   }, [pageNumber, data, role]);
+
 
   return (
     <section className="w-full flex items-center justify-center flex-col">

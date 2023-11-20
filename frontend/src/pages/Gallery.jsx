@@ -22,7 +22,7 @@ export function Gallery() {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.Prod}api/movies/${id}`
+        `${Global.endpoints.backend.Prod}/api/movies/${id}`
       );
       const jsonData = await response.json();
       setItem(jsonData);
