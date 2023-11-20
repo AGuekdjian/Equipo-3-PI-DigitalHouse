@@ -51,7 +51,19 @@ export function Home() {
   fetchMovies(pageNumber)
   );
   
+  
+  // AGUARDANDO AL ENPOINT
 
+  // handleSearch = async (query) => {
+  //   try {
+
+  //     const response = await fetch `${Global.endpoints.backend.Prod}/api/movies?query=${query}`;
+  //     const data = await response.json();
+  //     setPeliculasRandom(data); 
+  //   } catch (error) {
+  //     console.error('Error al buscar películas:', error);
+  //   }
+  // };
   
   useEffect(() => {
     if (role === "ROLE_ROOT" || role === "ROLE_ADMIN") {
@@ -137,7 +149,7 @@ export function Home() {
 
   return (
     <section className="w-full flex items-center justify-center flex-col">
-      <FormBusquedaPelicula />
+      <FormBusquedaPelicula  />
       {/* <Categorias /> */}
 
       {isLoading ? (
