@@ -1,6 +1,6 @@
 // __test__/Footer.test.jsx
 import { render, screen } from 'vitest-dom';
-import Footer from '../src/components/Footer';
+import Footer from '../components/footer/Footer';
 
 // Test 1: Renderiza el componente Footer con el año actual
 test('Renderiza el componente Footer con el año actual', () => {
