@@ -47,7 +47,7 @@ function useSearch () {
 export function Home() {
   const [route, setRoute] = useState("");
   const { auth } = useAuth();
-  const { role } = auth;
+  const { role } = auth
   const navigate = useNavigate();
   const [peliculasRandom, setPeliculasRandom] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -86,8 +86,6 @@ export function Home() {
   const { isLoading, isError, data } = useQuery(["peliculas", pageNumber], () =>
   fetchMovies(pageNumber)
   );
-  
-  
 
 
   useEffect(() => {
