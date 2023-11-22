@@ -8,10 +8,16 @@ export function RegistrarPelicula() {
     genre: "",
     image_urls: [],
   });
+  const [formData2, setFormData2] = useState({
+    "title": "Five night as freddy's prueba 3 ",
+    "overview": "prueba de fnaf",
+      "genre":"Action",
+      "image_urls": ["https://www.lavanguardia.com/andro4all/hero/2023/10/five-nights-at-freddys.jpg?width=1200"]
+  });
   const [submitStatus, setSubmitStatus] = useState(null);
-
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState();
 
   async function fetchData() {
     try {
@@ -27,6 +33,9 @@ export function RegistrarPelicula() {
 
   useEffect(() => {
     fetchData();
+    const token = localStorage.getItem("token");
+    setToken(token);
+    console.log(token);
   }, []);
 
   const handleInputChange = (event) => {
@@ -38,15 +47,19 @@ export function RegistrarPelicula() {
     event.preventDefault();
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.Prod}api/movies/`,
+        `${Global.endpoints.backend.Prod}/api/movies`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(formData2),
         }
       );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const jsonData = await response.json();
       console.log(jsonData);
       if (response.status === 409) {
