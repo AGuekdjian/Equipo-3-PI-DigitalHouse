@@ -68,7 +68,6 @@ export function Home() {
   }
   const fetchMovies = async (page, url) => {
     setPageNumber(page);
-    navigate(`${route}/page/${page + 1}`);
 
     let uri =
       page === null
