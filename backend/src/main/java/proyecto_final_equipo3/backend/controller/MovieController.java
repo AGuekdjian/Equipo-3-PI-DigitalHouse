@@ -35,5 +35,15 @@ public class MovieController extends AbstractCrudController<Movie, MovieService>
         return new ResponseEntity<>(service.findByGenre(genre, pageable), HttpStatus.OK);
     }
 
+    @GetMapping("/findByTitle")
+    public ResponseEntity<?> getMoviesByTitle(@RequestParam("title") String title, Pageable pageable) {
+        return new ResponseEntity<>(service.findByTitle(title, pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/titles")
+    public ResponseEntity<List<String>> getAllMovieTitles() {
+        List<String> titles = service.getAllMovieTitles();
+        return ResponseEntity.ok(titles);
+    }
 
 }

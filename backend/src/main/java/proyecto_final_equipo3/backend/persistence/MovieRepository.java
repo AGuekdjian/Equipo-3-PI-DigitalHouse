@@ -14,24 +14,13 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie,Integer> {
 
-    @Query(value =
-            "SELECT " +
-                    "    derivedTable.genre, " +
-                    "    derivedTable.image_urls, " +
-                    "    derivedTable.movieCount " +
-                    "FROM ( " +
-                    "    SELECT " +
-                    "        genre, " +
-                    "        SUBSTRING_INDEX(image_urls, ',', 1) as image_urls, " +
-                    "        ROW_NUMBER() OVER(PARTITION BY genre ORDER BY id) as rn, " +
-                    "        COUNT(*) OVER(PARTITION BY genre) as movieCount " +
-                    "    FROM movies " +
-                    ") AS derivedTable " +
-                    "WHERE derivedTable.rn = 1 " +
-                    "ORDER BY derivedTable.movieCount DESC;",
-            nativeQuery = true)
-    List<GenreImageResponse> findGroupedByGenreWithImage();
-
     Page<Movie> findByGenre(Genre genre, Pageable pageable);
 
+    @Query(value = "SELECT * FROM movies m WHERE " +
+            "LOWER(m.title) REGEXP LOWER(?1)",
+            nativeQuery = true)
+    Page<Movie> findByTitleWithRegex(String regexPattern, Pageable pageable);
+
+    @Query("SELECT m.title FROM Movie m")
+    List<String> findAllTitles();
 }

@@ -12,8 +12,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import proyecto_final_equipo3.backend.constants.EndsPointInternal;
 import proyecto_final_equipo3.backend.dto.AuthRequest;
+import proyecto_final_equipo3.backend.dto.FavoriteDto;
+import proyecto_final_equipo3.backend.dto.UserInfoDTO;
 import proyecto_final_equipo3.backend.exceptions.particular.ItemNotFoundException;
 import proyecto_final_equipo3.backend.exceptions.particular.RegisterErrorException;
+import proyecto_final_equipo3.backend.model.Favorite;
+import proyecto_final_equipo3.backend.model.Movie;
 import proyecto_final_equipo3.backend.model.UserInfo;
 import proyecto_final_equipo3.backend.service.JwtService;
 import proyecto_final_equipo3.backend.service.UserInfoService;
@@ -24,6 +28,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(EndsPointInternal.AUTH)
+
 public class UserController {
     @Autowired
     private UserInfoService service;
@@ -31,6 +36,7 @@ public class UserController {
     private JwtService jwtService;
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @PostMapping("/register")
     public String addNewUser(@RequestBody UserInfo userInfo) throws RegisterErrorException {
         userInfo.setRoles("ROLE_USER");
@@ -74,15 +80,15 @@ public class UserController {
 
     @GetMapping("/users")
     @PreAuthorize("hasAuthority('ROLE_ROOT')")
-    public ResponseEntity<List<UserInfo>> getAllUsers() {
-        List<UserInfo> users = service.findAllUsers();
+    public ResponseEntity<List<UserInfoDTO>> getAllUsers() {
+        List<UserInfoDTO> users = service.findAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @PostMapping("/promoteToAdmin/{email}")
+    @PostMapping("/promoteToAdmin/{id}")
     @PreAuthorize("hasAuthority('ROLE_ROOT')")
-    public String promoteToAdmin(@PathVariable String email) {
-        return service.promoteToAdmin(email);
+    public String promoteToAdmin(@PathVariable Integer id) {
+        return service.switchUserRole(id);
     }
 
     @PostMapping("/createRootUser")
@@ -94,4 +100,5 @@ public class UserController {
         service.addUser(userInfo);
         return ResponseEntity.status(HttpStatus.CREATED).body("");
     }
+
 }
