@@ -12,10 +12,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService extends AbstractCrudService<Movie, Integer, MovieRepository> implements BaseInterfaceService<Movie> {
@@ -53,5 +51,14 @@ public class MovieService extends AbstractCrudService<Movie, Integer, MovieRepos
         return repository.findByGenre(genre, pageable);
     }
 
+    public Page<Movie> findByTitle(String title, Pageable pageable) {
+        String regexPattern = Arrays.stream(title.split("\\s+"))
+                .map(word -> "(?=.*\\b" + word + "\\b)")
+                .collect(Collectors.joining());
+        return repository.findByTitleWithRegex(regexPattern, pageable);
+    }
 
+    public List<String> getAllMovieTitles() {
+        return repository.findAllTitles();
+    }
 }

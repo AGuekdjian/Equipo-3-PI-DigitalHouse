@@ -21,6 +21,7 @@ public class JwtService {
     private String jwtSecret;
         public String generateToken(UserInfo userInfo) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userInfo.getId());
         claims.put("name", userInfo.getName());
         claims.put("last_name", userInfo.getLast_name());
         claims.put("roles", userInfo.getRoles());
@@ -73,5 +74,9 @@ public class JwtService {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
+    public Integer extractUserId(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("userId", Integer.class);
+    }
 
 }

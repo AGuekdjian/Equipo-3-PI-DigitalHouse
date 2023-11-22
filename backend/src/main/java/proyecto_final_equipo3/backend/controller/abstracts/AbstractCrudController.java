@@ -49,4 +49,5 @@ public abstract class AbstractCrudController<T, S extends BaseInterfaceService<T
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

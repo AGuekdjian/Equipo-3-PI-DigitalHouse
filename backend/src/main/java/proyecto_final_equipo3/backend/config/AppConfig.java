@@ -1,4 +1,4 @@
-package proyecto_final_equipo3.backend;
+package proyecto_final_equipo3.backend.config;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
