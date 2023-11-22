@@ -1,7 +1,7 @@
 export const Global = {
   endpoints: {
     backend: {
-      Prod: "http://34.212.28.234",
+      Prod: "http://34.212.28.234", // Instancia creada en la region de Oregon.
       Local: "http://localhost:8080",
     },
     frontend: {

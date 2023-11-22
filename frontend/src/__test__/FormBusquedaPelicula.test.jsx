@@ -1,6 +1,6 @@
 // __test__/FormBusquedaPelicula.test.jsx
-import { render, screen } from 'vitest-dom';
-import FormBusquedaPelicula from '../src/components/FormBusquedaPelicula';
+import { render, screen } from 'vitest-qdom';
+import FormBusquedaPelicula from '../components/Forms/FormBusquedaPelicula';
 
 // Test 1: Renderiza el componente FormBusquedaPelicula con el título correcto
 test('Renderiza el componente FormBusquedaPelicula con el título correcto', () => {

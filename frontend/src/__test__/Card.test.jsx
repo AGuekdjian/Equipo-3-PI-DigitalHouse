@@ -1,6 +1,6 @@
 // __test__/Card.test.jsx
-import { render, screen } from 'vitest-dom';
-import Card from '../src/components/Card';
+import { render, screen,  } from 'vitest-dom';
+import Card from '../components/card/Card';
 
 // Test 1: Renderiza el componente Card correctamente con un título
 test('Renderiza el componente Card con un título', () => {
