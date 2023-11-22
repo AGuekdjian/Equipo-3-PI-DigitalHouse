@@ -17,9 +17,10 @@ public interface MovieRepository extends JpaRepository<Movie,Integer> {
     Page<Movie> findByGenre(Genre genre, Pageable pageable);
 
     @Query(value = "SELECT * FROM movies m WHERE " +
-            "LOWER(m.title) REGEXP LOWER(?1)",
+            "LOWER(m.title) REGEXP LOWER(?1) OR LOWER(m.title) = LOWER(?2)",
             nativeQuery = true)
-    Page<Movie> findByTitleWithRegex(String regexPattern, Pageable pageable);
+    Page<Movie> findByTitleWithRegexAndTitle(String regexPattern, String title, Pageable pageable);
+
 
     @Query("SELECT m.title FROM Movie m")
     List<String> findAllTitles();
