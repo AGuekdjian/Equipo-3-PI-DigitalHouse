@@ -55,7 +55,7 @@ public class MovieService extends AbstractCrudService<Movie, Integer, MovieRepos
         String regexPattern = Arrays.stream(title.split("\\s+"))
                 .map(word -> "(?=.*\\b" + word + "\\b)")
                 .collect(Collectors.joining());
-        return repository.findByTitleWithRegex(regexPattern, pageable);
+        return repository.findByTitleWithRegexAndTitle(regexPattern,title, pageable);
     }
 
     public List<String> getAllMovieTitles() {
