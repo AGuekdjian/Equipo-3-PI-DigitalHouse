@@ -47,7 +47,7 @@ export function RegistrarPelicula() {
     event.preventDefault();
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.Prod}/api/movies/`,
+        `${Global.endpoints.backend.Prod}/api/movies`,
         {
           method: "POST",
           headers: {

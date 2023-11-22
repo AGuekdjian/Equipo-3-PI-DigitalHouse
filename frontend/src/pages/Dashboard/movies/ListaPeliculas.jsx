@@ -39,18 +39,24 @@ export function ListaPeliculas() {
     event.preventDefault();
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.Prod}/api/movies/`,
+        `${Global.endpoints.backend.Prod}/api/movies`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify(formData),
         }
       );
-      const jsonData = await response.json();
-      console.log(jsonData);
-      setSubmitStatus("success");
+ 
+      if (response.status === 204) {
+        setSubmitStatus("success");
+      
+      }else {
+        setSubmitStatus("error");
+      }
+
     } catch (error) {
       console.error("Error al enviar datos a la API:", error);
       setSubmitStatus("error");

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Card from "../../components/card/Card";
 import FormBusquedaPelicula from "../../components/Forms/FormBusquedaPelicula";
 import { Spinner } from "reactstrap";
@@ -9,6 +9,40 @@ import PaginationComponent from "../../components/PaginationComponent";
 import Pagination from "react-bootstrap/Pagination";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks";
+import { useMovies } from "../../hooks/useMovies";
+import debounce from 'just-debounce-it'
+
+function useSearch () {
+  const [search, updateSearch] = useState('')
+  const [error, setError] = useState(null)
+  const isFirstInput = useRef(true)
+
+  useEffect(() => {
+    if (isFirstInput.current) {
+      isFirstInput.current = search === ''
+      return
+    }
+
+    if (search === '') {
+      setError('No se puede buscar una película vacía')
+      return
+    }
+
+    if (search.match(/^\d+$/)) {
+      setError('No se puede buscar una película con un número')
+      return
+    }
+
+    if (search.length < 3) {
+      setError('La búsqueda debe tener al menos 3 caracteres')
+      return
+    }
+
+    setError(null)
+  }, [search])
+
+  return { search, updateSearch, error }
+}
 
 export function Home() {
   const [route, setRoute] = useState("");
@@ -18,6 +52,9 @@ export function Home() {
   const [peliculasRandom, setPeliculasRandom] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [itemPagination, setItemPagination] = useState([]);
+  const { search, updateSearch, error } = useSearch()
+  const { movies, loading, getMovies, errorMovieList } = useMovies( {search})
+
 
   function getPageRange(currentPage, totalPages) {
     let startPage = Math.max(currentPage - 2, 2);
@@ -52,19 +89,8 @@ export function Home() {
   );
   
   
-  // AGUARDANDO AL ENPOINT
 
-  // handleSearch = async (query) => {
-  //   try {
 
-  //     const response = await fetch `${Global.endpoints.backend.Prod}/api/movies?query=${query}`;
-  //     const data = await response.json();
-  //     setPeliculasRandom(data); 
-  //   } catch (error) {
-  //     console.error('Error al buscar películas:', error);
-  //   }
-  // };
-  
   useEffect(() => {
     if (role === "ROLE_ROOT" || role === "ROLE_ADMIN") {
       setRoute("/admin");
@@ -146,10 +172,35 @@ export function Home() {
     }
   }, [pageNumber, data, role]);
 
+  /*LOGICA PARA SUGERENCIA DE PELICULAS*/
+  
+  const debouncedGetMovies = useCallback(
+    debounce(search => {
+      console.log('search', search)
+      getMovies({ search })
+      
+    }, 300)
+    , [getMovies]
+  )
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    getMovies({ search })
+    setPeliculasRandom(movies.content)
+
+  }
+
+
+  const handleChange = (event) => {
+    const newSearch = event.target.value
+    updateSearch(newSearch)
+    debouncedGetMovies(newSearch)
+  }
+
 
   return (
     <section className="w-full flex items-center justify-center flex-col">
-      <FormBusquedaPelicula  />
+      <FormBusquedaPelicula onSubmit={handleSubmit} onChange={handleChange} movies={movies} search={search} error={errorMovieList}   />
       {/* <Categorias /> */}
 
       {isLoading ? (
