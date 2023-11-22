@@ -35,7 +35,6 @@ export function RegistrarPelicula() {
     fetchData();
     const token = localStorage.getItem("token");
     setToken(token);
-    console.log(token);
   }, []);
 
   const handleInputChange = (event) => {
