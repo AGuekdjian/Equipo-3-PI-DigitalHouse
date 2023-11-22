@@ -1,24 +1,21 @@
-import React from 'react'
-import Pagination from 'react-bootstrap/Pagination';
-import { useState, useEffect } from 'react';
+import React from "react";
+import Pagination from "react-bootstrap/Pagination";
+import { useState, useEffect } from "react";
 
-const PaginationComponent = ({ items}) => {
-
+const PaginationComponent = ({ items }) => {
   return (
-    <div>
+    <div className="mb-8">
       <Pagination>
-
         <Pagination.Prev />
 
-          {items.map((item) => {
-            return item
-          })}
+        {items.map((item, index) => {
+          return <div key={index}>{item}</div>;
+        })}
 
         <Pagination.Next />
-
       </Pagination>
     </div>
-  )
-}
+  );
+};
 
-export default PaginationComponent
+export default PaginationComponent;
