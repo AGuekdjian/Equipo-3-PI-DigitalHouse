@@ -11,7 +11,7 @@ const FormBusquedaPelicula = ({ onSubmit, onChange, search, movies, error }) => 
     console.log(movies);
     if (movies.content) {
       setMoviesTitle(movies.content.map((movie) => (
-        movie ? <li className="hover:bg-gray-700 cursor-pointer rounded-pill w-72" key={movie.id} onClick={() => onChange({ target: { value: movie.title } })} >{movie.title}</li> : null
+        movie ? <li className="hover:bg-gray-700 cursor-pointer w-72 text-left p-1" key={movie.id} onClick={() => onChange({ target: { value: movie.title } })} >{movie.title}</li> : null
       )))
     }
   }, [movies])
@@ -32,7 +32,7 @@ const FormBusquedaPelicula = ({ onSubmit, onChange, search, movies, error }) => 
             onChange={(e) => onChange(e)}
             value={search}
           />
-          <ul className="w-72">
+          <ul className="w-72 bg-black">
             {moviesTitle.length > 0 ? moviesTitle : null}
             {error ? <li>{error}</li> : null}
           </ul>
