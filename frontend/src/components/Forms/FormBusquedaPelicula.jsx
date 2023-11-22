@@ -1,43 +1,27 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./FormBusquedaPelicula.css";
-import { useState } from "react";
 
-const FormBusquedaPelicula = ({ onSearch }) => {
 
-  const [search, setSearch] = useState("");
-  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    onSearch(search)
+const FormBusquedaPelicula = ({ onSubmit, onChange, search, movies, error }) => {
 
-  }
-
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    const newSearch = e.target.value;
-
-    if (newSearch === "") {
-      setError("Por favor ingrese una pelicula")
-    }
-
-    if (newSearch.length < 3) {
-      setError("Por favor ingrese una pelicula mayor a 3 caracteres")
-    }
-
-    setError(null)
-  }
+  const [moviesTitle, setMoviesTitle] = useState([])
 
   useEffect(() => {
-
-  })
+    console.log(movies);
+    if (movies.content) {
+      setMoviesTitle(movies.content.map((movie) => (
+        movie ? <li className="hover:bg-gray-700 cursor-pointer rounded-pill w-72" key={movie.id} onClick={() => onChange({ target: { value: movie.title } })} >{movie.title}</li> : null
+      )))
+    }
+  }, [movies])
 
 
   return (
     <section className="flex text-center flex-col w-3/12 mt-8 search-styles-mobile">
       <h1 className="font-extrabold text-2xl">Buscar Pelicula</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}  className="flex flex-col items-center">
         <div className="mt-2 search-input-container">
           {/* <input type="text" placeholder='Seleccione su ubicación' /> */}
           <input
@@ -45,13 +29,17 @@ const FormBusquedaPelicula = ({ onSearch }) => {
             type="text"
             name="search"
             placeholder="Seleccione la pelicula"
-            onChange={handleChange}
+            onChange={(e) => onChange(e)}
             value={search}
           />
-          <button type="submit" className="btn py-2 px-4 bg-sky text-dark rounded-pill font-extrabold ml-2">
+          <ul className="w-72">
+            {moviesTitle.length > 0 ? moviesTitle : null}
+            {error ? <li>{error}</li> : null}
+          </ul>
+
+          <button type="submit" className="btn mt-3 py-2 px-4 bg-sky text-dark rounded-pill font-extrabold ml-2">
             Buscar
           </button>
-          {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
         </div>
       </form>
     </section>
