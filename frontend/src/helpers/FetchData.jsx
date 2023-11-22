@@ -20,21 +20,16 @@ export const FechData = async (
         },
         body: JSON.stringify(form),
       });
-
       const data = await res.json();
-
       setData !== undefined ? setData(data) : null;
-
       setLoading(false);
     }
-
     const res = await fetch(url, {
       method: method,
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-
     if (!url.includes(words[0])) {
       const data = await res.json();
       setData !== undefined ? setData(data) : null;

@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "../../../hooks/useForm";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { MsgError, MsgSuccess, Global } from "../../../helpers";
 import "react-toastify/dist/ReactToastify.css";
 import "./Register.css";
+import { TermsAndConditions } from "../../../components/termsAndConditions/TermsAndConditions";
 
 export function Register() {
   const { form, changed } = useForm({});
-  const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(false);
 
+  const navigate = useNavigate();
   const { endpoints, emailJS } = Global;
 
   const sendEmail = async (mailUrlApi, mailBody) => {
@@ -22,39 +24,49 @@ export function Register() {
     });
   };
 
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   const saveUser = async (e) => {
     e.preventDefault();
 
     let newUser = form;
 
     try {
-      const res = await fetch(`${endpoints.backend.Prod}/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
-
-      if (res.status === 200) {
-        MsgSuccess("Registrado correctamente");
-        let mailBody = {
-          service_id: emailJS.service_id,
-          template_id: emailJS.template_id,
-          user_id: emailJS.user_id,
-          template_params: {
-            user_name: newUser.name,
-            user_email: newUser.email,
+      if (isChecked) {
+        const res = await fetch(`${endpoints.backend.Prod}/auth/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        };
-        sendEmail(emailJS.mailUrlApi, mailBody);
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
+          body: JSON.stringify(newUser),
+        });
+
+        if (res.status === 200) {
+          MsgSuccess("Registrado correctamente");
+          let mailBody = {
+            service_id: emailJS.service_id,
+            template_id: emailJS.template_id,
+            user_id: emailJS.user_id,
+            template_params: {
+              user_name: newUser.name,
+              user_email: newUser.email,
+            },
+          };
+          sendEmail(emailJS.mailUrlApi, mailBody);
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        } else {
+          const data = await res.json();
+          MsgError(data.error_message);
+          return;
+        }
       } else {
-        const data = await res.json();
-        MsgError(data.error_message);
-        return;
+        MsgError(
+          "Debe aceptar los terminos y condiciones para poder registrarse."
+        );
       }
     } catch (error) {
       throw new Error(error);
@@ -64,13 +76,13 @@ export function Register() {
   return (
     <>
       <section className="flex flex-col items-center justify-center w-full">
-        <h1 className="font-extrabold text-2xl text-sky">CINESEARCHPRO</h1>
+        <h1 className="font-extrabold text-4xl text-sky">CINESEARCHPRO</h1>
         <ToastContainer />
         <form
           onSubmit={saveUser}
           className="form mt-4 w-[28rem] bg-slate-600 py-4 px-4 rounded-xl text-center"
         >
-          <h1 className="text-dark text-lg">Registrarse</h1>
+          <h1 className="text-dark text-xl font-bold">Registrarse</h1>
           <div className="flex flex-col items-start inputs-container">
             <div>
               <div className="flex group-by-name-surname">
@@ -112,8 +124,18 @@ export function Register() {
                 placeholder="Contrasenia"
               />
             </div>
+            <div className="ml-6">
+              <label className="flex">
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={handleCheckboxChange}
+                />
+                <TermsAndConditions />
+              </label>
+            </div>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center mt-2">
             <input
               type="submit"
               value="Registrarse"
