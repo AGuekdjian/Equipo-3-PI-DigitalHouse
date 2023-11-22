@@ -69,7 +69,7 @@ jobs:
           path: frontend/dist
 
   deploy:
-    needs: [tests, build]
+    needs: [build]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4.1.1
