@@ -1,3 +1,5 @@
+
+
 export const FechData = async (
   url,
   token,
@@ -37,6 +39,7 @@ export const FechData = async (
     }
     setLoading(false);
   } catch (e) {
-    throw new Error("Ah ocurrido un error:", e);
+
+    throw new Error("Ha ocurrido un error:", e);
   }
 };
