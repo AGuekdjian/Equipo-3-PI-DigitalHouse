@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./FormBusquedaPelicula.css";
+import DatePickerComponent from "../datePickerComponent/DatePickerComponent";
 
 const FormBusquedaPelicula = ({
   onSubmit,
@@ -9,6 +10,13 @@ const FormBusquedaPelicula = ({
   error,
 }) => {
   const [moviesTitle, setMoviesTitle] = useState([]);
+  const [showList, setShowList] = useState(false);
+
+  const handleBlur = (e) => {
+    if (!e.currentTarget.contains(document.activeElement)) {
+      setShowList(false);
+    }
+  };
 
   useEffect(() => {
     if (movies.content) {
@@ -18,7 +26,7 @@ const FormBusquedaPelicula = ({
             <li
               className="hover:bg-gray-700 cursor-pointer w-72 text-left p-1"
               key={movie.id}
-              onClick={() => onChange({ target: { value: movie.title } })}
+              onMouseDown={() => onChange({ target: { value: movie.title } })}
             >
               {movie.title}
             </li>
@@ -33,24 +41,33 @@ const FormBusquedaPelicula = ({
       <h1 className="font-extrabold text-2xl">Buscar Pelicula</h1>
 
       <form onSubmit={onSubmit} className="flex flex-col items-center">
-        <div className="mt-2 search-input-container">
-          {/* <input type="text" placeholder='Seleccione su ubicación' /> */}
-          <input
-            className="py-2 px-4 rounded-pill w-72 bg-grey-light"
-            type="text"
-            name="search"
-            placeholder="Seleccione la pelicula"
-            onChange={(e) => onChange(e)}
-            value={search}
-          />
-          <ul className="w-72 bg-black">
-            {moviesTitle.length > 0 ? moviesTitle : null}
-            {error ? <li>{error}</li> : null}
-          </ul>
+        <div className="mt-2 search-input-container flex flex-row items-center" onBlur={handleBlur}>
+          <div>
+            <input
+              className="py-2 px-4 rounded-pill w-72 bg-grey-light mr-2"
+              type="text"
+              name="search"
+              placeholder="Seleccione la pelicula"
+              onChange={(e) => {
+                onChange(e)
+                setShowList(true);  
+              }
+              }
+              value={search}
+              autoComplete="off"
+            />
+            {showList && (
+            <ul className="w-72 bg-black absolute z-10">
+              {moviesTitle.length > 0 ? moviesTitle : null}
+              {error ? <li>{error}</li> : null}
+            </ul>
+          )}
+          </div>
+          <DatePickerComponent />
 
           <button
             type="submit"
-            className="btn mt-3 py-2 px-4 bg-sky text-dark rounded-pill font-extrabold ml-2"
+            className="btn py-2 px-4 bg-sky text-dark rounded-pill font-extrabold"
           >
             Buscar
           </button>
