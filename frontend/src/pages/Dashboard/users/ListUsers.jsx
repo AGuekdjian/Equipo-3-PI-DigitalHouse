@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Global } from "../../../helpers/Global";
 import { FechData } from "../../../helpers/FetchData";
+import { MsgError } from "../../../helpers";
+import { MsgSuccess } from "../../../helpers";
 
 const ListUsers = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
+  const [usersUpdated, setUsersUpdated] = useState(false);
 
   useEffect(() => {
+
+
     FechData(
       `${Global.endpoints.backend.Prod}/auth/users`,
       token,
@@ -15,20 +20,21 @@ const ListUsers = () => {
       setData,
       setLoading
     );
-  }, []);
+  }, [usersUpdated]);
 
   const handlePromote = async (id) => {
     const confirmDelete = window.confirm(
       "¿Está seguro de que desea promover este usuario a admin?"
     );
     if (confirmDelete) {
-      FechData(
+      await FechData(
         `${Global.endpoints.backend.Prod}/auth/promoteToAdmin/${id}`,
         token,
         "POST",
         null,
         setLoading
       );
+      setUsersUpdated(prevState => !prevState);
     }
   };
 
@@ -56,6 +62,13 @@ const ListUsers = () => {
             {data && !loading ? (
               data.length > 0 &&
               data.map(({ id, name, last_name, roles }) => {
+                let button;
+                if (roles.includes('ROLE_USER')) {
+                  button = <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => handlePromote(id)}>Promover admin</button>;
+                } else if (roles.includes('ROLE_ADMIN')) {
+                  button = <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => handlePromote(id)}>Remover admin</button>;
+                }
+
                 return (
                   <tr
                     key={id}
@@ -68,9 +81,7 @@ const ListUsers = () => {
                     <td className="px-6 py-4">{last_name}</td>
                     <td className="px-6 py-4">{roles}</td>
                     <td>
-                      <button onClick={() => handlePromote(id)}>
-                        Promover admin
-                      </button>
+                      {button}
                     </td>
                   </tr>
                 );

@@ -57,14 +57,10 @@ export function Home() {
 
 
   function getPageRange(currentPage, totalPages) {
-    let startPage = Math.max(currentPage - 2, 2);
-    let endPage = Math.min(startPage + 4, totalPages - 1);
+    let startPage = Math.max(currentPage - 1, 1);
+    let endPage = Math.min(startPage + 2, totalPages);
   
-    if (endPage - startPage < 4) {
-      startPage = Math.max(endPage - 4, 2);
-    }
-  
-    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+    return [...Array(endPage + 1 - startPage).keys()].map(i => startPage + i);
   }
   const fetchMovies = async (page, url) => {
     setPageNumber(page);

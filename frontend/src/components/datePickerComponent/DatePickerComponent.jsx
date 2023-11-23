@@ -15,6 +15,8 @@ const DatePickerComponent = () => {
 
   return (
     <DatePicker
+      className="py-2 px-4 rounded-pill w-72 bg-grey-light mr-2"
+      placeholderText="Seleccione la fecha"
       selected={selectedDate}
       onChange={(date) => setSelectedDate(date)}
       minDate={new Date()} // Solo permite seleccionar fechas posteriores a la actual

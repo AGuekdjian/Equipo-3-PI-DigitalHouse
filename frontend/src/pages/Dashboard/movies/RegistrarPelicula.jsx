@@ -8,12 +8,6 @@ export function RegistrarPelicula() {
     genre: "",
     image_urls: [],
   });
-  const [formData2, setFormData2] = useState({
-    "title": "Five night as freddy's prueba 3 ",
-    "overview": "prueba de fnaf",
-      "genre":"Action",
-      "image_urls": ["https://www.lavanguardia.com/andro4all/hero/2023/10/five-nights-at-freddys.jpg?width=1200"]
-  });
   const [submitStatus, setSubmitStatus] = useState(null);
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
@@ -53,7 +47,7 @@ export function RegistrarPelicula() {
             "Content-Type": "application/json",
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify(formData2),
+          body: JSON.stringify(formData),
         }
       );
       if (!response.ok) {
@@ -190,20 +184,20 @@ export function RegistrarPelicula() {
           <div className="md:flex md:items-center">
             <div className="md:w-1/3"></div>
             <div className="md:w-2/3">
-              <button type="submit">Registrar pelicula</button>
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-full" type="submit">Registrar pelicula</button>
             </div>
           </div>
           {submitStatus === "success" && (
-            <p>Los datos se enviaron correctamente.</p>
+            <p className="text-green-500">Los datos se enviaron correctamente.</p>
           )}
           {submitStatus === "conflict" && (
-            <p>
+            <p className="text-red-500">
               Ya existe una pelicula con ese título, intenta nuevamente
               registrando otra película
             </p>
           )}
           {submitStatus === "error" && (
-            <p>
+            <p className="text-red-500">
               Ocurrió un error al enviar los datos. Por favor, inténtelo de
               nuevo más tarde.
             </p>
