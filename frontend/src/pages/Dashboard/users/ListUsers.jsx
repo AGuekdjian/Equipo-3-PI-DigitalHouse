@@ -36,7 +36,7 @@ const ListUsers = () => {
       );
       setUsersUpdated(prevState => !prevState);
     }
-  };
+  }
 
   return (
     <div>
