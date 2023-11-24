@@ -53,9 +53,9 @@ public class MovieService extends AbstractCrudService<Movie, Integer, MovieRepos
 
     public Page<Movie> findByTitle(String title, Pageable pageable) {
         String regexPattern = Arrays.stream(title.split("\\s+"))
-                .map(word -> "(?=.*\\b" + word + "\\b)")
+                .map(word -> "(?=.*" + word + ")") // Se eliminan los \b para permitir búsquedas parciales
                 .collect(Collectors.joining());
-        return repository.findByTitleWithRegexAndTitle(regexPattern,title, pageable);
+        return repository.findByTitleWithRegex(regexPattern, pageable);
     }
 
     public List<String> getAllMovieTitles() {
