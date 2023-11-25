@@ -86,4 +86,8 @@ jobs:
       #     name: dist
       #     path: frontend/dist
       - name: Deploy to AWS S3
+        run: ls
+      - name: Deploy to AWS S3
+        run: ls frontend/
+      - name: Deploy to AWS S3
         run: aws s3 sync ./frontend/dist/. s3://1023c12-grupo2-pi
