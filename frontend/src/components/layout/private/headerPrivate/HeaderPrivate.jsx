@@ -75,12 +75,26 @@ export const HeaderPrivate = () => {
         <nav className="flex justify-center items-center">
           <ul className="flex mx-8">
             {route == "user" ? (
-              <li className="ml-6">
-                <NavLink to={`/${route}/reserve`} className="flex items-center">
-                  <i className="fa-solid fa-list"></i>
-                  <span className="ml-2.5">Reservar</span>
-                </NavLink>
-              </li>
+              <>
+                <li className="ml-6">
+                  <NavLink
+                    to={`/${route}/favmovies`}
+                    className="flex items-center hover:text-sky transition-all"
+                  >
+                    <i class="fa-solid fa-bookmark"></i>
+                    <span className="ml-2.5">Mis Favoritos</span>
+                  </NavLink>
+                </li>
+                <li className="ml-6">
+                  <NavLink
+                    to={`/${route}/reserve`}
+                    className="flex items-center hover:text-sky transition-all"
+                  >
+                    <i className="fa-solid fa-list"></i>
+                    <span className="ml-2.5">Mis Reservas</span>
+                  </NavLink>
+                </li>
+              </>
             ) : null}
           </ul>
 

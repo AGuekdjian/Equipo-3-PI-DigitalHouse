@@ -16,6 +16,7 @@ import {
   ListUsers,
 } from "../pages";
 import { PrivateLayout, PublicLayout, UserLayout } from "../components/layout";
+import { Favorite } from "../pages/Favorite";
 const Routing = () => {
   return (
     <>
@@ -38,6 +39,7 @@ const Routing = () => {
           <Route path="logout" element={<Logout />} />
           <Route path="profile" element={<Profile />} />
           <Route path="reserve" element={<Reserve />} />
+          <Route path="favmovies" element={<Favorite />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
         </Route>
