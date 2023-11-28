@@ -21,29 +21,50 @@ import {
 
 export const HeaderPrivate = () => {
   const [route, setRoute] = useState("");
+  const [path, setPath] = useState("");
   const [collapsed, setCollapsed] = useState(true);
+  const [username, setUsername] = useState("");
 
   const toggleNavbar = () => setCollapsed(!collapsed);
-
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const { auth } = useAuth();
+  const { role } = auth;
+
+  function generateUsername(user) {
+    const firstLetter = user.name.charAt(0).toUpperCase();
+    const username = firstLetter + user.last_name;
+    setUsername(username);
+  }
 
   useEffect(() => {
-    if (auth.role == "ROLE_USER") {
+    if (role == "ROLE_USER") {
       setRoute("user");
+      generateUsername(auth);
     } else {
+      generateUsername(auth);
       setRoute("admin");
+      setPath(window.location.pathname);
     }
   }, []);
+
+  useEffect(() => {
+    if (role == "ROLE_USER") {
+      setRoute("user");
+      generateUsername(auth);
+    } else {
+      generateUsername(auth);
+      setRoute("admin");
+      setPath(window.location.pathname);
+    }
+  }, [window.location.pathname]);
 
   return (
     <>
       <header className="bg-sky-light w-full h-16 flex justify-around items-center header-desktop-private">
         <div className="flex items-center">
-          <Link to="/">
+          <Link to={role === "ROLE_USER" ? "/" : "/admin"}>
             <img src={Logo} alt="logo" className="h-14" />
           </Link>
           <h1 className="mx-4 text-xl font-extrabold">
@@ -53,13 +74,6 @@ export const HeaderPrivate = () => {
 
         <nav className="flex justify-center items-center">
           <ul className="flex mx-8">
-            <li className="menu-list__item">
-              <NavLink to="/" className="flex items-center">
-                <i className="fa-solid fa-house"></i>
-                <span className="ml-2.5">Inicio</span>
-              </NavLink>
-            </li>
-
             {route == "user" ? (
               <li className="ml-6">
                 <NavLink to={`/${route}/reserve`} className="flex items-center">
@@ -67,89 +81,109 @@ export const HeaderPrivate = () => {
                   <span className="ml-2.5">Reservar</span>
                 </NavLink>
               </li>
-            ) : (
-              <li className="ml-6">
-                <NavLink
-                  to={`/${route}/dashboard`}
-                  className="flex items-center"
-                >
-                  <i className="fa-solid fa-list"></i>
-                  <span className="ml-2.5">Dashboard</span>
-                </NavLink>
-              </li>
-            )}
+            ) : null}
           </ul>
 
           <div className="flex items-center">
             <Dropdown
               isOpen={dropdownOpen}
               toggle={toggle}
-              className="border-none"
+              className="border-none rounded-2xl bg-sky hover:rounded-2xl text-grey-light hover:text-white transition-all"
             >
-              <DropdownToggle caret className="border-none flex items-center">
-                <img src={avatar} className="w-12" alt="Imagen de perfil" />
+              <DropdownToggle
+                caret
+                className="border-none flex items-center rounded-2xl bg-sky text-grey-light hover:rounded-2xl hover:text-white transition-all"
+              >
+                <div className="flex items-center">
+                  <img src={avatar} className="w-10" alt="Imagen de perfil" />
+                  <h3 className="font-bold mx-2">{username}</h3>
+                </div>
               </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>
-                  {route == "user" ? (
+              {route == "user" ? (
+                <DropdownMenu>
+                  <DropdownItem>
                     <NavLink
                       to={`/${route}/profile`}
-                      className="flex items-center"
+                      className="flex items-center hover:text-sky transition-all"
                     >
                       <i className="fa-solid fa-user"></i>
                       <span className="ml-2.5">Perfil</span>
                     </NavLink>
-                  ) : (
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    <NavLink
+                      to={`/${route}/settings`}
+                      className="flex items-center hover:text-sky transition-all"
+                    >
+                      <i className="fa-solid fa-gear"></i>
+                      <span className="ml-2.5">Ajustes</span>
+                    </NavLink>
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    <NavLink
+                      to={`/${route}/logout`}
+                      className="flex items-center hover:text-sky transition-all"
+                    >
+                      <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                      <span className="ml-2.5">Cerrar Sesion</span>
+                    </NavLink>
+                  </DropdownItem>
+                </DropdownMenu>
+              ) : (
+                <DropdownMenu>
+                  <DropdownItem>
                     <NavLink
                       to={`/${route}/profile`}
-                      className="flex items-center"
+                      className="flex items-center hover:text-sky transition-all"
                     >
                       <i className="fa-solid fa-user"></i>
                       <span className="ml-2.5">Perfil</span>
                     </NavLink>
-                  )}
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  {route == "user" ? (
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    {path === "/admin/dashboard" || path === "/admin" ? (
+                      <NavLink
+                        to={`/${route}/userHome`}
+                        className="flex items-center hover:text-sky transition-all"
+                      >
+                        <i class="fa-solid fa-street-view"></i>
+                        <span className="ml-2.5">Vista desde Usuario</span>
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        to={`/${route}/dashboard`}
+                        className="flex items-center hover:text-sky transition-all"
+                      >
+                        <i class="fa-solid fa-list-check"></i>
+                        <span className="ml-2.5">Panel Admin</span>
+                      </NavLink>
+                    )}
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
                     <NavLink
                       to={`/${route}/settings`}
-                      className="flex items-center"
+                      className="flex items-center hover:text-sky transition-all"
                     >
                       <i className="fa-solid fa-gear"></i>
                       <span className="ml-2.5">Ajustes</span>
                     </NavLink>
-                  ) : (
-                    <NavLink
-                      to={`/${route}/settings`}
-                      className="flex items-center"
-                    >
-                      <i className="fa-solid fa-gear"></i>
-                      <span className="ml-2.5">Ajustes</span>
-                    </NavLink>
-                  )}
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  {route == "user" ? (
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
                     <NavLink
                       to={`/${route}/logout`}
-                      className="flex items-center"
+                      className="flex items-center hover:text-sky transition-all"
                     >
                       <i className="fa-solid fa-arrow-right-from-bracket"></i>
                       <span className="ml-2.5">Cerrar Sesion</span>
                     </NavLink>
-                  ) : (
-                    <NavLink
-                      to={`/${route}/logout`}
-                      className="flex items-center"
-                    >
-                      <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                      <span className="ml-2.5">Cerrar Sesion</span>
-                    </NavLink>
-                  )}
-                </DropdownItem>
-              </DropdownMenu>
+                  </DropdownItem>
+                </DropdownMenu>
+              )}
             </Dropdown>
           </div>
         </nav>
