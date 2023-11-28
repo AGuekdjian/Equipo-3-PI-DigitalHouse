@@ -15,7 +15,7 @@ const UserLayout = () => {
       <>
         <HeaderPrivate />
 
-        <main className="bg-dark min-h-screen text-txt-grey flex items-center">
+        <main className="bg-dark min-h-screen text-txt-grey flex">
           {role == "ROLE_USER" ? <Outlet /> : <Navigate to="/login" />}
           {/* {true && false ? <Outlet /> : <Navigate to="/login" />} */}
         </main>

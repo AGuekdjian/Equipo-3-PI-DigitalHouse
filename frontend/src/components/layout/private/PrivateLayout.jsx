@@ -15,7 +15,7 @@ const PrivateLayout = () => {
       <>
         <HeaderPrivate />
 
-        <main className="bg-dark min-h-screen text-txt-grey flex items-center">
+        <main className="bg-dark min-h-screen text-txt-grey flex ">
           {role == "ROLE_ROOT" || role == "ROLE_ADMIN" ? (
             <Outlet />
           ) : (

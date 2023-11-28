@@ -14,7 +14,7 @@ function Share() {
     <div>
       <ToastContainer />
       <Button onClick={toggle} className="border-none hover:bg-transparent">
-        <i className="fa-solid fa-share-nodes text-lg mx-1"></i>
+        <i className="fa-solid fa-share-nodes hover:text-sky transition-all text-lg mx-1"></i>
       </Button>
       <Modal
         isOpen={modal}

@@ -4,7 +4,6 @@ import {
   Home,
   Login,
   Register,
-  RegistrarPelicula,
   Reserve,
   Detail,
   AdminDashboard,
@@ -12,12 +11,8 @@ import {
   Logout,
   Gallery,
   ListaPeliculas,
-  EditarPelicula,
   Setting,
   Profile,
-  EditarUsuario,
-  EliminarUsuario,
-  AgregarUsuario,
   ListUsers,
 } from "../pages";
 import { PrivateLayout, PublicLayout, UserLayout } from "../components/layout";
@@ -48,17 +43,17 @@ const Routing = () => {
         </Route>
 
         <Route path="/admin" element={<PrivateLayout />}>
-          <Route index element={<Home />} />
-          <Route path="page/:pageNumber" element={<Home />} />
+          <Route index element={<AdminDashboard />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="dashboard/movies" element={<ListaPeliculas />} />
+          <Route path="dashboard/user" element={<ListUsers />} />
+          <Route path="userHome" element={<Home />} />
           <Route path="settings" element={<Setting />} />
           <Route path="logout" element={<Logout />} />
           <Route path="profile" element={<Profile />} />
           <Route path="reserve" element={<Reserve />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/images/:id" element={<Gallery />} />
-          <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="dashboard/movies" element={<ListaPeliculas />} />
-          <Route path="dashboard/user" element={<ListUsers />} />
         </Route>
 
         <Route path="*" element={<Error404 />} />
