@@ -13,6 +13,26 @@ export function Register() {
 
   const navigate = useNavigate();
   const { endpoints, emailJS } = Global;
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState(null);
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    const passwordRegex = /(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+    if (!passwordRegex.test(event.target.value)) {
+      setPasswordError("La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número");
+      setPasswordConfirm(false);
+    } else {
+      setPasswordError("");
+      setPasswordConfirm(true);
+    }
+  };
+
+  const handleInputPasswordChange = (event) => {
+    changed(event);
+    handlePasswordChange(event);
+  };
 
   const sendEmail = async (mailUrlApi, mailBody) => {
     await fetch(mailUrlApi, {
@@ -34,7 +54,7 @@ export function Register() {
     let newUser = form;
 
     try {
-      if (isChecked) {
+      if (isChecked && passwordConfirm) {
         const res = await fetch(`${endpoints.backend.Prod}/auth/register`, {
           method: "POST",
           headers: {
@@ -65,7 +85,7 @@ export function Register() {
         }
       } else {
         MsgError(
-          "Debe aceptar los terminos y condiciones para poder registrarse."
+          "Faltan datos."
         );
       }
     } catch (error) {
@@ -120,8 +140,9 @@ export function Register() {
                 className="input-pwd py-2 px-4 rounded-xl shadow-sm placeholder-slate-400 text-gray-700 focus:outline-none"
                 type="password"
                 name="password"
-                onChange={changed}
-                placeholder="Contrasenia"
+                onChange={handleInputPasswordChange}
+                value={password}
+                placeholder="Contraseña"
               />
             </div>
             <div className="ml-6">
@@ -147,6 +168,7 @@ export function Register() {
             >
               Iniciar Sesion
             </NavLink>
+            {passwordError && <p className="text-red-500">{passwordError}</p>}
           </div>
         </form>
       </section>

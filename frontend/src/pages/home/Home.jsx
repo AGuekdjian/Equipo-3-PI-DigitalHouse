@@ -154,7 +154,7 @@ export function Home() {
 
   return (
     <section className="flex justify-center items-center w-full">
-      {loading ? (
+      {isLoading ? (
         <Spinner color="primary" className="mt-8">
           Loading...
         </Spinner>
