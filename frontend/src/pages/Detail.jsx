@@ -12,6 +12,19 @@ export function Detail() {
   const { id } = useParams();
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(true);
+  const [route, setRoute] = useState("")
+
+
+  useEffect(() => {
+    if ((role && role === "ROLE_ROOT") || (role && role === "ROLE_ADMIN")) {
+      setRoute("/admin");
+    } else if (role === "ROLE_USER") {
+      setRoute("/user");
+    } else {
+      null;
+    }
+  }, [])
+
 
   useEffect(() => {
     GetMovieById(
@@ -83,22 +96,16 @@ export function Detail() {
                 </div>
                 {email ? (
                   <Link
-                    to={`${
-                      role === "ROLE_ROOT" || role === "ROLE_ADMIN"
-                        ? "/admin"
-                        : "/user"
-                    }/detail/images/${item.id}`}
+                    to={`${role === "ROLE_ROOT" || role === "ROLE_ADMIN"
+                      ? "/admin"
+                      : "/user"
+                      }/detail/images/${item.id}`}
                     className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
                   >
                     Más imagenes
                   </Link>
                 ) : (
-                  <Link
-                    to={`/detail/images/${item.id}`}
-                    className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
-                  >
-                    Más imagenes
-                  </Link>
+                  null
                 )}
               </div>
             </section>
@@ -117,9 +124,18 @@ export function Detail() {
               </div>
             </article>
             <section>
-              {role === "ROLE_ROOT" || role === "ROLE_ADMIN" ? (
-                <AvailableDates />
-              ) : null}
+              <AvailableDates />
+              {!email ? (
+                null
+              ) : (
+                <Link
+                  to={`${route}/detail/reserve/${item.id}`}
+                  className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
+                >
+                  Reservar
+                </Link>
+              )}
+
             </section>
           </section>
         </section>

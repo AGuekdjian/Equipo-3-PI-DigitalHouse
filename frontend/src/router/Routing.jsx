@@ -14,6 +14,7 @@ import {
   Setting,
   Profile,
   ListUsers,
+  NewReserve
 } from "../pages";
 import { PrivateLayout, PublicLayout, UserLayout } from "../components/layout";
 import { Favorite } from "../pages/Favorite";
@@ -41,6 +42,7 @@ const Routing = () => {
           <Route path="reserve" element={<Reserve />} />
           <Route path="favmovies" element={<Favorite />} />
           <Route path="detail/:id" element={<Detail />} />
+          <Route path="detail/reserve/:id" element={<NewReserve />} />
           <Route path="detail/images/:id" element={<Gallery />} />
         </Route>
 
@@ -55,6 +57,7 @@ const Routing = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="reserve" element={<Reserve />} />
           <Route path="detail/:id" element={<Detail />} />
+          <Route path="detail/reserve/:id" element={<NewReserve />} />
           <Route path="detail/images/:id" element={<Gallery />} />
         </Route>
 
