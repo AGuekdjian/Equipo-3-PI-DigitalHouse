@@ -1,0 +1,36 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Movie {
+  """Unique identifier"""
+  id: Float!
+
+  """Movie title"""
+  title: String!
+
+  """Movie overview"""
+  overview: String!
+}
+
+type Query {
+  movies: [Movie!]!
+  movie(id: Int!): Movie!
+}
+
+type Mutation {
+  createMovie(createMovieInput: CreateMovieInput!): Movie!
+  updateMovie(updateMovieInput: UpdateMovieInput!): Movie!
+  removeMovie(id: Int!): Movie!
+}
+
+input CreateMovieInput {
+  title: String!
+  overview: String!
+}
+
+input UpdateMovieInput {
+  title: String
+  overview: String
+  id: Int!
+}
