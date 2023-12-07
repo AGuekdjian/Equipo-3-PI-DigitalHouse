@@ -28,20 +28,20 @@ public class FavoriteController {
     private JwtService jwtService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ROOT') or hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ResponseEntity<List<Movie>> getUserFavorites(HttpServletRequest httpRequest) {
         List<Movie> favorites = favoriteService.getFavoritesByUser(jwtService.extractUserIdFromRequest(httpRequest));
         return new ResponseEntity<>(favorites, HttpStatus.OK);
     }
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ROOT') or hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ResponseEntity<Favorite> addFavorite(@RequestBody FavoriteDto request, HttpServletRequest httpRequest) throws BadRequestException {
         System.out.println(jwtService.extractUserIdFromRequest(httpRequest));
         Favorite favorite = favoriteService.addFavorite(jwtService.extractUserIdFromRequest(httpRequest), request.getMovieId());
         return new ResponseEntity<>(favorite, HttpStatus.CREATED);
     }
     @DeleteMapping
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ROOT') or hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ResponseEntity<Void> removeFavorite(@RequestBody FavoriteDto request, HttpServletRequest httpRequest) throws BadRequestException {
         favoriteService.removeFavorite(jwtService.extractUserIdFromRequest(httpRequest), request.getMovieId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
