@@ -10,6 +10,7 @@ import proyecto_final_equipo3.backend.constants.EndsPointInternal;
 import org.springframework.beans.factory.annotation.Autowired;
 import proyecto_final_equipo3.backend.dto.MovieCalendarDtoCreate;
 import proyecto_final_equipo3.backend.dto.MovieCalendarDtoUpdate;
+import proyecto_final_equipo3.backend.exceptions.particular.BadRequestException;
 import proyecto_final_equipo3.backend.exceptions.particular.DuplicateEntryException;
 import proyecto_final_equipo3.backend.exceptions.particular.ForeignKeyException;
 import proyecto_final_equipo3.backend.exceptions.particular.ItemNotFoundException;
@@ -29,6 +30,11 @@ public class MovieCalendarController  {
     @GetMapping()
     public ResponseEntity<Page<MovieCalendar>> findAll(Pageable pageable){
         return new ResponseEntity<Page<MovieCalendar>>(service.findAll(pageable),HttpStatus.OK);
+    }
+
+    @GetMapping("/findByMovie/{movie_id}")
+    public ResponseEntity<List<MovieCalendar>> findByMovieId(@PathVariable Integer movie_id) throws BadRequestException {
+        return new ResponseEntity<List<MovieCalendar>>(service.findByMovieId(movie_id),HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<MovieCalendar> findById(@PathVariable Integer id) throws ItemNotFoundException {

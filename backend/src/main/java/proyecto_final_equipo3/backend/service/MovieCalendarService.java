@@ -94,6 +94,8 @@ public class MovieCalendarService {
         }
     }
 
-
-
+    public List<MovieCalendar> findByMovieId(Integer movie_id) throws BadRequestException {
+        Movie movie = movieRepository.findById(movie_id).orElseThrow(() -> new BadRequestException("Movie not found"));
+        return repository.findByMovieId(movie_id);
+    }
 }
