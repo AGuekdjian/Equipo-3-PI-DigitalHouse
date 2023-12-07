@@ -25,6 +25,7 @@ const NewReserve = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [selectedCinema, setSelectedCinema] = useState(null);
+  const [selectedData, setSelectedData] = useState(null);
 
 
 
@@ -134,6 +135,8 @@ const NewReserve = () => {
     setSelectedDate(date);
   }
 
+
+
   return (
 
 
@@ -168,7 +171,14 @@ const NewReserve = () => {
 
 
       <form onSubmit={handleSubmit} className="text-left w-full px-20" action="">
-
+        <h2>Cines disponibles:</h2>
+        {selectedData?.map((data) => (
+          <div className='flex justify-between'>
+            <p>Cine: {data.cinema.replace("_", " ")}</p>
+            <p>Fecha: {data.date}</p>
+            <p>Hora: {data.time}</p>
+          </div>
+        ))}
         <div className='inputLabel'>
           <label className="block mb-2 text-2xl font-bold mb-1 mt-3" htmlFor="comentarios">Comentarios extra</label>
           <textarea name="comentarios" id="comentarios" cols="20" rows="5"></textarea>
@@ -177,7 +187,7 @@ const NewReserve = () => {
         <label htmlFor="number-input" className="block text-2xl font-bold mb-1 mb-2 mt-3 text-sm text-2xl font-bold mb-1">Seleccione número de entradas</label>
         <input type="number" id="number-input" aria-describedby="helper-text-explanation" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="3" required value={seatsNumber} onChange={handleSeatsChange} ></input>
         <AvailableDates className="text-2xl font-bold mt-3" onCinemaChange={handleCinemaChange} onDateIdChange={handleDateIdChange} onDateChange={handleDateChange} movieId={id} />
-        <h3 className='mt-3'>Cine: {selectedCinema} Cine Search pro</h3>
+        <h3 className='mt-3'>Cine: {selectedCinema?.replace("_", " ")} Cine Search pro</h3>
         <div className='w-100 flex justify-center mt-10 mb-10'>
           <button className='btn py-3 px-5 bg-sky text-dark rounded-pill font-extrabold text-sm' type='submit' >Confirmar reserva</button>
         </div>
