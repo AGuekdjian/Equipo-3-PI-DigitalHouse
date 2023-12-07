@@ -1,5 +1,6 @@
 package proyecto_final_equipo3.backend.controller;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,9 @@ public class MovieCalendarController  {
     @Autowired
     private MovieCalendarService service;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<MovieCalendar>> findAll() {
-        return new ResponseEntity<List<MovieCalendar>>(service.findAll(),HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<Page<MovieCalendar>> findAll(Pageable pageable){
+        return new ResponseEntity<Page<MovieCalendar>>(service.findAll(pageable),HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<MovieCalendar> findById(@PathVariable Integer id) throws ItemNotFoundException {

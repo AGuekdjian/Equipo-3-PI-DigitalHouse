@@ -64,8 +64,8 @@ public class MovieCalendarService {
         return movieCalendar.orElseThrow(() -> new ItemNotFoundException("Entity not found with id: " + id));
     }
 
-    public List<MovieCalendar> findAll() {
-        return repository.findAll();
+    public Page<MovieCalendar> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
     public MovieCalendar delete(Integer id) throws ItemNotFoundException {
         Optional<MovieCalendar> movieCalendar = repository.findById(id);
