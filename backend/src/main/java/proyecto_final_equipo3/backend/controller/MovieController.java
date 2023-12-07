@@ -30,6 +30,16 @@ public class MovieController extends AbstractCrudController<Movie, MovieService>
         return service.findGroupedByGenreWithImage();
     }
 
+    @GetMapping(EndsPointInternal.GENRE)
+    public List<Genre> listOfGenres() {
+        List<String> genresList = new ArrayList<>();
+        for (Genre genre : Genre.values()) {
+            genresList.add(genre.toString());
+        }
+        return genresList;        
+    }
+
+
     @GetMapping("/filterByGenre")
     public ResponseEntity<?> getMoviesByGenre(@RequestParam("genre") Genre genre, Pageable pageable) {
         return new ResponseEntity<>(service.findByGenre(genre, pageable), HttpStatus.OK);
