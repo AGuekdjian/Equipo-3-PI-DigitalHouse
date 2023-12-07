@@ -6,11 +6,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.FieldError;
 import proyecto_final_equipo3.backend.dto.UserInfoDTO;
+import proyecto_final_equipo3.backend.exceptions.ErrorList;
 import proyecto_final_equipo3.backend.exceptions.particular.ItemNotFoundException;
 import proyecto_final_equipo3.backend.exceptions.particular.RegisterErrorException;
 import proyecto_final_equipo3.backend.model.UserInfo;
 import proyecto_final_equipo3.backend.persistence.UserInfoRepository;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +52,10 @@ public class UserInfoService implements UserDetailsService {
         userInfo.setPassword(encoder.encode(userInfo.getPassword()));
         repository.save(userInfo);
 
-        return "User Added Successfully";
+        Map<String, String> response = new LinkedHashMap<>();
+        response.put("message", "User registered successfully!");
+
+        return response.toString();
     }
     public String switchUserRole(Integer id) {
         Optional<UserInfo> userDetail = repository.findById(id);
@@ -61,7 +69,9 @@ public class UserInfoService implements UserDetailsService {
                 userInfo.setRoles("ROLE_USER");
             }
             repository.save(userInfo);
-            return "User role switched successfully";
+            Map<String, String> response = new LinkedHashMap<>();
+            response.put("message", "User role switched "+userInfo.getRoles()+" successfully");
+            return response.toString();
         } else {
             throw new UsernameNotFoundException("User not found " + id);
         }
