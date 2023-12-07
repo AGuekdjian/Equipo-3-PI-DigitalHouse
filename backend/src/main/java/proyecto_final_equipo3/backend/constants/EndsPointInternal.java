@@ -12,6 +12,7 @@ public class EndsPointInternal {
     public final static String AUTH = "auth";
     public final static String FAVORITE = "api/favorites";
     public final static String MOVIE_CALENDAR = "api/calendar";
+    public final static String RESERVE = "api/reserve";
 
 
 }
