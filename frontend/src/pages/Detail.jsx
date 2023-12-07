@@ -17,6 +17,8 @@ export function Detail() {
   const { favorites, getAllFavorites, errorFavorites, addResponse, addFavorite } = useFavorites();
   const [isFavorite, setIsFavorite] = useState(false);
 
+
+
   useEffect(() => {
     if ((role && role === "ROLE_ROOT") || (role && role === "ROLE_ADMIN")) {
       setRoute("/admin");
@@ -30,21 +32,23 @@ export function Detail() {
 
   useEffect(() => {
     getAllFavorites();
-
     GetMovieById(
       `${Global.endpoints.backend.Prod}/api/movies/${id}`,
       setLoading,
       setItem
     );
 
-    const isMovieFavorite = favorites.some(favorite => favorite.id === parseInt(id));
-    setIsFavorite(isMovieFavorite);
-
+  }, []);
+  useEffect(() => {
+    if (favorites && favorites.length > 0) {
+      const isFavorite = favorites.some(favorite => favorite.id === parseInt(id));
+      setIsFavorite(isFavorite);
+    }
   }, [favorites]);
 
   const handleFavorite = () => {
     addFavorite(id);
-    getAllFavorites();
+    setIsFavorite(prevIsFavorite => !prevIsFavorite);
   }
 
   return (
@@ -91,19 +95,19 @@ export function Detail() {
                 <div>
                   <ul className="flex">
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                   </ul>
                 </div>
@@ -137,7 +141,6 @@ export function Detail() {
               </div>
             </article>
             <section>
-              <AvailableDates />
               {!email ? (
                 null
               ) : (

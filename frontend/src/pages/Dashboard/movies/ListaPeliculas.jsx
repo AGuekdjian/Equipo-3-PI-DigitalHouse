@@ -93,7 +93,7 @@ export function ListaPeliculas() {
         `${Global.endpoints.backend.Prod}/api/movies/genrelist`,
         {
           headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': token
           }
         }
       );

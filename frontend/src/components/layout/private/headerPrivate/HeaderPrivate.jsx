@@ -81,7 +81,7 @@ export const HeaderPrivate = () => {
                     to={`/${route}/favmovies`}
                     className="flex items-center hover:text-sky transition-all"
                   >
-                    <i class="fa-solid fa-bookmark"></i>
+                    <i className="fa-solid fa-bookmark"></i>
                     <span className="ml-2.5">Mis Favoritos</span>
                   </NavLink>
                 </li>
@@ -173,7 +173,7 @@ export const HeaderPrivate = () => {
                         to={`/${route}/userHome`}
                         className="flex items-center hover:text-sky transition-all"
                       >
-                        <i class="fa-solid fa-street-view"></i>
+                        <i className="fa-solid fa-street-view"></i>
                         <span className="ml-2.5">Vista desde Usuario</span>
                       </NavLink>
                     ) : (
@@ -181,7 +181,7 @@ export const HeaderPrivate = () => {
                         to={`/${route}/dashboard`}
                         className="flex items-center hover:text-sky transition-all"
                       >
-                        <i class="fa-solid fa-list-check"></i>
+                        <i className="fa-solid fa-list-check"></i>
                         <span className="ml-2.5">Panel Admin</span>
                       </NavLink>
                     )}
