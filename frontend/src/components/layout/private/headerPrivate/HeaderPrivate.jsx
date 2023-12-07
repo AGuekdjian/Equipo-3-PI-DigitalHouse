@@ -117,16 +117,6 @@ export const HeaderPrivate = () => {
                 <DropdownMenu>
                   <DropdownItem>
                     <NavLink
-                      to={`/${route}/profile`}
-                      className="flex items-center hover:text-sky transition-all"
-                    >
-                      <i className="fa-solid fa-user"></i>
-                      <span className="ml-2.5">Perfil</span>
-                    </NavLink>
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    <NavLink
                       to={`/${route}/settings`}
                       className="flex items-center hover:text-sky transition-all"
                     >
@@ -157,16 +147,6 @@ export const HeaderPrivate = () => {
                 </DropdownMenu>
               ) : (
                 <DropdownMenu>
-                  <DropdownItem>
-                    <NavLink
-                      to={`/${route}/profile`}
-                      className="flex items-center hover:text-sky transition-all"
-                    >
-                      <i className="fa-solid fa-user"></i>
-                      <span className="ml-2.5">Perfil</span>
-                    </NavLink>
-                  </DropdownItem>
-                  <DropdownItem divider />
                   <DropdownItem>
                     {path === "/admin/dashboard" || path === "/admin" ? (
                       <NavLink

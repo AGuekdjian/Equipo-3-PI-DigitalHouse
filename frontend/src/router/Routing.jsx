@@ -40,8 +40,8 @@ const Routing = () => {
           <Route path="settings" element={<Setting />} />
           <Route path="logout" element={<Logout />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="reservaConfirmada" element={<Reserve />} />
-          <Route path="reserve" element={<ReservaConfirmada />} />
+          <Route path="reservaConfirmada" element={<ReservaConfirmada />} />
+          <Route path="reserve" element={<Reserve />} />
           <Route path="favmovies" element={<Favorite />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/reserve/:id" element={<NewReserve />} />
