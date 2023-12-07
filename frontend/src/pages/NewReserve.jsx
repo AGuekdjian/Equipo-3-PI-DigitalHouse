@@ -187,6 +187,6 @@ const NewReserve = () => {
 
     </div>
   )
-}
+} 
 
 export default NewReserve
