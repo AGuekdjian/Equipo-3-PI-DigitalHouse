@@ -137,6 +137,16 @@ export const HeaderPrivate = () => {
                   <DropdownItem divider />
                   <DropdownItem>
                     <NavLink
+                      to={`/${route}/favmovies`}
+                      className="flex items-center hover:text-sky transition-all"
+                    >
+                      <i className="fa-solid fa-heart"></i>
+                      <span className="ml-2.5">Favoritos</span>
+                    </NavLink>
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    <NavLink
                       to={`/${route}/logout`}
                       className="flex items-center hover:text-sky transition-all"
                     >
@@ -184,6 +194,16 @@ export const HeaderPrivate = () => {
                     >
                       <i className="fa-solid fa-gear"></i>
                       <span className="ml-2.5">Ajustes</span>
+                    </NavLink>
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    <NavLink
+                      to={`/${route}/favmovies`}
+                      className="flex items-center hover:text-sky transition-all"
+                    >
+                      <i className="fa-solid fa-heart"></i>
+                      <span className="ml-2.5">Favoritos</span>
                     </NavLink>
                   </DropdownItem>
                   <DropdownItem divider />

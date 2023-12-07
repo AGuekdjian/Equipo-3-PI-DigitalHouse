@@ -5,6 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 import { Spinner } from "reactstrap";
 import Share from "../components/shareComponent/Share";
 import { AvailableDates } from "../components/availableDates/AvailableDates";
+import { useFavorites } from "../hooks/useFavorites";
 
 export function Detail() {
   const { auth } = useAuth();
@@ -13,7 +14,8 @@ export function Detail() {
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(true);
   const [route, setRoute] = useState("")
-
+  const { favorites, getAllFavorites, errorFavorites, addResponse, addFavorite } = useFavorites();
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     if ((role && role === "ROLE_ROOT") || (role && role === "ROLE_ADMIN")) {
@@ -27,12 +29,23 @@ export function Detail() {
 
 
   useEffect(() => {
+    getAllFavorites();
+
     GetMovieById(
       `${Global.endpoints.backend.Prod}/api/movies/${id}`,
       setLoading,
       setItem
     );
-  }, []);
+
+    const isMovieFavorite = favorites.some(favorite => favorite.id === parseInt(id));
+    setIsFavorite(isMovieFavorite);
+
+  }, [favorites]);
+
+  const handleFavorite = () => {
+    addFavorite(id);
+    getAllFavorites();
+  }
 
   return (
     <section className="flex justify-center items-center w-full">
@@ -63,7 +76,7 @@ export function Detail() {
             <section className="p-2 ml-5 rounded-xl w-[700px]">
               <div className="mb-2 mt-4 flex items-center">
                 <Share />
-                <i className="fa-solid fa-heart text-lg text-grey-light mx-1.5 hover:text-red-600 cursor-pointer transition-all"></i>
+                <i onClick={() => handleFavorite()} className={`fa-solid fa-heart text-lg ${isFavorite ? 'text-red-600' : 'text-grey-light'} mx-1.5 hover:text-red-600 cursor-pointer transition-all`}></i>
               </div>
               <div className="mb-6">
                 <h3 className="my-1">2016 | Clasificacion por edad: 13+</h3>

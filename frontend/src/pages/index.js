@@ -17,3 +17,4 @@ export * from './user/Setting';
 export * from './user/login/Login';
 export { default as Profile } from './user/profile/Profile';
 export * from './user/register/Register';
+export { default as Favorite} from './Favorite'

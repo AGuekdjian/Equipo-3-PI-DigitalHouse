@@ -14,7 +14,7 @@ import {
   Setting,
   Profile,
   ListUsers,
-  NewReserve
+  NewReserve,
 } from "../pages";
 import { PrivateLayout, PublicLayout, UserLayout } from "../components/layout";
 import { Favorite } from "../pages/Favorite";
@@ -55,6 +55,7 @@ const Routing = () => {
           <Route path="settings" element={<Setting />} />
           <Route path="logout" element={<Logout />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="favmovies" element={<Favorite />} />
           <Route path="reserve" element={<Reserve />} />
           <Route path="detail/:id" element={<Detail />} />
           <Route path="detail/reserve/:id" element={<NewReserve />} />
