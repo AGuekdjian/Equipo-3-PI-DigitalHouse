@@ -16,7 +16,7 @@ export function ListaPeliculas() {
     genre: "",
     image_urls: [],
   });
-  const [token, setToken] = useState();
+  const token = localStorage.getItem("token");
 
   const handleImageUrlChange = (event, index) => {
     const { value } = event.target;
@@ -72,8 +72,6 @@ export function ListaPeliculas() {
     setLoading(true);
     fetchData();
     fetchGenres();
-    const token = localStorage.getItem("token");
-    setToken(token);
   }, [currentPage]);
 
   async function fetchData() {
@@ -92,7 +90,12 @@ export function ListaPeliculas() {
   async function fetchGenres() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.Prod}/api/genre`
+        `${Global.endpoints.backend.Prod}/api/movies/genrelist`,
+        {
+          headers: {
+            'Authorization': token
+          }
+        }
       );
       const jsonData = await response.json();
       setGenres(jsonData);

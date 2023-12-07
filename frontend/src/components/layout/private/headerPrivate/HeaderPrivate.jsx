@@ -81,7 +81,7 @@ export const HeaderPrivate = () => {
                     to={`/${route}/favmovies`}
                     className="flex items-center hover:text-sky transition-all"
                   >
-                    <i class="fa-solid fa-bookmark"></i>
+                    <i className="fa-solid fa-bookmark"></i>
                     <span className="ml-2.5">Mis Favoritos</span>
                   </NavLink>
                 </li>
@@ -117,21 +117,21 @@ export const HeaderPrivate = () => {
                 <DropdownMenu>
                   <DropdownItem>
                     <NavLink
-                      to={`/${route}/profile`}
-                      className="flex items-center hover:text-sky transition-all"
-                    >
-                      <i className="fa-solid fa-user"></i>
-                      <span className="ml-2.5">Perfil</span>
-                    </NavLink>
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    <NavLink
                       to={`/${route}/settings`}
                       className="flex items-center hover:text-sky transition-all"
                     >
                       <i className="fa-solid fa-gear"></i>
                       <span className="ml-2.5">Ajustes</span>
+                    </NavLink>
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    <NavLink
+                      to={`/${route}/favmovies`}
+                      className="flex items-center hover:text-sky transition-all"
+                    >
+                      <i className="fa-solid fa-heart"></i>
+                      <span className="ml-2.5">Favoritos</span>
                     </NavLink>
                   </DropdownItem>
                   <DropdownItem divider />
@@ -148,22 +148,12 @@ export const HeaderPrivate = () => {
               ) : (
                 <DropdownMenu>
                   <DropdownItem>
-                    <NavLink
-                      to={`/${route}/profile`}
-                      className="flex items-center hover:text-sky transition-all"
-                    >
-                      <i className="fa-solid fa-user"></i>
-                      <span className="ml-2.5">Perfil</span>
-                    </NavLink>
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
                     {path === "/admin/dashboard" || path === "/admin" ? (
                       <NavLink
                         to={`/${route}/userHome`}
                         className="flex items-center hover:text-sky transition-all"
                       >
-                        <i class="fa-solid fa-street-view"></i>
+                        <i className="fa-solid fa-street-view"></i>
                         <span className="ml-2.5">Vista desde Usuario</span>
                       </NavLink>
                     ) : (
@@ -171,7 +161,7 @@ export const HeaderPrivate = () => {
                         to={`/${route}/dashboard`}
                         className="flex items-center hover:text-sky transition-all"
                       >
-                        <i class="fa-solid fa-list-check"></i>
+                        <i className="fa-solid fa-list-check"></i>
                         <span className="ml-2.5">Panel Admin</span>
                       </NavLink>
                     )}
@@ -184,6 +174,16 @@ export const HeaderPrivate = () => {
                     >
                       <i className="fa-solid fa-gear"></i>
                       <span className="ml-2.5">Ajustes</span>
+                    </NavLink>
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    <NavLink
+                      to={`/${route}/favmovies`}
+                      className="flex items-center hover:text-sky transition-all"
+                    >
+                      <i className="fa-solid fa-heart"></i>
+                      <span className="ml-2.5">Favoritos</span>
                     </NavLink>
                   </DropdownItem>
                   <DropdownItem divider />

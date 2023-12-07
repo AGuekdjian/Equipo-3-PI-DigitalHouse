@@ -40,7 +40,7 @@ function Share() {
                     target="_blank"
                     href="https://wa.me"
                   >
-                    <i class="fa-brands fa-whatsapp text-4xl mx-1 text-white font-extrabold"></i>
+                    <i className="fa-brands fa-whatsapp text-4xl mx-1 text-white font-extrabold"></i>
                   </a>
                 </li>
                 <li className="mx-3 rounded-pill w-[3.6rem] h-[3.6rem] bg-twitter flex justify-center items-center">
@@ -49,7 +49,7 @@ function Share() {
                     target="_blank"
                     href="https://twitter.com"
                   >
-                    <i class="fa-brands fa-twitter text-3xl mx-1 text-white font-extrabold"></i>
+                    <i className="fa-brands fa-twitter text-3xl mx-1 text-white font-extrabold"></i>
                   </a>
                 </li>
                 <li className="mx-3 rounded-pill w-[3.6rem] h-[3.6rem] bg-facebook flex justify-center items-center">
@@ -58,7 +58,7 @@ function Share() {
                     target="_blank"
                     href="https://www.facebook.com"
                   >
-                    <i class="fa-brands fa-facebook-f text-3xl mx-1 text-white font-extrabold"></i>
+                    <i className="fa-brands fa-facebook-f text-3xl mx-1 text-white font-extrabold"></i>
                   </a>
                 </li>
               </ul>

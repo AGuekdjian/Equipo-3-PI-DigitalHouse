@@ -5,6 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 import { Spinner } from "reactstrap";
 import Share from "../components/shareComponent/Share";
 import { AvailableDates } from "../components/availableDates/AvailableDates";
+import { useFavorites } from "../hooks/useFavorites";
 
 export function Detail() {
   const { auth } = useAuth();
@@ -12,14 +13,43 @@ export function Detail() {
   const { id } = useParams();
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(true);
+  const [route, setRoute] = useState("")
+  const { favorites, getAllFavorites, errorFavorites, addResponse, addFavorite } = useFavorites();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+
 
   useEffect(() => {
+    if ((role && role === "ROLE_ROOT") || (role && role === "ROLE_ADMIN")) {
+      setRoute("/admin");
+    } else if (role === "ROLE_USER") {
+      setRoute("/user");
+    } else {
+      null;
+    }
+  }, [])
+
+
+  useEffect(() => {
+    getAllFavorites();
     GetMovieById(
       `${Global.endpoints.backend.Prod}/api/movies/${id}`,
       setLoading,
       setItem
     );
+
   }, []);
+  useEffect(() => {
+    if (favorites && favorites.length > 0) {
+      const isFavorite = favorites.some(favorite => favorite.id === parseInt(id));
+      setIsFavorite(isFavorite);
+    }
+  }, [favorites]);
+
+  const handleFavorite = () => {
+    addFavorite(id);
+    setIsFavorite(prevIsFavorite => !prevIsFavorite);
+  }
 
   return (
     <section className="flex justify-center items-center w-full">
@@ -50,7 +80,7 @@ export function Detail() {
             <section className="p-2 ml-5 rounded-xl w-[700px]">
               <div className="mb-2 mt-4 flex items-center">
                 <Share />
-                <i className="fa-solid fa-heart text-lg text-grey-light mx-1.5 hover:text-red-600 cursor-pointer transition-all"></i>
+                <i onClick={() => handleFavorite()} className={`fa-solid fa-heart text-lg ${isFavorite ? 'text-red-600' : 'text-grey-light'} mx-1.5 hover:text-red-600 cursor-pointer transition-all`}></i>
               </div>
               <div className="mb-6">
                 <h3 className="my-1">2016 | Clasificacion por edad: 13+</h3>
@@ -65,61 +95,51 @@ export function Detail() {
                 <div>
                   <ul className="flex">
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                     <li className="mx-1 text-xl cursor-pointer hover:text-yellow-500 transition-all">
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </li>
                   </ul>
                 </div>
                 {email ? (
                   <Link
-                    to={`${
-                      role === "ROLE_ROOT" || role === "ROLE_ADMIN"
-                        ? "/admin"
-                        : "/user"
-                    }/detail/images/${item.id}`}
+                    to={`${role === "ROLE_ROOT" || role === "ROLE_ADMIN"
+                      ? "/admin"
+                      : "/user"
+                      }/detail/images/${item.id}`}
                     className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
                   >
                     Más imagenes
                   </Link>
                 ) : (
-                  <Link
-                    to={`/detail/images/${item.id}`}
-                    className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
-                  >
-                    Más imagenes
-                  </Link>
+                  null
                 )}
               </div>
             </section>
           </section>
           <section className="flex justify-around w-full mt-4">
-            <article>
-              <h2 className="text-xl text-grey-light font-extrabold">
-                Caracteristicas
-              </h2>
-              <div>
-                <ul>
-                  <li>Caracteristica 1</li>
-                  <li>Caracteristica 2</li>
-                  <li>Caracteristica 3</li>
-                </ul>
-              </div>
-            </article>
             <section>
-              {role === "ROLE_ROOT" || role === "ROLE_ADMIN" ? (
-                <AvailableDates />
-              ) : null}
+              {!email ? (
+                null
+              ) : (
+                <Link
+                  to={`${route}/detail/reserve/${item.id}`}
+                  className="btn py-1 px-2 bg-sky text-dark rounded-pill font-extrabold text-sm"
+                >
+                  Reservar
+                </Link>
+              )}
+
             </section>
           </section>
         </section>

@@ -10,9 +10,12 @@ export * from './Detail';
 export * from './Error404/Error404';
 export * from './Gallery';
 export * from './Reserve';
+export { default as NewReserve } from './NewReserve';
 export * from './home/Home';
 export * from './user/Logout';
 export * from './user/Setting';
 export * from './user/login/Login';
 export { default as Profile } from './user/profile/Profile';
 export * from './user/register/Register';
+export { default as Favorite} from './Favorite'
+export {default as ReservaConfirmada}  from './ReservaConfirmada'

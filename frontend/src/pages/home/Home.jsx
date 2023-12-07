@@ -73,16 +73,6 @@ export function Home() {
     if (data) {
       const pageRange = getPageRange(pageNumber + 1, data.totalPages);
 
-      items.push(
-        <Pagination.Item
-          key={1}
-          onClick={() => {
-            fetchMovies(0, null);
-          }}
-        >
-          {1}
-        </Pagination.Item>
-      );
 
       if (pageRange[0] > 2) {
         items.push(<Pagination.Ellipsis />);
@@ -154,7 +144,7 @@ export function Home() {
 
   return (
     <section className="flex justify-center items-center w-full">
-      {loading ? (
+      {isLoading ? (
         <Spinner color="primary" className="mt-8">
           Loading...
         </Spinner>

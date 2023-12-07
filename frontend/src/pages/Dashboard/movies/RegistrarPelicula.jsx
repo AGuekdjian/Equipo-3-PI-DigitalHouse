@@ -16,7 +16,7 @@ export function RegistrarPelicula() {
   async function fetchData() {
     try {
       const response = await fetch(
-        `${Global.endpoints.backend.Prod}/api/genre`
+        `${Global.endpoints.backend.Prod}/api/movies/genrelist`
       );
       const jsonData = await response.json();
       setData(jsonData);
