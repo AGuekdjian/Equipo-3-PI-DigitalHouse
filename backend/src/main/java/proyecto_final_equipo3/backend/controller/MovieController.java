@@ -14,6 +14,7 @@ import proyecto_final_equipo3.backend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,7 +32,7 @@ public class MovieController extends AbstractCrudController<Movie, MovieService>
     }
 
     @GetMapping(EndsPointInternal.GENRE)
-    public List<Genre> listOfGenres() {
+    public List<String> listOfGenres() {
         List<String> genresList = new ArrayList<>();
         for (Genre genre : Genre.values()) {
             genresList.add(genre.toString());
