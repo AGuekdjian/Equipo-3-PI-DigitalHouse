@@ -1,4 +1,5 @@
 package proyecto_final_equipo3.backend.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -41,10 +42,12 @@ public class Movie {
     @Column(name = "image_urls")
     private List<String> image_urls = new ArrayList<>();
 
+    @JsonIgnore
     @CreatedDate
     @Column(name = "created_date", nullable = false, updatable = false)
     private LocalDateTime created_date;
 
+    @JsonIgnore
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private LocalDateTime last_modified_date;
