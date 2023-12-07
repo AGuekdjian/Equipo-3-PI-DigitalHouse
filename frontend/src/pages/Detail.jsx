@@ -128,18 +128,6 @@ export function Detail() {
             </section>
           </section>
           <section className="flex justify-around w-full mt-4">
-            <article>
-              <h2 className="text-xl text-grey-light font-extrabold">
-                Caracteristicas
-              </h2>
-              <div>
-                <ul>
-                  <li>Caracteristica 1</li>
-                  <li>Caracteristica 2</li>
-                  <li>Caracteristica 3</li>
-                </ul>
-              </div>
-            </article>
             <section>
               {!email ? (
                 null
