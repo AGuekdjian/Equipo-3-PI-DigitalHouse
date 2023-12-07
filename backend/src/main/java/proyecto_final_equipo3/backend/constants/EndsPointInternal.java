@@ -6,11 +6,13 @@ import lombok.Getter;
 public class EndsPointInternal {
 
     public final static String MOVIE = "api/movies";
-    public final static String GENRES = "genres";
-    public final static String GENRE = "api/genre";
+    public final static String GENRES = "genresWithImage";
+    public final static String GENRE = "genrelist";
     public final static String FEATURE = "api/features";
     public final static String AUTH = "auth";
     public final static String FAVORITE = "api/favorites";
+    public final static String MOVIE_CALENDAR = "api/calendar";
+    public final static String RESERVE = "api/reserve";
 
 
 }
