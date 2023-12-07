@@ -29,20 +29,13 @@ public class FavoriteService {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new BadRequestException("Movie not found"));
         Optional<Favorite> favoriteExist = favoriteRepository.findByUserIdAndMovieId(userId, movieId);
         if (favoriteExist.isPresent()) {
-            throw new BadRequestException("Favorite already exists");
+            favoriteRepository.deleteByUserIdAndMovieId(userId, movieId);
+            return favoriteExist.get();
         }
         Favorite favorite = new Favorite();
         favorite.setUser(user);
         favorite.setMovie(movie);
         return favoriteRepository.save(favorite);
-    }
-
-    public void removeFavorite(Integer userId, Integer movieId) throws BadRequestException {
-        Optional<Favorite> favoriteExist = favoriteRepository.findByUserIdAndMovieId(userId, movieId);
-        if (favoriteExist.isEmpty()) {
-            throw new BadRequestException("Favorite not found");
-        }
-        favoriteRepository.deleteByUserIdAndMovieId(userId, movieId);
     }
 
     public List<Movie> getFavoritesByUser(Integer userId) {

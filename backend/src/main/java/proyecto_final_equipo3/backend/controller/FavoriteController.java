@@ -40,11 +40,4 @@ public class FavoriteController {
         Favorite favorite = favoriteService.addFavorite(jwtService.extractUserIdFromRequest(httpRequest), request.getMovieId());
         return new ResponseEntity<>(favorite, HttpStatus.CREATED);
     }
-    @DeleteMapping
-    @PreAuthorize("hasAuthority('ROLE_ROOT') or hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
-    public ResponseEntity<Void> removeFavorite(@RequestBody FavoriteDto request, HttpServletRequest httpRequest) throws BadRequestException {
-        favoriteService.removeFavorite(jwtService.extractUserIdFromRequest(httpRequest), request.getMovieId());
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
 }
