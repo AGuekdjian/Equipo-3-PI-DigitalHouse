@@ -1,7 +1,6 @@
 package proyecto_final_equipo3.backend.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,6 @@ public class FavoriteController {
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_ROOT') or hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public ResponseEntity<Favorite> addFavorite(@RequestBody FavoriteDto request, HttpServletRequest httpRequest) throws BadRequestException {
-        System.out.println(jwtService.extractUserIdFromRequest(httpRequest));
         Favorite favorite = favoriteService.addFavorite(jwtService.extractUserIdFromRequest(httpRequest), request.getMovieId());
         return new ResponseEntity<>(favorite, HttpStatus.CREATED);
     }
